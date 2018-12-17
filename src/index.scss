@@ -1,0 +1,25 @@
+/*-- Variables --*/
+$primary-color: #1e0a3c;
+$secondary-color: #f05537;
+$grey-color: #6f7287;
+
+/*---- Global ----*/
+* {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  outline: 0;
+  font-family: 'Source Sans Pro', sans-serif;
+  font-size: 100%;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  vertical-align: bottom;
+  text-decoration: none;
+  box-sizing: border-box;
+}
+
+html, body { 
+  height: 100%;
+  width: 100%;
+  background-color: #fff;
+}
