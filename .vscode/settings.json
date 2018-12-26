@@ -1,3 +1,6 @@
 {
-    "files.associations": {"*.js": "javascriptreact"},
+    "files.associations": {
+        "*.js": "javascriptreact"
+    },
+    // "prettier.tabWidth": 4,
 }

@@ -1,13 +1,10 @@
 import {put} from "redux-saga/effects";
-import axios from "axios";
+import axios from "../axios-base";
 import * as actions from "../actions/index"
 
-axios.defaults.baseURL = 'http://localhost:8000/api/';
-// axios.defaults.headers.common['Authorization'] = AUTH_TOKEN;
-// axios.defaults.headers.post['Content-Type'] = 'application/json';
 
-export function* getEvents(action) {
-    yield put(actions.fetchEventsStart);
+export function* getEventsSaga(action) {
+    yield put(actions.fetchEventsStart());
     try {
         const response = yield axios.get("event/");
         yield put(actions.fetchEventsSuccess(response.data));
