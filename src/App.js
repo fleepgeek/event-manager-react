@@ -3,10 +3,9 @@ import { Route, Switch, withRouter } from "react-router-dom";
 import { connect } from "react-redux";
 import "./App.css";
 import Events from "./pages/Events/Events";
-import Auth from "./pages/Auth/Auth";
+import { Auth, Logout } from "./pages";
 import Layout from "./components/Layout/Layout";
 import Home from "./pages/Home/Home";
-import Logout from "./pages/Auth/Logout";
 import * as authActions from "./state/auth";
 
 class App extends Component {
@@ -35,7 +34,7 @@ class App extends Component {
       );
     }
 
-    return <Layout>{routes}</Layout>;
+    return <Layout isAuth={this.props.isAuthenticated}>{routes}</Layout>;
   }
 }
 

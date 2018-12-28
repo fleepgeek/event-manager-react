@@ -2,6 +2,7 @@
 $primary-color: #1e0a3c;
 $secondary-color: #f05537;
 $grey-color: #6f7287;
+$light-grey: #dbdae3;
 
 /*---- Global ----*/
 * {
@@ -51,6 +52,10 @@ img {
 		grid-column: 2/-2;
 		margin-top: 50px;
 	}
+}
+
+.flex-container {
+	display: flex;
 }
 
 .avatar {

@@ -2,5 +2,6 @@
     "files.associations": {
         "*.js": "javascriptreact"
     },
+    "editor.tabSize": 2,
     // "prettier.tabWidth": 4,
 }
