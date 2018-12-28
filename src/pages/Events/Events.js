@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import "./Events.scss";
-import * as actions from "../../store/actions";
+import * as eventActions from "../../state/events";
 import EventCard from "../../components/EventCard/EventCard";
 
 class Events extends Component {
@@ -47,7 +47,7 @@ const mapStateToProps = state => ({
 
 const mapDispatchToProps = dispatch => ({
     // onGetEvents: () => dispatch(Actions.Creators.start()),
-    onGetEvents: () => dispatch(actions.fetchEvents())
+    onGetEvents: () => dispatch(eventActions.fetchEvents())
 });
 
 export default connect(

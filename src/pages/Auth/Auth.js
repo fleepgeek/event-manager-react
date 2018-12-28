@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import { Formik, Form, Field, ErrorMessage } from "formik";
 import * as Yup from "yup";
-import * as actions from "../../store/actions";
+import * as authActions from "../../state/auth";
 
 const LoginSchema = Yup.object().shape({
   username: Yup.string()
@@ -104,8 +104,8 @@ const mapStateToProps = state => ({
 });
 
 const mapDispatchToProps = dispatch => ({
-  onAuth: payload => dispatch(actions.auth(payload)),
-  onToggleLogin: () => dispatch(actions.toggleLogin())
+  onAuth: payload => dispatch(authActions.auth(payload)),
+  onToggleLogin: () => dispatch(authActions.toggleLogin())
 });
 
 export default connect(
