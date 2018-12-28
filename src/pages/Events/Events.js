@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import "./Events.scss";
-import * as eventActions from "../../state/events";
+import { actions as eventActions } from "../../state/events";
 import EventCard from "../../components/EventCard/EventCard";
 
 class Events extends Component {

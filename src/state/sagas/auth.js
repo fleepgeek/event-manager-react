@@ -1,6 +1,6 @@
 import { put, takeEvery, all } from "redux-saga/effects";
 import { delay } from "redux-saga";
-import * as actions from "../auth";
+import { actionTypes, actions } from "../auth";
 import axios from "../../utils/axios-base";
 
 function* authSaga(action) {
@@ -59,9 +59,9 @@ function* authAutoLoginSaga(action) {
 // Watcher
 export default function* watchAuthActions() {
   yield all([
-    takeEvery(actions.AUTH, authSaga),
-    takeEvery(actions.LOGOUT_START, logoutSaga),
-    takeEvery(actions.AUTH_AUTO_LOGIN, authAutoLoginSaga),
-    takeEvery(actions.AUTH_AUTO_LOGOUT, authAutoLogoutSaga)
+    takeEvery(actionTypes.AUTH, authSaga),
+    takeEvery(actionTypes.LOGOUT, logoutSaga),
+    takeEvery(actionTypes.AUTH_AUTO_LOGIN, authAutoLoginSaga),
+    takeEvery(actionTypes.AUTH_AUTO_LOGOUT, authAutoLogoutSaga)
   ]);
 }

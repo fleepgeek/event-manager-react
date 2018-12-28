@@ -1,27 +1,18 @@
+import { createActions, createReducer } from "reduxsauce";
+
 // Actions
-export const FETCH_EVENTS = "[events] FETCH_EVENTS";
-export const FETCH_EVENTS_START = "[events] FETCH_EVENTS_START";
-export const FETCH_EVENTS_FAIL = "[events] FETCH_EVENTS_FAIL";
-export const FETCH_EVENTS_SUCCESS = "[events] FETCH_EVENTS_SUCCESS";
+const { Types, Creators } = createActions(
+  {
+    fetchEventsStart: null,
+    fetchEventsFail: ["error"],
+    fetchEventsSuccess: ["events"],
+    fetchEvents: null
+  },
+  { prefix: "[events] " }
+);
 
-// Action Creators
-export const fetchEventsStart = () => ({
-  type: FETCH_EVENTS_START
-});
-
-export const fetchEventsFail = error => ({
-  type: FETCH_EVENTS_FAIL,
-  error
-});
-
-export const fetchEventsSuccess = events => ({
-  type: FETCH_EVENTS_SUCCESS,
-  events
-});
-
-export const fetchEvents = () => ({
-  type: FETCH_EVENTS
-});
+export const actionTypes = Types;
+export const actions = Creators;
 
 // Reducer
 const INITIAL_STATE = {
@@ -30,28 +21,31 @@ const INITIAL_STATE = {
   events: []
 };
 
-const reducer = (state = INITIAL_STATE, action) => {
-  switch (action.type) {
-    case FETCH_EVENTS_START:
-      return {
-        ...state,
-        loading: true
-      };
-    case FETCH_EVENTS_FAIL:
-      return {
-        ...state,
-        loading: false,
-        error: action.error
-      };
-    case FETCH_EVENTS_SUCCESS:
-      return {
-        ...state,
-        loading: false,
-        events: action.events
-      };
-    default:
-      return state;
-  }
+export const fetchEventsStart = (state = INITIAL_STATE) => {
+  return {
+    ...state,
+    loading: true
+  };
 };
+export const fetchEventsFail = (state = INITIAL_STATE, action) => {
+  return {
+    ...state,
+    loading: false,
+    error: action.error
+  };
+};
+export const fetchEventsSuccess = (state = INITIAL_STATE, action) => {  
+  return {
+    ...state,
+    loading: false,
+    events: action.events
+  };
+};
+
+const reducer = createReducer(INITIAL_STATE, {
+  [Types.FETCH_EVENTS_START]: fetchEventsStart,
+  [Types.FETCH_EVENTS_FAIL]: fetchEventsFail,
+  [Types.FETCH_EVENTS_SUCCESS]: fetchEventsSuccess
+});
 
 export default reducer;

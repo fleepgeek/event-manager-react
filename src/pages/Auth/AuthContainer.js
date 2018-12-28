@@ -1,5 +1,5 @@
 import { connect } from "react-redux";
-import * as authActions from "../../state/auth";
+import { actions as authActions } from "../../state/auth";
 import AuthComponent from "./AuthComponent";
 
 const mapStateToProps = state => ({
@@ -9,7 +9,7 @@ const mapStateToProps = state => ({
 
 const mapDispatchToProps = dispatch => ({
   onAuth: payload => dispatch(authActions.auth(payload)),
-  onToggleLogin: () => dispatch(authActions.toggleLogin()),
+  onToggleLogin: () => dispatch(authActions.toggleLogin())
   // onLogout: () => dispatch(authActions.logout())
 });
 

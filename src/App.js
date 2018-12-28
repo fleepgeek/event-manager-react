@@ -4,9 +4,9 @@ import { connect } from "react-redux";
 import "./App.css";
 import Events from "./pages/Events/Events";
 import { Auth, Logout } from "./pages";
-import Layout from "./components/Layout/Layout";
+import { Layout } from "./components/";
 import Home from "./pages/Home/Home";
-import * as authActions from "./state/auth";
+import { actions as authActions } from "./state/auth";
 
 class App extends Component {
   componentDidMount() {
