@@ -4,7 +4,9 @@ import AuthComponent from "./AuthComponent";
 
 const mapStateToProps = state => ({
   error: state.auth.error,
-  isLogin: state.auth.isLogin
+  isLogin: state.auth.isLogin,
+  isAuthenticated: state.auth.token,
+  authRedirectPath: state.auth.authRedirectPath,
 });
 
 const mapDispatchToProps = dispatch => ({

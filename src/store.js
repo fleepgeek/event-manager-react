@@ -1,12 +1,14 @@
 import { createStore, applyMiddleware, compose, combineReducers } from "redux";
 import createSagaMiddleware from "redux-saga";
 import authReducer from "./state/auth";
-import eventsReducer from "./state/events";
+import eventListReducer from "./state/eventList";
+import eventReducer from "./state/event";
 import rootSaga from "./state/sagas";
 
 const reducer = combineReducers({
   auth: authReducer,
-  events: eventsReducer
+  eventList: eventListReducer,
+  event: eventReducer
 });
 
 const composeEnhancers =

@@ -1,6 +1,6 @@
 import React from "react";
-import Moment from 'react-moment';
 import "./EventCard.scss";
+import HostTile from "../HostTile/HostTile";
 
 const EventCard = (props) => {
     return (
@@ -15,17 +15,7 @@ const EventCard = (props) => {
                 <h2 className="title">
                     {props.event.title}
                 </h2>
-                <div className="tile">
-                    <img
-                        className="avatar"
-                        src="https://randomuser.me/api/portraits/men/43.jpg"
-                        alt="avatar"
-                    />
-                    <div className="detail">
-                        <p>Hosted by {props.event.creator.username}</p>
-                        <p><Moment format="MMMM Do YYYY, h:mm:ss a">{props.event.created_on}</Moment></p>
-                    </div>
-                </div>
+                <HostTile event={props.event} />
             </div>
         </div>
     );

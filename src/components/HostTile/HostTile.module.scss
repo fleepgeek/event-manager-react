@@ -1,0 +1,13 @@
+@import "../../index.scss";
+
+.tile {
+  display: flex;
+  align-items: center;
+  color: $grey-color;
+  margin-top: 10px;
+  .detail {
+      margin-left: 10px;
+      font-size: 14px;
+      line-height: 22px;
+  }
+}

@@ -27,7 +27,8 @@ const INITIAL_STATE = {
   expirationDate: localStorage.getItem("expirationDate"),
   loading: false,
   error: null,
-  isLogin: true
+  isLogin: true,
+  authRedirectPath: "/"
 };
 
 export const authStart = (state = INITIAL_STATE) => {

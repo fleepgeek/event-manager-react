@@ -8,7 +8,7 @@ const { Types, Creators } = createActions(
     fetchEventsSuccess: ["events"],
     fetchEvents: null
   },
-  { prefix: "[events] " }
+  { prefix: "[eventList] " }
 );
 
 export const actionTypes = Types;

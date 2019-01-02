@@ -1,7 +1,7 @@
 import { put, takeEvery, all } from "redux-saga/effects";
 import axios from "../../utils/axios-base";
 // import *  actions from "../events";
-import { actionTypes, actions } from "../events"
+import { actionTypes, actions } from "../eventList"
 
 function* getEventsSaga(action) {
   yield put(actions.fetchEventsStart());
