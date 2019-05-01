@@ -4,5 +4,5 @@ import watchAuthActions from "./auth";
 import watchEventActions from "./event";
 
 export default function* rootSaga() {
-  yield all([watchAuthActions(), watchEventsActions(), watchEventActions()]);
+	yield all([watchAuthActions(), watchEventsActions(), watchEventActions()]);
 }
