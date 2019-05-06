@@ -3,7 +3,7 @@ import { Route, Switch, withRouter } from "react-router-dom";
 import { connect } from "react-redux";
 import { Auth, Logout, Home, EventList, Event } from "./pages";
 import { Layout } from "./components/";
-import { actions as authActions } from "./state/auth";
+import { authActions, authSelectors } from "./state/auth/";
 
 const App = props => {
 	useEffect(() => {
@@ -37,11 +37,11 @@ const App = props => {
 };
 
 const mapStateToProps = state => ({
-	isAuthenticated: state.auth.token !== null
+	isAuthenticated: authSelectors.getIsAuthenticated(state)
 });
 
 const mapDispatchToProps = dispatch => ({
-	tryAutoLogin: () => dispatch(authActions.authAutoLogin())
+	tryAutoLogin: () => dispatch(authActions.autoLogin())
 });
 
 export default withRouter(

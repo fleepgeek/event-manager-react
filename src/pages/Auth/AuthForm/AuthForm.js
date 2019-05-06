@@ -45,12 +45,12 @@ const AuthForm = props => {
 							password: values.password
 						};
 					}
-					console.log(val);
-					let payload = {
-						formData: val,
-						isLogin: props.isLogin
-					};
-					props.onAuth(payload);
+					// console.log(val);
+					// let payload = {
+					// 	formData: val,
+					// 	isLogin: props.isLogin
+					// };
+					props.onAuth(val);
 				}}
 			>
 				{({ isSubmitting }) => (

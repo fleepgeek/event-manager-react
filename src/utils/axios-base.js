@@ -5,8 +5,8 @@ const instance = axios.create({
 	headers: { "Content-Type": "application/json" }
 	// axios.defaults.headers.common['Authorization'] = AUTH_TOKEN;
 });
-const token = localStorage.getItem("token");
-instance.defaults.headers.common["Authorization"] = "JWT " + token;
+// const token = localStorage.getItem("token");
+// instance.defaults.headers.common["Authorization"] = "JWT " + token;
 // instance.defaults.headers.post['Content-Type'] = 'application/json';
 
 export default instance;

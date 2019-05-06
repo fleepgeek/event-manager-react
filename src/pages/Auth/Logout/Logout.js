@@ -1,7 +1,7 @@
 import React, { useEffect } from "react";
 import { connect } from "react-redux";
 import { Redirect } from "react-router-dom";
-import { actions as authActions } from "../../../state/auth";
+import * as authActions from "../../../state/auth/actions";
 
 const Logout = props => {
 	useEffect(() => {
