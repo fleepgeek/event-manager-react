@@ -1,10 +1,12 @@
 import React, { useEffect } from "react";
 import { connect } from "react-redux";
-import { actions as eventActions } from "../../state/event";
+import { createStructuredSelector } from "reselect";
+import { eventActions, eventSelectors } from "../../state/event/";
 import EventComponent from "./EventComponent";
 
 const EventContainer = props => {
-	const { match, event, onGetEvent, loading, onAttendEvent } = props;
+	// const { match, event, onGetEvent, loading, onAttendEvent } = props;
+	const { match, event, onGetEvent, loading } = props;
 
 	useEffect(() => {
 		if (+match.params.id !== event.id) {
@@ -17,19 +19,19 @@ const EventContainer = props => {
 		<EventComponent
 			event={event}
 			loading={loading}
-			attendEvent={onAttendEvent}
+			// attendEvent={onAttendEvent}
 		/>
 	);
 };
 
-const mapStateToProps = state => ({
-	event: state.event.event,
-	loading: state.event.loading
+const mapStateToProps = createStructuredSelector({
+	event: eventSelectors.getById,
+	loading: eventSelectors.getLoading
 });
 
 const mapDispatchToProps = dispatch => ({
-	onGetEvent: id => dispatch(eventActions.getEvent(id)),
-	onAttendEvent: id => dispatch(eventActions.attendEvent(id))
+	onGetEvent: id => dispatch(eventActions.fetchEventById(id))
+	// onAttendEvent: id => dispatch(eventActions.attendEvent(id))
 });
 
 export default connect(

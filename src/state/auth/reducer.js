@@ -1,5 +1,5 @@
 import produce from "immer";
-import authTypes from "./types";
+import authActionTypes from "./actionTypes";
 
 // Reducer
 export const INITIAL_STATE = {
@@ -7,55 +7,38 @@ export const INITIAL_STATE = {
 	username: localStorage.getItem("username"),
 	loading: false,
 	error: null,
-	isLogin: true,
 	authRedirectPath: "/"
 };
 
-export const authStart = (draft, payload) => {
-	draft.loading = true;
-};
+export const authStart = (draft, payload) => {};
 
-export const loginSuccess = (draft, payload) => {
-	draft.token = payload.token;
-	draft.username = payload.username;
-};
-
-export const authFail = (draft, payload) => {
-	draft.loading = false;
-	draft.error = payload.error;
-};
-
-export const logoutSuccess = draft => {
-	draft.token = null;
-	draft.username = null;
-};
-
-export const regSuccess = (draft, payload) => {
-	draft.loading = false;
-};
-
-export const toggleLogin = (draft, payload) => {
-	draft.isLogin = !draft.isLogin;
-};
+export const loginSuccess = (draft, payload) => {};
 
 const authReducer = (state = INITIAL_STATE, { type, payload }) =>
 	produce(state, draft => {
+		// eslint-disable-next-line default-case
 		switch (type) {
-			case authTypes.AUTH_START:
-				return authStart(draft, payload);
-			case authTypes.LOGIN_SUCCESS:
-				return loginSuccess(draft, payload);
-			case authTypes.AUTH_FAIL:
-				return authFail(draft, payload);
-			case authTypes.LOGOUT_SUCCESS:
-				return logoutSuccess(draft, payload);
-			case authTypes.REG_SUCCESS:
-				return regSuccess(draft, payload);
-			case authTypes.TOGGLE_LOGIN:
-				return toggleLogin(draft, payload);
-			default:
-				return state;
+			case authActionTypes.AUTH_START:
+				draft.loading = true;
+				break;
+			case authActionTypes.LOGIN_SUCCESS:
+				draft.token = payload.token;
+				draft.username = payload.username;
+				break;
+			case authActionTypes.AUTH_FAIL:
+				draft.loading = false;
+				draft.error = payload.error;
+				break;
+			case authActionTypes.LOGOUT_SUCCESS:
+				draft.token = null;
+				draft.username = null;
+				break;
+			case authActionTypes.REG_SUCCESS:
+				draft.loading = false;
+				break;
 		}
 	});
+// Notice that it is not needed to handle the default case,
+// a producer that doesn't do anything will simply return the original state.
 
 export default authReducer;

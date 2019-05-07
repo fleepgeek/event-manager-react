@@ -5,14 +5,16 @@ import Moment from "react-moment";
 import EventHero from "./EventHero/EventHero";
 
 const EventComponent = props => {
-	const { event, loading, attendEvent } = props;
+	// const { event, loading, attendEvent } = props;
+	const { event, loading } = props;
 	return (
 		<Container>
 			{loading ? (
 				<h2>Loading</h2>
 			) : (
 				<div className={styles["event"]}>
-					<EventHero event={event} attendEvent={attendEvent} />
+					{/* <EventHero event={event} attendEvent={attendEvent} /> */}
+					<EventHero event={event} />
 					<div className={styles["event-info"]}>
 						<div className={styles["main"]}>
 							<div className={styles["description"]}>

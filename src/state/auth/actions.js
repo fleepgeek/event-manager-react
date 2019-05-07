@@ -1,45 +1,41 @@
-import authTypes from "./types";
+import authActionTypes from "./actionTypes";
 
-export const auth = formData => ({
-	type: authTypes.AUTH,
-	payload: { formData }
+export const auth = (formData, isLogin) => ({
+	type: authActionTypes.AUTH,
+	payload: { formData, isLogin }
 });
 
 export const authStart = () => ({
-	type: authTypes.AUTH_START
+	type: authActionTypes.AUTH_START
 });
 
 export const loginSuccess = (token, username) => ({
-	type: authTypes.LOGIN_SUCCESS,
+	type: authActionTypes.LOGIN_SUCCESS,
 	payload: { token, username }
 });
 
 export const regSuccess = () => ({
-	type: authTypes.REG_SUCCESS
+	type: authActionTypes.REG_SUCCESS
 });
 
 export const authFail = error => ({
-	type: authTypes.AUTH_FAIL,
+	type: authActionTypes.AUTH_FAIL,
 	payload: { error }
 });
 
 export const logout = () => ({
-	type: authTypes.LOGOUT
+	type: authActionTypes.LOGOUT
 });
 
 export const logoutSuccess = () => ({
-	type: authTypes.LOGOUT_SUCCESS
+	type: authActionTypes.LOGOUT_SUCCESS
 });
 
 export const autoLogin = () => ({
-	type: authTypes.AUTO_LOGIN
+	type: authActionTypes.AUTO_LOGIN
 });
 
 export const autoLogout = expirationDate => ({
-	type: authTypes.AUTO_LOGOUT,
+	type: authActionTypes.AUTO_LOGOUT,
 	payload: { expirationDate }
-});
-
-export const toggleLogin = () => ({
-	type: authTypes.TOGGLE_LOGIN
 });

@@ -13,11 +13,6 @@ export const getIsAuthenticated = createSelector(
 	authState => authState.token !== null
 );
 
-export const getIsLogin = createSelector(
-	selectAuth,
-	authState => authState.isLogin
-);
-
 export const getAuthRedirectPath = createSelector(
 	selectAuth,
 	authState => authState.authRedirectPath

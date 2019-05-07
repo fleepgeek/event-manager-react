@@ -2,7 +2,8 @@ import React from "react";
 import styles from "./EventHero.module.scss";
 import { Button, HostTile } from "../../../components";
 
-const EventHero = ({ event, attendEvent }) => {
+// const EventHero = ({ event, attendEvent }) => {
+const EventHero = ({ event }) => {
 	return (
 		<div className={styles["hero"]}>
 			<div className={styles["poster-wrapper"]}>
@@ -32,7 +33,7 @@ const EventHero = ({ event, attendEvent }) => {
 						type="secondary"
 						full
 						disabled={false}
-						clicked={() => attendEvent(event.id)}
+						// clicked={() => attendEvent(event.id)}
 					>
 						Attend
 					</Button>
