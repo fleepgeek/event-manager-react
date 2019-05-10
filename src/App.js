@@ -4,6 +4,7 @@ import { connect } from "react-redux";
 import { Auth, Logout, Home, EventList, Event } from "./pages";
 import { Layout } from "./components/";
 import { authActions, authSelectors } from "./state/auth/";
+// import "bootstrap/dist/css/bootstrap.min.css";
 
 const App = props => {
 	useEffect(() => {

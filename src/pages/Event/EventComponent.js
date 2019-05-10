@@ -1,5 +1,6 @@
 import React from "react";
-import { Container } from "../../components";
+// import { Container } from "../../components";
+import { Container } from "reactstrap";
 import styles from "./EventComponent.module.scss";
 import Moment from "react-moment";
 import EventHero from "./EventHero/EventHero";

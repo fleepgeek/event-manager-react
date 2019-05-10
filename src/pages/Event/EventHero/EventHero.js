@@ -30,10 +30,9 @@ const EventHero = ({ event }) => {
 				<div className={styles["actions"]}>
 					{/* <p>Location: {event.location}</p> */}
 					<Button
-						type="secondary"
+						secondary
 						full
-						disabled={false}
-						// clicked={() => attendEvent(event.id)}
+						// onClick={() => attendEvent(event.id)}
 					>
 						Attend
 					</Button>

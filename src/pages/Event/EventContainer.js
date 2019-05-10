@@ -7,6 +7,7 @@ import EventComponent from "./EventComponent";
 const EventContainer = props => {
 	// const { match, event, onGetEvent, loading, onAttendEvent } = props;
 	const { match, event, onGetEvent, loading } = props;
+	console.log("event");
 
 	useEffect(() => {
 		if (+match.params.id !== event.id) {
