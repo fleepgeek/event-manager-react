@@ -2,6 +2,8 @@ import React from "react";
 import styled from "styled-components";
 import Moment from "react-moment";
 
+import { Avatar } from "../components";
+
 const Tile = styled.div`
 	display: flex;
 	align-items: center;
@@ -18,11 +20,7 @@ const Detail = styled.div`
 const HostTile = props => {
 	return (
 		<Tile>
-			<img
-				className="avatar"
-				src="https://randomuser.me/api/portraits/men/43.jpg"
-				alt="avatar"
-			/>
+			<Avatar src="https://randomuser.me/api/portraits/men/43.jpg" />
 			<Detail>
 				{/* <p>Hosted by {props.event && props.event.creator ? props.event.creator.username : null}</p> */}
 				<p>Hosted by {((props.event || {}).creator || {}).username}</p>

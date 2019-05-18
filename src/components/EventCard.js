@@ -1,6 +1,6 @@
 import React from "react";
 import styled from "styled-components";
-import HostTile from "./HostTile";
+import { HostTile } from "../components";
 
 const Card = styled.div`
 	background-color: #fff;

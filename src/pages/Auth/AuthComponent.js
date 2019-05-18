@@ -1,16 +1,24 @@
 import React from "react";
 import { Redirect } from "react-router-dom";
-import AuthForm from "./AuthForm/AuthForm";
-import "./AuthComponent.scss";
+import { Container, Row, Col } from "reactstrap";
+import AuthForm from "./AuthForm";
 
 const AuthComponent = props => {
 	return (
-		<div className="flex-container">
+		<>
 			{props.isAuthenticated && <Redirect to={props.authRedirectPath} />}
-			<div className="form-wrapper">
-				<AuthForm {...props} />
-			</div>
-		</div>
+			<Container style={{ marginTop: "40px" }}>
+				<Row>
+					<Col
+						sm={{ size: 8, offset: 2 }}
+						md={{ size: 6, offset: 3 }}
+						lg={{ size: 4, offset: 4 }}
+					>
+						<AuthForm {...props} />
+					</Col>
+				</Row>
+			</Container>
+		</>
 	);
 };
 

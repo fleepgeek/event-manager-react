@@ -1,13 +1,14 @@
 import React from "react";
 import { NavLink } from "react-router-dom";
 import styled from "styled-components";
+import { lighten } from "polished";
 
 const StyledNavbar = styled.nav`
 	display: flex;
 	align-items: center;
 	justify-content: space-between;
 	height: 59px;
-	border-bottom: 1px solid lighten(${props => props.theme.colors.grey}, 45%);
+	border-bottom: 1px solid ${props => lighten(0.45, props.theme.colors.grey)};
 	padding: 0 20px;
 	.logo {
 		color: ${props => props.theme.colors.secondary};
