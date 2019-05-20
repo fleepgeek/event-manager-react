@@ -5,22 +5,20 @@ import { eventActions, eventSelectors } from "../../state/event/";
 import EventListComponent from "./EventListComponent";
 
 const EventListContainer = props => {
-	const { onfetchEvents, events, loading } = props;
+	const { onfetchEvents, events } = props;
 	useEffect(() => {
 		onfetchEvents();
 		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, []);
 
-	return <EventListComponent events={events} loading={loading} />;
+	return <EventListComponent events={events} />;
 };
 
 const mapStateToProps = createStructuredSelector({
-	events: eventSelectors.getAll,
-	loading: eventSelectors.getLoading
+	events: eventSelectors.getAll
 });
 
 const mapDispatchToProps = dispatch => ({
-	// onGetEvents: () => dispatch(Actions.Creators.start()),
 	onfetchEvents: () => dispatch(eventActions.fetchAllEvents())
 });
 

@@ -5,9 +5,9 @@ export const auth = (formData, isLogin) => ({
 	payload: { formData, isLogin }
 });
 
-export const authStart = () => ({
-	type: authActionTypes.AUTH_START
-});
+// export const authStart = () => ({
+// 	type: authActionTypes.AUTH_START
+// });
 
 export const loginSuccess = (token, username) => ({
 	type: authActionTypes.LOGIN_SUCCESS,
@@ -18,10 +18,10 @@ export const regSuccess = () => ({
 	type: authActionTypes.REG_SUCCESS
 });
 
-export const authFail = error => ({
-	type: authActionTypes.AUTH_FAIL,
-	payload: { error }
-});
+// export const authFail = error => ({
+// 	type: authActionTypes.AUTH_FAIL,
+// 	payload: { error }
+// });
 
 export const logout = () => ({
 	type: authActionTypes.LOGOUT

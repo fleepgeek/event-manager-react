@@ -27,23 +27,23 @@ const EventListComponent = props => {
 			</SectionHeader>
 			<Container>
 				<Row>
-					{!props.loading &&
-						props.events.map(e => (
-							<Col
-								key={e.id}
-								md="6"
-								lg={{ size: 4 }}
-								style={{ marginBottom: "40px" }}
-							>
-								<Link to={`/events/${e.id}`}>
-									<EventCard event={e} />
-								</Link>
-							</Col>
-						))}
+					{/* {!props.loading && */}
+					{props.events.map(e => (
+						<Col
+							key={e.id}
+							md="6"
+							lg={{ size: 4 }}
+							style={{ marginBottom: "40px" }}
+						>
+							<Link to={`/events/${e.id}`}>
+								<EventCard event={e} />
+							</Link>
+						</Col>
+					))}
 				</Row>
 			</Container>
 		</>
 	);
 };
 
-export default EventListComponent;
+export default React.memo(EventListComponent);

@@ -17,13 +17,3 @@ export const getAuthRedirectPath = createSelector(
 	selectAuth,
 	authState => authState.authRedirectPath
 );
-
-export const getLoading = createSelector(
-	selectAuth,
-	authState => authState.loading
-);
-
-export const getError = createSelector(
-	selectAuth,
-	authState => authState.error
-);

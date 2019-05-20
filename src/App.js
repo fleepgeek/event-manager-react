@@ -1,10 +1,11 @@
 import React, { useEffect } from "react";
 import { Route, Switch, withRouter } from "react-router-dom";
 import { connect } from "react-redux";
+import { createStructuredSelector } from "reselect";
 import { Auth, Logout, Home, EventList, Event } from "./pages";
 import { Layout } from "./components/";
 import { authActions, authSelectors } from "./state/auth/";
-// import "bootstrap/dist/css/bootstrap.min.css";
+import { globalSelectors } from "./state/global";
 
 const App = props => {
 	useEffect(() => {
@@ -34,11 +35,16 @@ const App = props => {
 		);
 	}
 
-	return <Layout isAuth={props.isAuthenticated}>{routes}</Layout>;
+	return (
+		<Layout isAuth={props.isAuthenticated} loading={props.loading}>
+			{routes}
+		</Layout>
+	);
 };
 
-const mapStateToProps = state => ({
-	isAuthenticated: authSelectors.getIsAuthenticated(state)
+const mapStateToProps = createStructuredSelector({
+	isAuthenticated: authSelectors.getIsAuthenticated,
+	loading: globalSelectors.getLoading
 });
 
 const mapDispatchToProps = dispatch => ({

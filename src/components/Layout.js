@@ -1,11 +1,12 @@
 import React from "react";
-import { Navbar } from "../components";
+import { Navbar, ProgressBar } from "../components";
 
-const Layout = props => {
+const Layout = ({ children, isAuth, loading }) => {
 	return (
 		<div>
-			<Navbar isAuth={props.isAuth} />
-			{props.children}
+			{loading && <ProgressBar />}
+			<Navbar isAuth={isAuth} />
+			{children}
 		</div>
 	);
 };

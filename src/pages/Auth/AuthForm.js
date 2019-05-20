@@ -103,7 +103,7 @@ const AuthForm = props => {
 					{!isLogin && <span>Already have an account?</span>}{" "}
 					{isLogin ? "Or Sign Up" : "Login"}
 				</AuthToggle>
-				{props.error && <h3>{props.error}</h3>}
+				{props.message && <h3>{props.message}</h3>}
 			</StyledForm>
 		</>
 	);

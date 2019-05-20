@@ -1,11 +1,12 @@
 import { put, takeEvery, all, delay } from "redux-saga/effects";
 import authActionTypes from "./actionTypes";
-import * as actions from "./actions";
+import * as authActions from "./actions";
+import * as globalActions from "../global/actions";
 import axios from "../../utils/axios-base";
 
 function* authSaga(action) {
 	try {
-		yield put(actions.authStart());
+		yield put(globalActions.showLoading());
 		const { formData, isLogin } = action.payload;
 		let endPoint = isLogin ? "auth/" : "auth/register/";
 		const response = yield axios.post(endPoint, formData);
@@ -14,12 +15,14 @@ function* authSaga(action) {
 			localStorage.setItem("token", token);
 			localStorage.setItem("username", username);
 			localStorage.setItem("expirationDate", expires);
-			yield put(actions.loginSuccess(token, username));
+			yield put(authActions.loginSuccess(token, username));
+			yield put(globalActions.hideLoading());
 		} else {
-			yield put(actions.regSuccess());
+			yield put(globalActions.hideLoading());
+			yield put(authActions.regSuccess());
 		}
 	} catch (error) {
-		yield put(actions.authFail(error.response.data.detail));
+		yield put(globalActions.showMessage(error.response.data.detail));
 	}
 }
 
@@ -28,15 +31,15 @@ function* logoutSaga(action) {
 	localStorage.removeItem("username");
 	localStorage.removeItem("expirationDate");
 
-	yield put(actions.logoutSuccess());
+	yield put(authActions.logoutSuccess());
 }
 
 function* authAutoLogoutSaga(action) {
 	yield delay(action.payload.expirationDate);
 	try {
-		yield put(actions.logout());
+		yield put(authActions.logout());
 	} catch (error) {
-		yield put(actions.authFail(error.response.data.detail));
+		yield put(globalActions.showMessage(error.response.data.detail));
 	}
 }
 
@@ -44,21 +47,23 @@ function* authAutoLoginSaga(action) {
 	const token = localStorage.getItem("token");
 	try {
 		if (token === null) {
-			yield put(actions.logout());
+			yield put(authActions.logout());
 		} else {
 			const expirationDate = new Date(localStorage.getItem("expirationDate"));
 			const username = localStorage.getItem("username");
 			if (expirationDate > new Date()) {
-				yield put(actions.loginSuccess(token, username));
+				yield put(authActions.loginSuccess(token, username));
 				yield put(
-					actions.autoLogout(expirationDate.getTime() - new Date().getTime())
+					authActions.autoLogout(
+						expirationDate.getTime() - new Date().getTime()
+					)
 				);
 			} else {
-				yield put(actions.logout());
+				yield put(authActions.logout());
 			}
 		}
 	} catch (error) {
-		yield put(actions.authFail(error.response.data.detail));
+		yield put(globalActions.showMessage(error.response.data.detail));
 	}
 }
 

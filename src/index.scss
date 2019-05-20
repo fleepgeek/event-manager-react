@@ -1,73 +1,10 @@
-// @import "~bootstrap/dist/css/bootstrap.min.css";
-
-// @import "~bootstrap/scss/_variables";
-// @import "~bootstrap/scss/_grid";
-/*-- Variables --*/
-$primary-color: #1e0a3c;
-$secondary-color: #f05537;
-$grey-color: #6f7287;
-$light-grey: #dbdae3;
-
-/*---- Global ----*/
-// * {
-// 	margin: 0;
-// 	padding: 0;
-// 	border: 0;
-// 	outline: 0;
-// 	list-style: none;
-// 	font-family: "Source Sans Pro", sans-serif;
-// 	font-size: 100%;
-// 	-webkit-font-smoothing: antialiased;
-// 	-moz-osx-font-smoothing: grayscale;
-// 	vertical-align: bottom;
-// 	text-decoration: none;
-// 	box-sizing: border-box;
-// }
-
-// html,
-// body {
-// 	height: 100%;
-// 	width: 100%;
-// 	background-color: #fff;
-// }
-
-// p {
-// 	margin: 0;
-// 	padding: 0;
-// }
-
-// img {
-// 	width: 100%;
-// 	height: 100%;
-// }
-
-// h1 {
-// 	font-size: 40px;
-// 	@media screen and (max-width: 960px) {
-// 		font-size: 36px;
-// 	}
-// }
-
-// .container {
-// 	.header {
-// grid-column: span 12;
-// height: 100px;
-// background-color: lighten($grey-color, 40%);
-// display: grid;
-// grid-template-columns: repeat(12, 1fr);
-// align-items: center;
-// h2 {
-// 	grid-column: 2;
-// 	font-size: 30px;
-// 	color: $primary-color;
-// }
-// 	}
-// 	.content {
-// 		grid-column: 2/-2;
-// 		margin-top: 50px;
-// 	}
-// }
-
-// .flex-container {
-// 	display: flex;
-// }
+@import "../node_modules/bootstrap/scss/functions";
+@import "../node_modules/bootstrap/scss/variables";
+@import "../node_modules/bootstrap/scss/mixins";
+@import "../node_modules/bootstrap/scss/type";
+@import "../node_modules/bootstrap/scss/images";
+@import "../node_modules/bootstrap/scss/code";
+@import "../node_modules/bootstrap/scss/grid";
+@import "../node_modules/bootstrap/scss/modal";
+@import "../node_modules/bootstrap/scss/spinners";
+@import "../node_modules/bootstrap/scss/utilities";

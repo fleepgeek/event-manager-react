@@ -12,13 +12,3 @@ export const getById = createSelector(
 	selectEvent,
 	eventState => eventState.single
 );
-
-export const getLoading = createSelector(
-	selectEvent,
-	eventState => eventState.loading
-);
-
-export const getError = createSelector(
-	selectEvent,
-	eventState => eventState.error
-);

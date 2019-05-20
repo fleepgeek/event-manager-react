@@ -4,6 +4,7 @@ import authReducer from "./auth";
 import eventReducer from "./event";
 import watchAuthActions from "./auth/sagas";
 import watchEventActions from "./event/sagas";
+import globalReducer from "./global";
 
 export function* rootSaga() {
 	yield all([watchAuthActions(), watchEventActions()]);
@@ -11,7 +12,8 @@ export function* rootSaga() {
 
 const rootReducer = combineReducers({
 	auth: authReducer,
-	event: eventReducer
+	event: eventReducer,
+	global: globalReducer
 });
 
 export default rootReducer;

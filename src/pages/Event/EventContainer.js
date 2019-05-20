@@ -5,10 +5,7 @@ import { eventActions, eventSelectors } from "../../state/event/";
 import EventComponent from "./EventComponent";
 
 const EventContainer = props => {
-	// const { match, event, onGetEvent, loading, onAttendEvent } = props;
-	const { match, event, onGetEvent, loading } = props;
-	console.log("event");
-
+	const { match, event, onGetEvent } = props;
 	useEffect(() => {
 		if (+match.params.id !== event.id) {
 			onGetEvent(match.params.id);
@@ -17,17 +14,17 @@ const EventContainer = props => {
 	}, []);
 
 	return (
-		<EventComponent
-			event={event}
-			loading={loading}
-			// attendEvent={onAttendEvent}
-		/>
+		<>
+			<EventComponent
+				event={event}
+				// attendEvent={onAttendEvent}
+			/>
+		</>
 	);
 };
 
 const mapStateToProps = createStructuredSelector({
-	event: eventSelectors.getById,
-	loading: eventSelectors.getLoading
+	event: eventSelectors.getById
 });
 
 const mapDispatchToProps = dispatch => ({

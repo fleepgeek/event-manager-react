@@ -1,35 +1,38 @@
 import { put, takeEvery, all } from "redux-saga/effects";
 import axios from "../../utils/axios-base";
-import * as actions from "./actions";
+import * as eventActions from "./actions";
+import * as globalActions from "../global/actions";
 import actionTypes from "./actionTypes";
 
 function* getAllEventsSaga(action) {
-	yield put(actions.fetchEventStart());
+	yield put(globalActions.showLoading());
 	try {
 		const response = yield axios.get("events/");
-		yield put(actions.fetchAllEventsSuccess(response.data));
+		yield put(eventActions.fetchAllEventsSuccess(response.data));
+		yield put(globalActions.hideLoading());
 	} catch (error) {
-		yield put(actions.fetchActionFailed(error.response.data.detail));
+		yield put(globalActions.showMessage(error.response.data.detail));
 	}
 }
 
 function* getEventSaga({ payload }) {
 	try {
-		yield put(actions.fetchEventStart());
+		yield put(globalActions.showLoading());
 		const response = yield axios.get(`events/${payload.id}/`);
-		yield put(actions.fetchEventsByIdSuccess(response.data));
+		yield put(eventActions.fetchEventsByIdSuccess(response.data));
+		yield put(globalActions.hideLoading());
 	} catch (error) {
-		yield put(actions.fetchActionFailed(error.response.data.detail));
+		yield put(globalActions.showMessage(error.response.data.detail));
 	}
 }
 
 // function* attendEventSaga(action) {
 // 	try {
-// 		yield put(actions.attendEventInit());
+// 		yield put(eventActions.attendEventInit());
 // 		const response = yield axios.post(`events/${action.id}/attend/`);
-// 		yield put(actions.attendEventSuccess(response.data));
+// 		yield put(eventActions.attendEventSuccess(response.data));
 // 	} catch (error) {
-// 		yield put(actions.attendEventFail(error.response.data.detail));
+// 		yield put(eventActions.attendEventFail(error.response.data.detail));
 // 	}
 // }
 

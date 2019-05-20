@@ -1,5 +1,5 @@
 import React from "react";
-import { NavLink } from "react-router-dom";
+import { Link, NavLink } from "react-router-dom";
 import styled from "styled-components";
 import { lighten } from "polished";
 
@@ -22,17 +22,22 @@ const Menu = styled.div`
 		color: ${props => props.theme.colors.grey};
 		padding: 0 20px;
 		&:hover {
-			color: ${props => props.theme.colors.primary};
+			color: ${props => props.theme.colors.secondary};
+		}
+		&.active {
+			color: ${props => props.theme.colors.secondary};
+			font-weight: 500;
 		}
 	}
 `;
 
 const Navbar = props => {
+	console.log("navbar");
 	return (
 		<StyledNavbar>
-			<NavLink to="/" className="logo">
+			<Link to="/" className="logo">
 				eventio
-			</NavLink>
+			</Link>
 			<Menu>
 				<NavLink to="/events" exact>
 					Browse Events
@@ -54,4 +59,4 @@ const Navbar = props => {
 	);
 };
 
-export default Navbar;
+export default React.memo(Navbar);

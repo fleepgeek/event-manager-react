@@ -2,9 +2,10 @@ import { connect } from "react-redux";
 import { createStructuredSelector } from "reselect";
 import AuthComponent from "./AuthComponent";
 import { authActions, authSelectors } from "../../state/auth/";
+import { globalSelectors } from "../../state/global";
 
 const mapStateToProps = createStructuredSelector({
-	error: authSelectors.getError,
+	message: globalSelectors.getMessage,
 	isAuthenticated: authSelectors.getIsAuthenticated,
 	authRedirectPath: authSelectors.getAuthRedirectPath
 });

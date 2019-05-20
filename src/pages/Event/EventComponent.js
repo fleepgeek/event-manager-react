@@ -36,43 +36,36 @@ const Extras = styled(Col)`
 `;
 
 const EventComponent = props => {
-	// const { event, loading, attendEvent } = props;
-	const { event, loading } = props;
+	const { event } = props;
 	return (
 		<EventWrapper>
-			{loading ? (
-				<h2>Loading</h2>
-			) : (
-				<>
-					<EventHero event={event} />
-					<Container>
-						<Info>
-							<Main lg="7">
-								<div className="description">
-									<p className="heading">Description</p>
-									<p>{event.description}</p>
-								</div>
-							</Main>
-							<Extras>
-								<div className="item">
-									<p className="heading">Date and Time</p>
-									<p>
-										<Moment format="MMMM Do YYYY, h:mm:ss a">
-											{props.event.event_date}
-										</Moment>
-									</p>
-								</div>
-								<div className="item">
-									<p className="heading">Location</p>
-									<p>{event.location}</p>
-								</div>
-							</Extras>
-						</Info>
-					</Container>
-				</>
-			)}
+			<EventHero event={event} />
+			<Container>
+				<Info>
+					<Main lg="7">
+						<div className="description">
+							<p className="heading">Description</p>
+							<p>{event.description}</p>
+						</div>
+					</Main>
+					<Extras>
+						<div className="item">
+							<p className="heading">Date and Time</p>
+							<p>
+								<Moment format="MMMM Do YYYY, h:mm:ss a">
+									{props.event.event_date}
+								</Moment>
+							</p>
+						</div>
+						<div className="item">
+							<p className="heading">Location</p>
+							<p>{event.location}</p>
+						</div>
+					</Extras>
+				</Info>
+			</Container>
 		</EventWrapper>
 	);
 };
 
-export default EventComponent;
+export default React.memo(EventComponent);

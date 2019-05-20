@@ -8,7 +8,7 @@ import { ThemeProvider } from "styled-components";
 import store from "./store";
 import theme from "./styles/theme";
 import "./index.scss";
-import "bootstrap/dist/css/bootstrap-grid.min.css";
+// import "bootstrap/dist/css/bootstrap-grid.min.css";
 import GlobalStyle from "./styles/globalStyle";
 
 ReactDOM.render(

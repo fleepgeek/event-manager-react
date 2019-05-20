@@ -7,3 +7,4 @@ export { default as Avatar } from "./Avatar";
 export { default as Tag } from "./Tag";
 export { default as StyledForm } from "./StyledForm";
 export { default as InputWrapper } from "./InputWrapper";
+export { default as ProgressBar } from "./ProgressBar";
