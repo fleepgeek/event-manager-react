@@ -32,7 +32,6 @@ const Menu = styled.div`
 `;
 
 const Navbar = props => {
-	console.log("navbar");
 	return (
 		<StyledNavbar>
 			<Link to="/" className="logo">
@@ -42,7 +41,7 @@ const Navbar = props => {
 				<NavLink to="/events" exact>
 					Browse Events
 				</NavLink>
-				<NavLink to="/add" exact>
+				<NavLink to="/events/add" exact>
 					Create Event
 				</NavLink>
 				{props.isAuth ? (

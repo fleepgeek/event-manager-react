@@ -1,12 +1,13 @@
 import React from "react";
-import { Redirect } from "react-router-dom";
+import { Redirect, withRouter } from "react-router-dom";
 import { Container, Row, Col } from "reactstrap";
 import AuthForm from "./AuthForm";
 
 const AuthComponent = props => {
+	const { from } = props.location.state || { from: { pathname: "/" } };
 	return (
 		<>
-			{props.isAuthenticated && <Redirect to={props.authRedirectPath} />}
+			{props.isAuthenticated && <Redirect to={from} />}
 			<Container style={{ marginTop: "40px" }}>
 				<Row>
 					<Col
@@ -22,4 +23,4 @@ const AuthComponent = props => {
 	);
 };
 
-export default AuthComponent;
+export default withRouter(AuthComponent);

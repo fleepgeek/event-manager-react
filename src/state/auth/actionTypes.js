@@ -5,6 +5,6 @@ const authActionTypes = {
 	LOGOUT: "[auth] LOGOUT",
 	LOGOUT_SUCCESS: "[auth] LOGOUT_SUCCESS",
 	AUTO_LOGIN: "[auth] AUTO_LOGIN",
-	AUTO_LOGOUT: "[auth] AUTO_LOGOUT"
+	AUTO_LOGOUT: "[auth] AUTO_LOGOUT_INIT"
 };
 export default authActionTypes;
