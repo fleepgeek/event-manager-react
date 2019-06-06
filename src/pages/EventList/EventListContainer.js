@@ -1,7 +1,7 @@
 import React, { useEffect } from "react";
 import { connect } from "react-redux";
 import { createStructuredSelector } from "reselect";
-import { eventActions, eventSelectors } from "../../state/event/";
+import { eventsActions, eventsSelectors } from "../../state/events/";
 import EventListComponent from "./EventListComponent";
 
 const EventListContainer = props => {
@@ -15,11 +15,11 @@ const EventListContainer = props => {
 };
 
 const mapStateToProps = createStructuredSelector({
-	events: eventSelectors.getAll
+	events: eventsSelectors.getAll
 });
 
 const mapDispatchToProps = dispatch => ({
-	onfetchEvents: () => dispatch(eventActions.fetchAllEvents())
+	onfetchEvents: () => dispatch(eventsActions.fetchAllEvents())
 });
 
 export default connect(

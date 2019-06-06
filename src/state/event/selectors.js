@@ -3,12 +3,12 @@ import { INITIAL_STATE } from "./reducer";
 
 export const selectEvent = state => state.event || INITIAL_STATE;
 
-export const getAll = createSelector(
-	selectEvent,
-	eventState => eventState.all
-);
-
 export const getById = createSelector(
 	selectEvent,
-	eventState => eventState.single
+	eventState => eventState.event || {}
+);
+
+export const getAttendees = createSelector(
+	selectEvent,
+	eventState => eventState.attendees
 );

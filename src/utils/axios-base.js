@@ -1,12 +1,33 @@
 import axios from "axios";
+// import store from "../store";
+// let st = store || {};
+// console.log(st);
 
-const instance = axios.create({
+const getToken = () => {
+	const token = localStorage.getItem("token");
+	return token || "";
+};
+
+const httpClient = axios.create({
 	baseURL: "http://localhost:8000/api/",
-	headers: { "Content-Type": "application/json" }
-	// axios.defaults.headers.common['Authorization'] = AUTH_TOKEN;
+	headers: {
+		"Content-Type": "application/json"
+	}
 });
-// const token = localStorage.getItem("token");
-// instance.defaults.headers.common["Authorization"] = "JWT " + token;
-// instance.defaults.headers.post['Content-Type'] = 'application/json';
 
-export default instance;
+httpClient.interceptors.request.use(
+	config => {
+		if (!config.headers.Authorization) {
+			const token = getToken();
+
+			if (token) {
+				config.headers.Authorization = `JWT ${token}`;
+			}
+		}
+
+		return config;
+	},
+	error => Promise.reject(error)
+);
+
+export default httpClient;

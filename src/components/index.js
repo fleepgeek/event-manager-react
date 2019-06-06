@@ -8,3 +8,4 @@ export { default as Tag } from "./Tag";
 export { default as StyledForm } from "./StyledForm";
 export { default as InputWrapper } from "./InputWrapper";
 export { default as ProgressBar } from "./ProgressBar";
+export { default as DashboardPageHeader } from "./DashboardPageHeader";
