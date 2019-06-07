@@ -11,7 +11,7 @@ const GlobalStyle = createGlobalStyle`
     font-size: 100%;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
-    vertical-align: bottom;
+    /* vertical-align: bottom; */
     text-decoration: none;
     box-sizing: border-box;
   }
@@ -29,12 +29,12 @@ const GlobalStyle = createGlobalStyle`
     margin: 0;
     padding: 0;
   }
-  h1 {
-	font-size: 40px;
-	@media screen and (max-width: 960px) {
-		font-size: 36px;
-	}
-}
+  /* h1 {
+    font-size: 40px;
+    @media screen and (max-width: 960px) {
+      font-size: 36px;
+    }
+  } */
 `;
 
 export default GlobalStyle;

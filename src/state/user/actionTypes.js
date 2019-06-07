@@ -1,0 +1,8 @@
+const userActionTypes = {
+	GET_EVENTS: "[user] GET_EVENTS",
+	GET_CREATED_EVENTS: "[user] GET_CREATED_EVENTS_SUCCESS",
+	GET_ATTENDING_EVENTS: "[user] GET_ATTENDING_EVENTS_SUCCESS",
+	GET_PROFILE: "[user] GET_PROFILE",
+	GET_PROFILE_SUCCESS: "[user] GET_PROFILE_SUCCESS"
+};
+export default userActionTypes;

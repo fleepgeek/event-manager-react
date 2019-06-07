@@ -2,6 +2,7 @@ import React from "react";
 import { Link, NavLink } from "react-router-dom";
 import styled from "styled-components";
 import { lighten } from "polished";
+import { FaCalendarAlt } from "react-icons/fa";
 
 const StyledNavbar = styled.nav`
 	display: flex;
@@ -11,9 +12,13 @@ const StyledNavbar = styled.nav`
 	border-bottom: 1px solid ${props => lighten(0.45, props.theme.colors.grey)};
 	padding: 0 20px;
 	.logo {
-		color: ${props => props.theme.colors.secondary};
+		color: ${props => props.theme.colors.primary};
 		font-weight: 700;
-		font-size: 26px;
+		font-size: 1.5rem;
+		span {
+			color: ${props => props.theme.colors.secondary};
+			padding-left: 5px;
+		}
 	}
 `;
 
@@ -35,7 +40,8 @@ const Navbar = props => {
 	return (
 		<StyledNavbar>
 			<Link to="/" className="logo">
-				eventio
+				<FaCalendarAlt size={20} />
+				<span>Eventio</span>
 			</Link>
 			<Menu>
 				<NavLink to="/events" exact>
