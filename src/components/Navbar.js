@@ -45,9 +45,12 @@ const Navbar = props => {
 					Create Event
 				</NavLink>
 				{props.isAuth ? (
-					<NavLink to="/logout" exact>
-						Logout
-					</NavLink>
+					<>
+						<NavLink to="/dashboard">Dashboard</NavLink>
+						<NavLink to="/logout" exact>
+							Logout
+						</NavLink>
+					</>
 				) : (
 					<NavLink to="/auth" exact>
 						Sign In

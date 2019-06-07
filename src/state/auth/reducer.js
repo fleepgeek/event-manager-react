@@ -4,10 +4,9 @@ import authActionTypes from "./actionTypes";
 // Reducer
 export const INITIAL_STATE = {
 	token: localStorage.getItem("token"),
-	username: localStorage.getItem("username"),
+	uid: localStorage.getItem("uid"),
 	loading: false,
-	error: null,
-	authRedirectPath: "/"
+	error: null
 };
 
 const authReducer = (state = INITIAL_STATE, { type, payload }) =>
@@ -16,11 +15,11 @@ const authReducer = (state = INITIAL_STATE, { type, payload }) =>
 		switch (type) {
 			case authActionTypes.LOGIN_SUCCESS:
 				draft.token = payload.token;
-				draft.username = payload.username;
+				draft.uid = payload.uid;
 				break;
 			case authActionTypes.LOGOUT_SUCCESS:
 				draft.token = null;
-				draft.username = null;
+				draft.uid = null;
 				break;
 			case authActionTypes.REG_SUCCESS:
 				draft.loading = false;

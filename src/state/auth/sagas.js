@@ -10,12 +10,12 @@ function* authSaga(action) {
 		const { formData, isLogin } = action.payload;
 		let endPoint = isLogin ? "auth/" : "auth/register/";
 		const response = yield axios.post(endPoint, formData);
-		const { token, username, expires } = response.data;
+		const { token, uid, expires } = response.data;
 		if (isLogin) {
 			localStorage.setItem("token", token);
-			localStorage.setItem("username", username);
+			localStorage.setItem("uid", uid);
 			localStorage.setItem("expirationDate", expires);
-			yield put(authActions.loginSuccess(token, username));
+			yield put(authActions.loginSuccess(token, uid));
 			yield put(globalActions.hideLoading());
 		} else {
 			yield put(globalActions.hideLoading());
@@ -28,7 +28,7 @@ function* authSaga(action) {
 
 function* logoutSaga(action) {
 	localStorage.removeItem("token");
-	localStorage.removeItem("username");
+	localStorage.removeItem("uid");
 	localStorage.removeItem("expirationDate");
 
 	yield put(authActions.logoutSuccess());
@@ -50,9 +50,9 @@ function* authAutoLoginSaga(action) {
 			yield put(authActions.logout());
 		} else {
 			const expirationDate = new Date(localStorage.getItem("expirationDate"));
-			const username = localStorage.getItem("username");
+			const uid = localStorage.getItem("uid");
 			if (expirationDate > new Date()) {
-				yield put(authActions.loginSuccess(token, username));
+				yield put(authActions.loginSuccess(token, uid));
 				yield put(
 					authActions.autoLogout(
 						expirationDate.getTime() - new Date().getTime()

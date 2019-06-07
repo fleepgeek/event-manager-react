@@ -1,8 +1,8 @@
 const colors = {
-	primary: "#1e0a3c",
-	secondary: "#f05537",
-	grey: "#6f7287",
-	lightGrey: "#dbdae3"
+	primary: "#19212c",
+	secondary: "#e53633",
+	grey: "#837575",
+	lightGrey: "#b9b9b9"
 };
 
 const theme = {

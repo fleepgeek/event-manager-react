@@ -5,9 +5,9 @@ export const auth = (formData, isLogin) => ({
 	payload: { formData, isLogin }
 });
 
-export const loginSuccess = (token, username) => ({
+export const loginSuccess = (token, uid) => ({
 	type: authActionTypes.LOGIN_SUCCESS,
-	payload: { token, username }
+	payload: { token, uid }
 });
 
 export const regSuccess = () => ({
