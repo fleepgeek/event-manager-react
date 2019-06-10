@@ -9,3 +9,6 @@ export { default as StyledForm } from "./StyledForm";
 export { default as InputWrapper } from "./InputWrapper";
 export { default as ProgressBar } from "./ProgressBar";
 export { default as DashboardPageHeader } from "./DashboardPageHeader";
+export { default as ProfileCard } from "./ProfileCard";
+export { default as EventsTab } from "./EventsTab";
+export { default as EventsList } from "./EventsList";

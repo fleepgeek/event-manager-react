@@ -8,6 +8,11 @@ export const getToken = createSelector(
 	authState => authState.token
 );
 
+export const getUid = createSelector(
+	selectAuth,
+	authState => authState.uid
+);
+
 export const getIsAuthenticated = createSelector(
 	selectAuth,
 	authState => authState.token !== null

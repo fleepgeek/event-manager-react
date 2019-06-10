@@ -1,6 +1,7 @@
 import React, { useEffect } from "react";
 import { Switch, Route } from "react-router-dom";
 import { DashboardPageHeader } from "../../components";
+import { Profile } from "../";
 
 const Settings = ({ match, history }) => {
 	useEffect(() => {
@@ -24,12 +25,7 @@ const Settings = ({ match, history }) => {
 					render={() => <h2>Account</h2>}
 					exact
 				/>
-				<Route
-					path={`${match.path}/profile`}
-					render={() => <h2>Profile</h2>}
-					exact
-				/>
-				{/* <Route render={() => <h2>Profile</h2>} /> */}
+				<Route path={`${match.path}/profile`} component={Profile} exact />
 			</Switch>
 		</>
 	);
