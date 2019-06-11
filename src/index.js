@@ -5,6 +5,7 @@ import * as serviceWorker from "./serviceWorker";
 import { BrowserRouter } from "react-router-dom";
 import { Provider } from "react-redux";
 import { ThemeProvider } from "styled-components";
+import { IconContext } from "react-icons";
 import store from "./store";
 import theme from "./styles/theme";
 import "./index.scss";
@@ -17,8 +18,10 @@ ReactDOM.render(
 				{/* We use a Fragment because ThemeProvider returns its children 
 				when rendering, so it must only wrap a single child node  */}
 				<>
-					<App />
-					<GlobalStyle />
+					<IconContext.Provider value={{ className: "react-icons" }}>
+						<App />
+						<GlobalStyle />
+					</IconContext.Provider>
 				</>
 			</ThemeProvider>
 		</BrowserRouter>

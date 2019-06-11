@@ -10,6 +10,7 @@ const HeaderWrapper = styled.div`
 	box-shadow: 0 0 2px 0 rgba(46, 62, 72, 0.12),
 		0 2px 4px 0 rgba(46, 62, 72, 0.12);
 	text-transform: uppercase;
+	margin-bottom: 2rem;
 `;
 const Title = styled.h2`
 	color: ${({ theme }) => theme.colors.primary};

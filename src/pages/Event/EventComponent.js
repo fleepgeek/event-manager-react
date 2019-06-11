@@ -45,7 +45,7 @@ const Content = styled(Col)`
 `;
 
 const Main = styled(Col)`
-	line-height: 26px;
+	line-height: 1.5rem;
 `;
 
 const Extras = styled(Col)`
