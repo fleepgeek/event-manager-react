@@ -10,7 +10,7 @@ const eventReducer = (state = INITIAL_STATE, { type, payload }) =>
 	produce(state, draft => {
 		// eslint-disable-next-line default-case
 		switch (type) {
-			case eventActionTypes.FETCH_EVENT_BY_ID_SUCCESS:
+			case eventActionTypes.GET_EVENT_BY_ID_SUCCESS:
 				draft.event = payload.event;
 				break;
 			case eventActionTypes.GET_ATTENDEES_SUCCESS:

@@ -4,8 +4,9 @@ import { connect } from "react-redux";
 import { createStructuredSelector } from "reselect";
 import { DashboardPageHeader } from "../../components";
 import Profile from "./Profile";
-import { userSelectors, userActions } from "../../state/user";
+import { userSelectors } from "../../state/user";
 import { authSelectors } from "../../state/auth";
+import { eventsListSelectors, eventsListActions } from "../../state/eventsList";
 
 const Settings = ({
 	match,
@@ -13,7 +14,7 @@ const Settings = ({
 	onGetProfile,
 	onGetEvents,
 	uid,
-	profile,
+	currentUser,
 	created,
 	attending
 }) => {
@@ -21,7 +22,6 @@ const Settings = ({
 		if (match.path === "/dashboard/settings") {
 			history.replace(`${match.path}/profile`);
 		}
-		onGetProfile(uid);
 		onGetEvents(uid);
 		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, []);
@@ -43,7 +43,7 @@ const Settings = ({
 				<Route
 					path={`${match.path}/profile`}
 					render={() => (
-						<Profile profile={profile} events={{ created, attending }} />
+						<Profile profile={currentUser} events={{ created, attending }} />
 					)}
 					exact
 				/>
@@ -54,12 +54,14 @@ const Settings = ({
 
 const mapStateToProps = createStructuredSelector({
 	uid: authSelectors.getUid,
-	profile: userSelectors.getProfile,
-	created: userSelectors.getCreatedEvents,
-	attending: userSelectors.getAttendingEvents
+	currentUser: userSelectors.getCurrentUser,
+	created: eventsListSelectors.getUserCreatedEvents,
+	attending: eventsListSelectors.getUserAttendingEvents
 });
 
 export default connect(
 	mapStateToProps,
-	{ onGetProfile: userActions.getProfile, onGetEvents: userActions.getEvents }
+	{
+		onGetEvents: eventsListActions.getUserEvents
+	}
 )(Settings);

@@ -54,7 +54,7 @@ const mapStateToProps = createStructuredSelector({
 export default connect(
 	mapStateToProps,
 	{
-		onGetEvent: eventActions.fetchEventById,
+		onGetEvent: eventActions.getEventById,
 		onGetAttendees: eventActions.getAttendees,
 		onAttendEvent: eventActions.attendEvent,
 		onCancelAttendance: eventActions.cancelAttendance,

@@ -1,13 +1,13 @@
 import React, { useEffect } from "react";
 import { connect } from "react-redux";
 import { createStructuredSelector } from "reselect";
-import { eventsActions, eventsSelectors } from "../../state/events";
+import { eventsListActions, eventsListSelectors } from "../../state/eventsList";
 import BrowseEventsComponent from "./BrowseEventsComponent";
 
 const BrowseEventsContainer = props => {
-	const { onfetchEvents, events } = props;
+	const { ongetEvents, events } = props;
 	useEffect(() => {
-		onfetchEvents();
+		ongetEvents();
 		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, []);
 
@@ -15,11 +15,11 @@ const BrowseEventsContainer = props => {
 };
 
 const mapStateToProps = createStructuredSelector({
-	events: eventsSelectors.getAll
+	events: eventsListSelectors.getAll
 });
 
 const mapDispatchToProps = dispatch => ({
-	onfetchEvents: () => dispatch(eventsActions.fetchAllEvents())
+	ongetEvents: () => dispatch(eventsListActions.getAllEvents())
 });
 
 export default connect(

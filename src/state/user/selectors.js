@@ -8,17 +8,7 @@ export const getProfile = createSelector(
 	userState => userState.profile
 );
 
-export const getEvent = createSelector(
+export const getCurrentUser = createSelector(
 	selectUser,
-	userState => userState.event
-);
-
-export const getCreatedEvents = createSelector(
-	getEvent,
-	eventState => eventState.created
-);
-
-export const getAttendingEvents = createSelector(
-	getEvent,
-	eventState => eventState.attending
+	userState => userState.currentUser
 );

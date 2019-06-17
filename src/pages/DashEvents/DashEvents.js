@@ -2,8 +2,8 @@ import React, { useEffect } from "react";
 import { Switch, Route } from "react-router-dom";
 import { connect } from "react-redux";
 import { createStructuredSelector } from "reselect";
-import { userSelectors, userActions } from "../../state/user";
 import { authSelectors } from "../../state/auth";
+import { eventsListSelectors, eventsListActions } from "../../state/eventsList";
 import { DashboardPageHeader } from "../../components";
 import Attending from "./Attending";
 import Created from "./Created";
@@ -53,11 +53,11 @@ const DashEvents = ({
 
 const mapStateToProps = createStructuredSelector({
 	uid: authSelectors.getUid,
-	created: userSelectors.getCreatedEvents,
-	attending: userSelectors.getAttendingEvents
+	created: eventsListSelectors.getUserCreatedEvents,
+	attending: eventsListSelectors.getUserAttendingEvents
 });
 
 export default connect(
 	mapStateToProps,
-	{ onGetEvents: userActions.getEvents }
+	{ onGetEvents: eventsListActions.getUserEvents }
 )(DashEvents);

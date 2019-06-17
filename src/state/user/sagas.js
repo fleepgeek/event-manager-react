@@ -2,6 +2,7 @@ import { put, takeEvery, all } from "redux-saga/effects";
 import userActionTypes from "./actionTypes";
 import * as userActions from "./actions";
 import * as globalActions from "../global/actions";
+import authActionTypes from "../auth/actionTypes";
 import axios from "../../utils/axios-base";
 
 function* getProfileSaga({ payload }) {
@@ -16,17 +17,11 @@ function* getProfileSaga({ payload }) {
 	}
 }
 
-function* getUserEventsSaga({ payload }) {
+function* getCurrentUserSaga() {
 	try {
 		yield put(globalActions.showLoading());
-		const { userId } = payload;
-		let endPoint = `user/${userId}/`;
-		const [events, attending] = yield all([
-			axios.get(endPoint + "events"),
-			axios.get(endPoint + "attending")
-		]);
-		yield put(userActions.getCreatedEventsSuccess(events.data));
-		yield put(userActions.getAttendingEventsSuccess(attending.data));
+		const response = yield axios.get(`user/me/`);
+		yield put(userActions.getCurrentUserSuccess(response.data));
 		yield put(globalActions.hideLoading());
 	} catch (error) {
 		yield put(globalActions.showMessage(error.response.data.detail));
@@ -36,5 +31,6 @@ function* getUserEventsSaga({ payload }) {
 // Watcher
 export default function* watchUserActions() {
 	yield all([takeEvery(userActionTypes.GET_PROFILE, getProfileSaga)]);
-	yield all([takeEvery(userActionTypes.GET_EVENTS, getUserEventsSaga)]);
+	yield all([takeEvery(userActionTypes.GET_CURRENT_USER, getCurrentUserSaga)]);
+	yield all([takeEvery(authActionTypes.LOGIN_SUCCESS, getCurrentUserSaga)]);
 }

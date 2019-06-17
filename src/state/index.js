@@ -1,10 +1,10 @@
 import { combineReducers } from "redux";
 import { all } from "redux-saga/effects";
 import authReducer from "./auth";
-import eventsReducer from "./events";
+import eventsListReducer from "./eventsList";
 import eventReducer from "./event";
 import watchAuthActions from "./auth/sagas";
-import watchEventsActions from "./events/sagas";
+import watchEventsListActions from "./eventsList/sagas";
 import watchEventActions from "./event/sagas";
 import globalReducer from "./global";
 import userReducer from "./user";
@@ -13,7 +13,7 @@ import watchUserActions from "./user/sagas";
 export function* rootSaga() {
 	yield all([
 		watchAuthActions(),
-		watchEventsActions(),
+		watchEventsListActions(),
 		watchEventActions(),
 		watchUserActions()
 	]);
@@ -22,7 +22,7 @@ export function* rootSaga() {
 const rootReducer = combineReducers({
 	auth: authReducer,
 	user: userReducer,
-	events: eventsReducer,
+	eventsList: eventsListReducer,
 	event: eventReducer,
 	global: globalReducer
 });
