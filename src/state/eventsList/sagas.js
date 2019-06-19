@@ -19,7 +19,7 @@ function* getUserEventsSaga({ payload }) {
 	try {
 		yield put(globalActions.showLoading());
 		const { userId } = payload;
-		let endPoint = `user/${userId}/`;
+		let endPoint = `users/${userId}/`;
 		const [created, attending] = yield all([
 			axios.get(endPoint + "events"),
 			axios.get(endPoint + "attending")

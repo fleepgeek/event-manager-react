@@ -4,7 +4,8 @@ import globalActionTypes from "./actionTypes";
 export const INITIAL_STATE = {
 	loading: false,
 	message: "",
-	messageOpen: false
+	messageOpen: false,
+	modalOpen: false
 };
 
 const globalReducer = (state = INITIAL_STATE, { type, payload }) =>
@@ -26,10 +27,17 @@ const globalReducer = (state = INITIAL_STATE, { type, payload }) =>
 			case globalActionTypes.HIDE_LOADING:
 				draft.loading = false;
 				break;
+			case globalActionTypes.SHOW_MODAL:
+				draft.modalOpen = true;
+				break;
+			case globalActionTypes.HIDE_MODAL:
+				draft.modalOpen = false;
+				break;
 			case globalActionTypes.CLEAR_ALL:
 				draft.loading = false;
 				draft.message = "";
 				draft.messageOpen = false;
+				draft.modalOpen = false;
 				break;
 		}
 	});

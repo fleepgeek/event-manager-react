@@ -16,3 +16,11 @@ export const showLoading = () => ({
 export const hideLoading = () => ({
 	type: globalTypes.HIDE_LOADING
 });
+
+export const showModal = () => ({
+	type: globalTypes.SHOW_MODAL
+});
+
+export const hideModal = () => ({
+	type: globalTypes.HIDE_MODAL
+});

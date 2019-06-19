@@ -18,3 +18,12 @@ export const getCurrentUserSuccess = user => ({
 	type: userActionTypes.GET_CURRENT_USER_SUCCESS,
 	payload: { user }
 });
+
+export const getUsers = () => ({
+	type: userActionTypes.GET_USERS
+});
+
+export const getUsersSuccess = users => ({
+	type: userActionTypes.GET_USERS_SUCCESS,
+	payload: { users }
+});

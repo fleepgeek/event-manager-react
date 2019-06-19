@@ -4,7 +4,8 @@ import userActionTypes from "./actionTypes";
 // Reducer
 export const INITIAL_STATE = {
 	profile: {},
-	currentUser: {}
+	currentUser: {},
+	usersList: []
 };
 
 const userReducer = (state = INITIAL_STATE, { type, payload }) =>
@@ -16,6 +17,9 @@ const userReducer = (state = INITIAL_STATE, { type, payload }) =>
 				break;
 			case userActionTypes.GET_CURRENT_USER_SUCCESS:
 				draft.currentUser = payload.user;
+				break;
+			case userActionTypes.GET_USERS_SUCCESS:
+				draft.usersList = payload.users;
 				break;
 		}
 	});

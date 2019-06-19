@@ -1,13 +1,8 @@
 import React from "react";
-import { Container } from "reactstrap";
 import { ProfileCard } from "../../components";
 
 const Profile = ({ profile, events }) => {
-	return (
-		<Container>
-			<ProfileCard profile={profile} events={events} me />
-		</Container>
-	);
+	return <ProfileCard profile={profile} events={events} me />;
 };
 
 export default Profile;

@@ -17,3 +17,8 @@ export const getMessageOpen = createSelector(
 	selectGlobal,
 	globalState => globalState.messageOpen
 );
+
+export const getModalOpen = createSelector(
+	selectGlobal,
+	globalState => globalState.modalOpen
+);

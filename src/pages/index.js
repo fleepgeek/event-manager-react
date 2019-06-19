@@ -4,5 +4,6 @@ export { default as BrowseEvents } from "./BrowseEvents/BrowseEventsContainer";
 export { default as Event } from "./Event/EventContainer";
 export { default as Home } from "./Home/Home.js";
 export { default as Dashboard } from "./Dashboard/Dashboard";
-export { default as Settings } from "./Settings/Settings";
+export { default as DashSettings } from "./DashSettings/DashSettings";
 export { default as DashEvents } from "./DashEvents/DashEvents";
+export { default as DashPeople } from "./DashPeople/DashPeople";

@@ -12,3 +12,6 @@ export { default as DashboardPageHeader } from "./DashboardPageHeader";
 export { default as ProfileCard } from "./ProfileCard";
 export { default as EventsTab } from "./EventsTab";
 export { default as EventsList } from "./EventsList";
+export { default as UsersList } from "./UsersList";
+export { default as Backdrop } from "./Backdrop";
+export { default as Modal } from "./Modal";
