@@ -4,7 +4,8 @@ import styled from "styled-components";
 const FormComponent = styled.div`
 	h1 {
 		font-size: 28px;
-		font-weight: 400;
+		font-weight: 600;
+		text-transform: uppercase;
 		margin-bottom: 20px;
 	}
 	form {

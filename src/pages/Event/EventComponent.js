@@ -3,7 +3,6 @@ import { Container, Row, Col } from "reactstrap";
 import styled from "styled-components";
 import Moment from "react-moment";
 import { lighten, darken } from "polished";
-import { FaSpinner } from "react-icons/fa";
 
 import { Button, HostTile, Tag } from "../../components";
 

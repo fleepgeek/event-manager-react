@@ -18,8 +18,8 @@ const DashEvents = ({
 	created
 }) => {
 	useEffect(() => {
-		// if (match.path === "/dashboard/events/") {
-		if (location.state && location.state.fromDashboard) {
+		// if (location.state && location.state.fromDashboard) {
+		if (match.path === "/dashboard/events") {
 			history.replace(`${match.path}/attending`);
 		}
 		onGetEvents(uid);

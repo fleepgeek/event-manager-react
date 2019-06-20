@@ -1,5 +1,4 @@
 import React from "react";
-import styled from "styled-components";
 import { UsersList } from "../../components";
 
 const People = ({

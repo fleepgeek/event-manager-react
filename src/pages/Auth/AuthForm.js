@@ -1,9 +1,9 @@
 import React, { useState } from "react";
 import styled from "styled-components";
-import { Formik, Form, Field, ErrorMessage } from "formik";
+import { Formik, Form } from "formik";
 import * as Yup from "yup";
 
-import { StyledForm, Button, InputWrapper } from "../../components";
+import { StyledForm, Button, Input } from "../../components";
 
 const LoginSchema = Yup.object().shape({
 	username: Yup.string()
@@ -64,34 +64,19 @@ const AuthForm = props => {
 				>
 					{({ isSubmitting }) => (
 						<Form>
-							<InputWrapper>
-								<Field name="username" type="text" placeholder="Username" />
-								<ErrorMessage name="username" component="div" />
-							</InputWrapper>
-
+							<Input name="username" type="text" placeholder="Username" />
 							{!isLogin && (
-								<InputWrapper>
-									<Field name="email" type="email" placeholder="Email" />
-									<ErrorMessage name="email" component="div" />
-								</InputWrapper>
+								<Input name="email" type="email" placeholder="Email" />
 							)}
-
-							<InputWrapper>
-								<Field name="password" type="password" placeholder="Password" />
-								<ErrorMessage name="password" component="div" />
-							</InputWrapper>
-
+							<Input name="password" type="password" placeholder="Password" />
 							{!isLogin && (
-								<InputWrapper>
-									<Field
-										name="password2"
-										type="password"
-										placeholder="Confirm Password"
-									/>
-									<ErrorMessage name="password2" component="div" />
-								</InputWrapper>
+								<Input
+									name="password2"
+									type="password"
+									placeholder="Confirm Password"
+									labelText="Re-Type Password"
+								/>
 							)}
-
 							{/* <button type="submit" disabled={isSubmitting}> */}
 							<Button type="submit" secondary>
 								{isLogin ? "Login" : "Sign Up"}

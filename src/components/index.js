@@ -6,7 +6,7 @@ export { default as HostTile } from "./HostTile";
 export { default as Avatar } from "./Avatar";
 export { default as Tag } from "./Tag";
 export { default as StyledForm } from "./StyledForm";
-export { default as InputWrapper } from "./InputWrapper";
+export { default as Input } from "./Input";
 export { default as ProgressBar } from "./ProgressBar";
 export { default as DashboardPageHeader } from "./DashboardPageHeader";
 export { default as ProfileCard } from "./ProfileCard";
