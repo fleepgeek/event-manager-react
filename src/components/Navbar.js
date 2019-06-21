@@ -51,7 +51,6 @@ const Navbar = props => {
 							search: "?action=create_event",
 							state: { modal: true }
 						}}
-						exact
 					>
 						<Button secondary>Create Event</Button>
 					</NavLink>

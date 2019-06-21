@@ -7,20 +7,18 @@ const CreateEvent = ({ history, location, match }) => {
 	useEffect(() => {
 		const { state = {} } = location;
 		const { modal } = state;
-		if (match.path !== "/event/create") {
-			history.replace("?action=create_event", { modal: false });
-		} else {
-			history.replace("/event/create", { modal: false });
-			setShowModal(false);
-		}
 		const values = queryString.parse(location.search);
-		if (values.action === "create_event" && modal === false) {
+		console.log(modal);
+		if (location.pathname === "/event/create" || modal === undefined) {
 			history.replace("/event/create", { modal: false });
-		} else if (modal === true) {
-			setShowModal(true);
 		} else {
-			history.replace("/event/create", { modal: false });
+			if (values.action === "create_event" && modal === true) {
+				history.replace("?action=create_event");
+			} else {
+				history.replace("/event/create", { modal: false });
+			}
 		}
+		setShowModal(modal);
 		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, []);
 	return (
