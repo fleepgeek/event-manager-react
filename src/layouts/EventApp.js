@@ -2,9 +2,9 @@ import React from "react";
 import { withRouter } from "react-router-dom";
 import { connect } from "react-redux";
 import { createStructuredSelector } from "reselect";
-import { Navbar } from "../../components";
-import { EventRouter } from "../../routes";
-import { authSelectors } from "../../state/auth";
+import { Navbar } from "../components";
+import { EventRouter } from "../routes";
+import { authSelectors } from "../state/auth";
 
 const EventApp = ({ isAuthenticated }) => {
 	return (

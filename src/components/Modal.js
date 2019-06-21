@@ -26,10 +26,15 @@ const Modal = ({ children, isModalOpen, closeModal }) => {
 	return ReactDOM.createPortal(
 		<>
 			<Backdrop show={isModalOpen} onClick={() => closeModal()} />
+			{/* <Backdrop show={isModalOpen} onClick={() => !isModalOpen} /> */}
 			<Wrapper isModalOpen={isModalOpen}>{children}</Wrapper>
 		</>,
 		modalRoot
 	);
+};
+
+Modal.defaultProps = {
+	closeModal: () => {}
 };
 
 export default Modal;

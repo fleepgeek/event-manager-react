@@ -1,5 +1,5 @@
 import React, { useEffect } from "react";
-import { Switch, Route } from "react-router-dom";
+import { Route } from "react-router-dom";
 import { connect } from "react-redux";
 import { createStructuredSelector } from "reselect";
 import { authSelectors } from "../../state/auth";
@@ -35,18 +35,14 @@ const DashEvents = ({
 					{ text: "My Events", to: `${match.url}/myevents` }
 				]}
 			/>
-			<Switch>
-				<Route
-					path={`${match.path}/attending`}
-					render={() => <Attending events={attending} />}
-					exact
-				/>
-				<Route
-					path={`${match.path}/myevents`}
-					render={() => <Created events={created} />}
-					exact
-				/>
-			</Switch>
+			<Route
+				path={`${match.path}/attending`}
+				render={() => <Attending events={attending} />}
+			/>
+			<Route
+				path={`${match.path}/myevents`}
+				render={() => <Created events={created} />}
+			/>
 		</>
 	);
 };

@@ -1,1 +1,1 @@
-export { default as EventApp } from "./EventApp/EventApp.js";
+export { default as EventApp } from "./EventApp";
