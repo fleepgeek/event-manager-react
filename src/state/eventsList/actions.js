@@ -9,6 +9,16 @@ export const getAllEventsSuccess = events => ({
 	payload: { events }
 });
 
+export const saveEvent = formData => ({
+	type: eventsActionTypes.SAVE_EVENT,
+	payload: { formData }
+});
+
+export const saveEventSuccess = event => ({
+	type: eventsActionTypes.SAVE_EVENT_SUCCESS,
+	payload: { event }
+});
+
 export const getUserEvents = userId => ({
 	type: eventsActionTypes.GET_USER_EVENTS,
 	payload: { userId }

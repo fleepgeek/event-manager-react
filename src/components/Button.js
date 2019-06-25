@@ -1,9 +1,10 @@
 import styled, { css } from "styled-components";
 
 const Button = styled.button`
-	background: transparent;
+	/* background: transparent; */
+	background: ${({ theme }) => theme.colors.lightGrey};
 	border: none;
-	color: white;
+	color: ${({ theme }) => theme.colors.primary};
 	outline: none;
 	cursor: pointer;
 	padding: 10px 20px;
@@ -17,11 +18,13 @@ const Button = styled.button`
 		props.primary &&
 		css`
 			background: ${props.theme.colors.primary};
+			color: white;
 		`}
 	${props =>
 		props.secondary &&
 		css`
 			background: ${props.theme.colors.secondary};
+			color: white;
 		`}
 `;
 

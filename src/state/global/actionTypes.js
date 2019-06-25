@@ -6,6 +6,8 @@ const globalActionTypes = {
 	HIDE_LOADING: "[global] HIDE_LOADING",
 	SHOW_MODAL: "[global] SHOW_MODAL",
 	HIDE_MODAL: "[global] HIDE_MODAL",
+	SET_REDIRECT_PATH: "[global] SET_REDIRECT_PATH",
+	REDIRECT_COMPLETED: "[global] REDIRECT_COMPLETED",
 	CLEAR_ALL: "[global] CLEAR_ALL"
 };
 

@@ -14,11 +14,6 @@ export const getEventsByIdSuccess = event => ({
 	payload: { event }
 });
 
-export const addEvent = formData => ({
-	type: eventActionTypes.ADD_EVENT,
-	payload: { formData }
-});
-
 export const getAttendees = eventId => ({
 	type: eventActionTypes.GET_ATTENDEES,
 	payload: { eventId }

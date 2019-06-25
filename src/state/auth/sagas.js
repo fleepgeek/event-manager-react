@@ -3,6 +3,7 @@ import authActionTypes from "./actionTypes";
 import * as authActions from "./actions";
 import * as globalActions from "../global/actions";
 import axios from "../../utils/axios-base";
+import getHttpError from "../../utils/getHttpError";
 
 function* authSaga(action) {
 	try {
@@ -22,7 +23,7 @@ function* authSaga(action) {
 			yield put(authActions.regSuccess());
 		}
 	} catch (error) {
-		yield put(globalActions.showMessage(error.response.data.detail));
+		yield put(globalActions.showMessage(getHttpError(error)));
 	}
 }
 
@@ -39,7 +40,7 @@ function* authAutoLogoutSaga(action) {
 	try {
 		yield put(authActions.logout());
 	} catch (error) {
-		yield put(globalActions.showMessage(error.response.data.detail));
+		yield put(globalActions.showMessage(getHttpError(error)));
 	}
 }
 
@@ -63,7 +64,7 @@ function* authAutoLoginSaga(action) {
 			}
 		}
 	} catch (error) {
-		yield put(globalActions.showMessage(error.response.data.detail));
+		yield put(globalActions.showMessage(getHttpError(error)));
 	}
 }
 

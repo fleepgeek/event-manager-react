@@ -5,7 +5,8 @@ export const INITIAL_STATE = {
 	loading: false,
 	message: "",
 	messageOpen: false,
-	modalOpen: false
+	modalOpen: false,
+	redirectPath: null
 };
 
 const globalReducer = (state = INITIAL_STATE, { type, payload }) =>
@@ -32,6 +33,12 @@ const globalReducer = (state = INITIAL_STATE, { type, payload }) =>
 				break;
 			case globalActionTypes.HIDE_MODAL:
 				draft.modalOpen = false;
+				break;
+			case globalActionTypes.SET_REDIRECT_PATH:
+				draft.redirectPath = payload.path;
+				break;
+			case globalActionTypes.REDIRECT_COMPLETED:
+				draft.redirectPath = null;
 				break;
 			case globalActionTypes.CLEAR_ALL:
 				draft.loading = false;

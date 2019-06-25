@@ -4,14 +4,27 @@ import { connect } from "react-redux";
 import { createStructuredSelector } from "reselect";
 import { ProgressBar } from "./components";
 import { authActions } from "./state/auth";
-import { globalSelectors } from "./state/global";
+import { globalSelectors, globalActions } from "./state/global";
 import { AppRouter } from "./routes";
 
-const App = ({ tryAutoLogin, loading }) => {
+const App = ({
+	history,
+	tryAutoLogin,
+	loading,
+	redirectPath,
+	onRedirectCompleted
+}) => {
 	useEffect(() => {
 		tryAutoLogin();
 		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, []);
+
+	useEffect(() => {
+		if (redirectPath) {
+			history.push(redirectPath);
+			onRedirectCompleted();
+		}
+	}, [redirectPath, history, onRedirectCompleted]);
 
 	return (
 		<>
@@ -22,12 +35,16 @@ const App = ({ tryAutoLogin, loading }) => {
 };
 
 const mapStateToProps = createStructuredSelector({
-	loading: globalSelectors.getLoading
+	loading: globalSelectors.getLoading,
+	redirectPath: globalSelectors.getRedirectPath
 });
 
 export default withRouter(
 	connect(
 		mapStateToProps,
-		{ tryAutoLogin: authActions.autoLogin }
+		{
+			tryAutoLogin: authActions.autoLogin,
+			onRedirectCompleted: globalActions.redirectCompleted
+		}
 	)(App)
 );

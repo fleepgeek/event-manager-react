@@ -8,10 +8,10 @@ const FormComponent = styled.div`
 		text-transform: uppercase;
 		margin-bottom: 20px;
 	}
-	form {
+	/* form {
 		display: flex;
 		flex-direction: column;
-	}
+	} */
 `;
 
 const StyledForm = ({ title, children }) => {

@@ -5,7 +5,9 @@ import { Field, ErrorMessage } from "formik";
 
 const InputWrapper = styled.div`
 	margin-bottom: 1rem;
-	input {
+	input,
+	textarea,
+	select {
 		border: 1px solid ${({ theme }) => theme.colors.lightGrey};
 		width: 100%;
 		padding: 10px;
@@ -14,6 +16,7 @@ const InputWrapper = styled.div`
 	div {
 		color: red;
 		font-size: 12px;
+		font-weight: 600;
 	}
 `;
 
@@ -25,15 +28,40 @@ const Label = styled.label`
 	display: inline-block;
 `;
 
-const Input = ({ name, type, placeholder, noLabel, labelText }) => {
+const Input = ({
+	name,
+	type,
+	placeholder,
+	component,
+	items,
+	noLabel,
+	labelText,
+	...props
+}) => {
+	let field = (
+		<Field
+			name={name}
+			type={type || "text"}
+			component={component || "input"}
+			placeholder={placeholder || name}
+			{...props}
+		/>
+	);
+	if (component === "select") {
+		field = (
+			<Field name={name} component="select" {...props}>
+				{items.map(item => (
+					<option value={item.id} key={item.id}>
+						{item.name}
+					</option>
+				))}
+			</Field>
+		);
+	}
 	return (
 		<InputWrapper>
 			{!noLabel && <Label htmlFor={name}>{labelText || name}</Label>}
-			<Field
-				name={name}
-				type={type || "text"}
-				placeholder={placeholder || "Enter Value"}
-			/>
+			{field}
 			<ErrorMessage name={name} component="div" />
 		</InputWrapper>
 	);

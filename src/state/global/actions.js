@@ -24,3 +24,12 @@ export const showModal = () => ({
 export const hideModal = () => ({
 	type: globalTypes.HIDE_MODAL
 });
+
+export const setRedirectPath = path => ({
+	type: globalTypes.SET_REDIRECT_PATH,
+	payload: { path }
+});
+
+export const redirectCompleted = () => ({
+	type: globalTypes.REDIRECT_COMPLETED
+});

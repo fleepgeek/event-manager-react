@@ -13,6 +13,9 @@ const Wrapper = styled.div`
 	right: 15%;
 	margin: 0 auto !important;
 	display: ${({ isModalOpen }) => (isModalOpen ? "block" : "none")} !important;
+	background: #fff;
+	padding: 2rem 0.5rem;
+	border-radius: 5px;
 	@media screen and (max-width: 992px) {
 		left: 5%;
 		right: 5%;

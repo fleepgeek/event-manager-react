@@ -4,6 +4,7 @@ import * as userActions from "./actions";
 import * as globalActions from "../global/actions";
 import authActionTypes from "../auth/actionTypes";
 import axios from "../../utils/axios-base";
+import getHttpError from "../../utils/getHttpError";
 
 function* getProfileSaga({ payload }) {
 	try {
@@ -13,7 +14,7 @@ function* getProfileSaga({ payload }) {
 		yield put(userActions.getProfileSuccess(response.data));
 		yield put(globalActions.hideLoading());
 	} catch (error) {
-		yield put(globalActions.showMessage(error.response.data.detail));
+		yield put(globalActions.showMessage(getHttpError(error)));
 	}
 }
 
@@ -24,7 +25,7 @@ function* getCurrentUserSaga() {
 		yield put(userActions.getCurrentUserSuccess(response.data));
 		yield put(globalActions.hideLoading());
 	} catch (error) {
-		yield put(globalActions.showMessage(error.response.data.detail));
+		yield put(globalActions.showMessage(getHttpError(error)));
 	}
 }
 
@@ -35,7 +36,7 @@ function* getUsersSaga() {
 		yield put(userActions.getUsersSuccess(response.data));
 		yield put(globalActions.hideLoading());
 	} catch (error) {
-		yield put(globalActions.showMessage(error.response.data.detail));
+		yield put(globalActions.showMessage(getHttpError(error)));
 	}
 }
 

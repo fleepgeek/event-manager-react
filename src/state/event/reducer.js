@@ -17,12 +17,10 @@ const eventReducer = (state = INITIAL_STATE, { type, payload }) =>
 				draft.attendees = payload.attendees;
 				break;
 			case eventActionTypes.ATTEND_EVENT_SUCCESS:
-				draft.loading = false;
 				draft.event.attending = true;
 				draft.attendees.push(payload.attendee);
 				break;
 			case eventActionTypes.CANCEL_ATTENDANCE_SUCCESS:
-				draft.loading = false;
 				draft.event.attending = false;
 				draft.attendees.splice(
 					draft.attendees.findIndex(atd => atd.user.id === payload.userId),

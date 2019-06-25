@@ -1,14 +1,16 @@
 import React, { useEffect, useState } from "react";
+import { connect } from "react-redux";
 import queryString from "query-string";
 import { Modal } from "../../components";
+import EventForm from "./EventForm";
+import { eventsListActions } from "../../state/eventsList";
 
-const CreateEvent = ({ history, location, match }) => {
+const CreateEvent = ({ history, location, match, onSaveEvent }) => {
 	const [showModal, setShowModal] = useState(false);
 	useEffect(() => {
 		const { state = {} } = location;
 		const { modal } = state;
 		const values = queryString.parse(location.search);
-		console.log(modal);
 		if (location.pathname === "/event/create" || modal === undefined) {
 			history.replace("/event/create", { modal: false });
 		} else {
@@ -21,22 +23,27 @@ const CreateEvent = ({ history, location, match }) => {
 		setShowModal(modal);
 		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, []);
+	const closeModal = () => {
+		history.replace({ modal: false });
+	};
 	return (
 		<>
 			{showModal ? (
 				<Modal isModalOpen={showModal}>
-					<div style={{ backgroundColor: "white" }}>
-						<h3>Hello</h3>
-						<button onClick={() => history.replace({ modal: false })}>
-							Cancel
-						</button>
-					</div>
+					<EventForm closeModal={closeModal} saveEvent={onSaveEvent} />
 				</Modal>
 			) : (
-				<>{location.pathname === "/event/create" && <h1>Create Event</h1>}</>
+				<>
+					{location.pathname === "/event/create" && (
+						<EventForm saveEvent={onSaveEvent} />
+					)}
+				</>
 			)}
 		</>
 	);
 };
 
-export default CreateEvent;
+export default connect(
+	null,
+	{ onSaveEvent: eventsListActions.saveEvent }
+)(CreateEvent);
