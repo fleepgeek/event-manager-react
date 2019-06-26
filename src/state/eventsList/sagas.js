@@ -44,9 +44,29 @@ function* saveEventSaga({ payload }) {
 	}
 }
 
+function* getCategoriesSaga(action) {
+	try {
+		const response = yield axios("events/categories");
+		yield put(eventsActions.getCategoriesSuccess(response.data));
+	} catch (error) {
+		yield put(globalActions.showMessage(getHttpError(error)));
+	}
+}
+
+function* getTagsSaga(action) {
+	try {
+		const response = yield axios("events/tags");
+		yield put(eventsActions.getTagsSuccess(response.data));
+	} catch (error) {
+		yield put(globalActions.showMessage(getHttpError(error)));
+	}
+}
+
 // Watcher
 export default function* watchEventsListActions() {
 	yield all([takeEvery(actionTypes.GET_USER_EVENTS, getUserEventsSaga)]);
 	yield all([takeEvery(actionTypes.GET_ALL_EVENTS, getAllEventsSaga)]);
 	yield all([takeEvery(actionTypes.SAVE_EVENT, saveEventSaga)]);
+	yield all([takeEvery(actionTypes.GET_CATEGORIES, getCategoriesSaga)]);
+	yield all([takeEvery(actionTypes.GET_TAGS, getTagsSaga)]);
 }

@@ -3,7 +3,9 @@ import eventsActionTypes from "./actionTypes";
 
 export const INITIAL_STATE = {
 	all: [],
-	userEvents: {}
+	userEvents: {},
+	categories: [],
+	tags: []
 };
 
 const eventsReducer = (state = INITIAL_STATE, { type, payload }) =>
@@ -19,6 +21,12 @@ const eventsReducer = (state = INITIAL_STATE, { type, payload }) =>
 				break;
 			case eventsActionTypes.SAVE_EVENT_SUCCESS:
 				draft.all.push(payload.event);
+				break;
+			case eventsActionTypes.GET_CATEGORIES_SUCCESS:
+				draft.categories = payload.categories;
+				break;
+			case eventsActionTypes.GET_TAGS_SUCCESS:
+				draft.tags = payload.tags;
 				break;
 		}
 	});

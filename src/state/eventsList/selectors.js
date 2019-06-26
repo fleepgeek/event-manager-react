@@ -1,24 +1,34 @@
 import { createSelector } from "reselect";
 import { INITIAL_STATE } from "./reducer";
 
-export const selectEvent = state => state.eventsList || INITIAL_STATE;
+export const selectEventsList = state => state.eventsList || INITIAL_STATE;
 
 export const getAll = createSelector(
-	selectEvent,
+	selectEventsList,
 	eventState => eventState.all
 );
 
 export const getUserEvent = createSelector(
-	selectEvent,
+	selectEventsList,
 	userState => userState.userEvents
 );
 
 export const getUserCreatedEvents = createSelector(
 	getUserEvent,
-	eventState => eventState.created
+	eventsListState => eventsListState.created
 );
 
 export const getUserAttendingEvents = createSelector(
 	getUserEvent,
-	eventState => eventState.attending
+	eventsListState => eventsListState.attending
+);
+
+export const getCategories = createSelector(
+	selectEventsList,
+	eventsListState => eventsListState.categories
+);
+
+export const getTags = createSelector(
+	selectEventsList,
+	eventsListState => eventsListState.tags
 );

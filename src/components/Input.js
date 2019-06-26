@@ -1,7 +1,7 @@
 import React from "react";
 import PropTypes from "prop-types";
 import styled from "styled-components";
-import { Field, ErrorMessage } from "formik";
+import { Field, ErrorMessage, connect } from "formik";
 
 const InputWrapper = styled.div`
 	margin-bottom: 1rem;
@@ -28,6 +28,28 @@ const Label = styled.label`
 	display: inline-block;
 `;
 
+const MultiSelect = connect(({ formik, name, items }) => {
+	return (
+		<Field
+			name={name}
+			component="select"
+			multiple
+			onChange={e =>
+				formik.setFieldValue(
+					`${name}`,
+					[].slice.call(e.target.selectedOptions).map(option => option.value)
+				)
+			}
+		>
+			{items.map(item => (
+				<option value={item.id} key={item.id}>
+					{item.name}
+				</option>
+			))}
+		</Field>
+	);
+});
+
 const Input = ({
 	name,
 	type,
@@ -36,6 +58,7 @@ const Input = ({
 	items,
 	noLabel,
 	labelText,
+	multiple,
 	...props
 }) => {
 	let field = (
@@ -48,15 +71,20 @@ const Input = ({
 		/>
 	);
 	if (component === "select") {
-		field = (
-			<Field name={name} component="select" {...props}>
-				{items.map(item => (
-					<option value={item.id} key={item.id}>
-						{item.name}
-					</option>
-				))}
-			</Field>
-		);
+		if (multiple) {
+			field = <MultiSelect name={name} items={items} />;
+		} else {
+			field = (
+				<Field name={name} component="select" {...props}>
+					<option value="">-- Select {name} --</option>
+					{items.map(item => (
+						<option value={item.id} key={item.id}>
+							{item.name}
+						</option>
+					))}
+				</Field>
+			);
+		}
 	}
 	return (
 		<InputWrapper>
@@ -72,7 +100,14 @@ Input.propTypes = {
 	type: PropTypes.string,
 	placeholder: PropTypes.string,
 	noLabel: PropTypes.bool,
-	labelText: PropTypes.string
+	labelText: PropTypes.string,
+	multiple: PropTypes.bool,
+	items: PropTypes.arrayOf(
+		PropTypes.shape({
+			id: PropTypes.number.isRequired,
+			name: PropTypes.string.isRequired
+		})
+	)
 };
 
 Input.defaultProps = {

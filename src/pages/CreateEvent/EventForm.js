@@ -16,7 +16,7 @@ const EventSchema = Yup.object().shape({
 	location: Yup.string().required("Location Required")
 });
 
-const EventForm = ({ closeModal, message, saveEvent }) => {
+const EventForm = ({ closeModal, message, saveEvent, categories, tags }) => {
 	return (
 		<Container>
 			<StyledForm title="Create Event">
@@ -25,8 +25,8 @@ const EventForm = ({ closeModal, message, saveEvent }) => {
 						title: "",
 						description: "",
 						location: "",
-						category: 2,
-						tags: [1, 2],
+						category: "",
+						tags: [],
 						event_date: "2019-09-12T01:30:00"
 					}}
 					validationSchema={EventSchema}
@@ -37,17 +37,14 @@ const EventForm = ({ closeModal, message, saveEvent }) => {
 					{({ isSubmitting }) => (
 						<Form>
 							<Input name="title" type="text" placeholder="Title" />
-							{/* <Input
-								name="category"
-								component="select"
-								items={[{ id: 1, name: "Music" }, { id: 2, name: "Sport" }]}
-							/> */}
+							<Input name="category" component="select" items={categories} />
 							<Input
 								name="description"
 								component="textarea"
 								placeholder="Description here"
 							/>
 							<Input name="location" type="text" placeholder="Venue" />
+							<Input name="tags" component="select" items={tags} multiple />
 							<Button type="submit" className="mr-4" secondary>
 								Create Event
 							</Button>

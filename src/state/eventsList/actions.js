@@ -28,3 +28,21 @@ export const getUserEventsSuccess = (created, attending) => ({
 	type: eventsActionTypes.GET_USER_EVENTS_SUCCESS,
 	payload: { created, attending }
 });
+
+export const getCategories = () => ({
+	type: eventsActionTypes.GET_CATEGORIES
+});
+
+export const getCategoriesSuccess = categories => ({
+	type: eventsActionTypes.GET_CATEGORIES_SUCCESS,
+	payload: { categories }
+});
+
+export const getTags = () => ({
+	type: eventsActionTypes.GET_TAGS
+});
+
+export const getTagsSuccess = tags => ({
+	type: eventsActionTypes.GET_TAGS_SUCCESS,
+	payload: { tags }
+});
