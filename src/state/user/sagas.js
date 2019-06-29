@@ -41,13 +41,13 @@ function* getUsersSaga() {
 	}
 }
 
-function* updateUserSaga() {
+function* updateUserSaga({ payload }) {
 	try {
 		yield put(globalActions.showLoading());
+		const { formData } = payload;
 		const userId = yield select(authSelectors.getUid);
-		console.log(userId);
-		const response = yield axios.put(`users/${userId}/update/`);
-		yield put(userActions.getCurrentUserSuccess(response.data));
+		const response = yield axios.put(`users/${userId}/update/`, formData);
+		yield put(userActions.updateUserSuccess(response.data));
 		yield put(globalActions.hideLoading());
 	} catch (error) {
 		yield put(globalActions.showMessage(getHttpError(error)));

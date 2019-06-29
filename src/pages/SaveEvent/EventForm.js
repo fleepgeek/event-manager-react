@@ -53,6 +53,7 @@ const EventForm = ({
 			<StyledForm title={!isEdit ? "Create Event" : "Edit Event"}>
 				<Formik
 					initialValues={defaultValues}
+					enableReinitialize={true}
 					validationSchema={EventSchema}
 					onSubmit={values => {
 						if (isEdit) {

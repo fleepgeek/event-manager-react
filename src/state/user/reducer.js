@@ -4,7 +4,7 @@ import userActionTypes from "./actionTypes";
 // Reducer
 export const INITIAL_STATE = {
 	profile: {},
-	currentUser: {},
+	currentUser: null,
 	usersList: []
 };
 

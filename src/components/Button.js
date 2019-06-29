@@ -2,8 +2,11 @@ import styled, { css } from "styled-components";
 
 const Button = styled.button`
 	/* background: transparent; */
-	background: ${({ theme }) => theme.colors.lightGrey};
-	border: none;
+	/* background: ${({ theme }) => theme.colors.lightGrey}; */
+	background-color: #eff3f6;
+	background-image: linear-gradient(-180deg,#fafbfc,#eff3f6 90%);
+border: ${props => (props.hasBorder ? "1px solid rgba(27,31,35,.2)" : "none")};
+	/* border: none; */
 	color: ${({ theme }) => theme.colors.primary};
 	outline: none;
 	cursor: pointer;

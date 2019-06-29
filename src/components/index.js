@@ -15,3 +15,4 @@ export { default as EventsList } from "./EventsList";
 export { default as UsersList } from "./UsersList";
 export { default as Backdrop } from "./Backdrop";
 export { default as Modal } from "./Modal";
+export { default as Divider } from "./Divider";

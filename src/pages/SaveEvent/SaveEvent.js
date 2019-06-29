@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { connect } from "react-redux";
 import { createStructuredSelector } from "reselect";
-import queryString from "query-string";
+// import queryString from "query-string";
 import { Modal } from "../../components";
 import EventForm from "./EventForm";
 import { eventsListActions, eventsListSelectors } from "../../state/eventsList";
@@ -25,7 +25,7 @@ const CreateEvent = ({
 }) => {
 	const [showModal, setShowModal] = useState(false);
 	const isEditRef = React.useRef(false);
-	console.log(location, match);
+	// console.log(location, match);
 	useEffect(() => {
 		// if(location.pathname)
 		if (match.path === "/dashboard/events/:id/edit") {
@@ -39,6 +39,7 @@ const CreateEvent = ({
 		return () => {
 			onUnloadEvent();
 		};
+		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, []);
 
 	const closeModal = () => {

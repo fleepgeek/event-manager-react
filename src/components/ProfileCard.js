@@ -2,7 +2,7 @@ import React from "react";
 import styled from "styled-components";
 import { Container, Row, Col } from "reactstrap";
 import { FaMapMarker } from "react-icons/fa";
-import { Button, Tag, EventsTab } from "./";
+import { Button, Tag, EventsTab, Divider } from "./";
 
 const ProfileRow = styled(Row)`
 	box-shadow: 0 0 2px 0 rgba(46, 62, 72, 0.12),
@@ -17,9 +17,6 @@ const PersonalInfo = styled(Col)`
 
 const Header = styled.div`
 	display: flex;
-`;
-const Divider = styled.div`
-	border-bottom: 1px solid ${({ theme }) => theme.colors.lightGrey};
 `;
 
 const TempAvatar = styled.span`

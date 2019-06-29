@@ -4,9 +4,9 @@ import { connect } from "react-redux";
 import { createStructuredSelector } from "reselect";
 import { DashboardPageHeader } from "../../components";
 import Profile from "./Profile";
+import Account from "./Account";
 import { userSelectors } from "../../state/user";
 import { authSelectors } from "../../state/auth";
-import { eventsListSelectors, eventsListActions } from "../../state/eventsList";
 
 const Settings = ({
 	match,
@@ -19,10 +19,9 @@ const Settings = ({
 	attending
 }) => {
 	useEffect(() => {
-		if (match.path === "/dashboard/settings") {
-			history.replace(`${match.path}/profile`);
-		}
-		onGetEvents(uid);
+		// if (match.path === "/dashboard/settings") {
+		// 	history.replace(`${match.path}/profile`);
+		// }
 		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, []);
 	return (
@@ -35,16 +34,10 @@ const Settings = ({
 				]}
 			/>
 			<Switch>
-				<Route
-					path={`${match.path}/account`}
-					render={() => <h2>Account</h2>}
-					exact
-				/>
+				<Route path={`${match.path}/account`} component={Account} exact />
 				<Route
 					path={`${match.path}/profile`}
-					render={() => (
-						<Profile profile={currentUser} events={{ created, attending }} />
-					)}
+					render={props => <Profile profile={currentUser} {...props} />}
 					exact
 				/>
 			</Switch>
@@ -54,14 +47,7 @@ const Settings = ({
 
 const mapStateToProps = createStructuredSelector({
 	uid: authSelectors.getUid,
-	currentUser: userSelectors.getCurrentUser,
-	created: eventsListSelectors.getUserCreatedEvents,
-	attending: eventsListSelectors.getUserAttendingEvents
+	currentUser: userSelectors.getCurrentUser
 });
 
-export default connect(
-	mapStateToProps,
-	{
-		onGetEvents: eventsListActions.getUserEvents
-	}
-)(Settings);
+export default connect(mapStateToProps)(Settings);

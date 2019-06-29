@@ -28,8 +28,9 @@ export const getUsersSuccess = users => ({
 	payload: { users }
 });
 
-export const updateUser = () => ({
-	type: userActionTypes.UPDATE_USER
+export const updateUser = formData => ({
+	type: userActionTypes.UPDATE_USER,
+	payload: { formData }
 });
 
 export const updateUserSuccess = user => ({
