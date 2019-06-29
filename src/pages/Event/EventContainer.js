@@ -20,10 +20,9 @@ const EventContainer = props => {
 		onUnload
 	} = props;
 	useEffect(() => {
-		if (+match.params.id !== event.id) {
-			onGetEvent(match.params.id);
-			onGetAttendees(match.params.id);
-		}
+		onGetEvent(match.params.id);
+		onGetAttendees(match.params.id);
+
 		return () => {
 			onUnload();
 		};

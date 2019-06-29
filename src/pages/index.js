@@ -3,7 +3,7 @@ export { default as Logout } from "./Auth/Logout";
 export { default as Home } from "./Home/Home.js";
 export { default as BrowseEvents } from "./BrowseEvents/BrowseEventsContainer";
 export { default as Event } from "./Event/EventContainer";
-export { default as CreateEvent } from "./CreateEvent/CreateEvent";
+export { default as SaveEvent } from "./SaveEvent/SaveEvent";
 export { default as Dashboard } from "./Dashboard/Dashboard";
 export { default as DashSettings } from "./DashSettings/DashSettings";
 export { default as DashEvents } from "./DashEvents/DashEvents";

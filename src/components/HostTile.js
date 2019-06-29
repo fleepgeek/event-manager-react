@@ -26,7 +26,7 @@ const HostTile = props => {
 				<p>Hosted by {((props.event || {}).creator || {}).username}</p>
 				<p>
 					<Moment format="MMMM Do YYYY, h:mm:ss a">
-						{props.event.created_on}
+						{props.event.event_date}
 					</Moment>
 				</p>
 			</Detail>

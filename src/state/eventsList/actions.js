@@ -9,9 +9,9 @@ export const getAllEventsSuccess = events => ({
 	payload: { events }
 });
 
-export const saveEvent = formData => ({
+export const saveEvent = (formData, id = null) => ({
 	type: eventsActionTypes.SAVE_EVENT,
-	payload: { formData }
+	payload: { formData, id }
 });
 
 export const saveEventSuccess = event => ({

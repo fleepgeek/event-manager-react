@@ -2,7 +2,7 @@ import produce from "immer";
 import eventActionTypes from "./actionTypes";
 
 export const INITIAL_STATE = {
-	event: {},
+	event: null,
 	attendees: []
 };
 

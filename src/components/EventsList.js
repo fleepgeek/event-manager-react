@@ -17,6 +17,7 @@ const EventsList = ({ events, isMini }) => {
 		} else {
 			return (
 				<Col key={e.id} md="6" lg="4" style={{ marginBottom: "2rem" }}>
+					<Link to={`/dashboard/events/${e.id}/edit`}>Edit</Link>
 					<Link to={`/events/${e.id}`}>
 						<EventCard event={e} isMini={isMini} />
 					</Link>

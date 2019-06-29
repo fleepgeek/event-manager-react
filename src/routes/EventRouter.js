@@ -9,7 +9,7 @@ import {
 	BrowseEvents,
 	Event,
 	Dashboard,
-	CreateEvent
+	SaveEvent
 } from "../pages";
 import PrivateRoute from "./PrivateRoute";
 
@@ -19,7 +19,8 @@ const EventRouter = ({ location }) => {
 		<>
 			<Switch>
 				<PrivateRoute path="/dashboard" component={Dashboard} />
-				<PrivateRoute path="/event/create" component={CreateEvent} />
+				<PrivateRoute path="/event/create" component={SaveEvent} />
+				<PrivateRoute path="/event/:id/edit" component={SaveEvent} />
 				<Route path="/events/:id" component={Event} />
 				<Route path="/events" exact component={BrowseEvents} />
 				<Route path="/auth" component={Auth} />
@@ -27,8 +28,8 @@ const EventRouter = ({ location }) => {
 				<Route path="/" exact component={Home} />
 				<Route render={() => <h2>Page not Found</h2>} />
 			</Switch>
-			{values.action === "create_event" && (
-				<PrivateRoute path={`${location.pathname}`} component={CreateEvent} />
+			{values.action && (
+				<PrivateRoute path={`${location.pathname}`} component={SaveEvent} />
 			)}
 		</>
 	);

@@ -1,7 +1,8 @@
 import { put, takeEvery, all } from "redux-saga/effects";
 import axios from "../../utils/axios-base";
 import * as eventsActions from "./actions";
-import * as globalActions from "../global/actions";
+import { globalActions } from "../global";
+import { eventActions } from "../event";
 import actionTypes from "./actionTypes";
 import getHttpError from "../../utils/getHttpError";
 
@@ -34,10 +35,17 @@ function* getUserEventsSaga({ payload }) {
 
 function* saveEventSaga({ payload }) {
 	yield put(globalActions.showLoading());
+	const { id, formData } = payload;
 	try {
-		const response = yield axios.post("events/", payload.formData);
+		let response = null;
+		if (id) {
+			response = yield axios.put(`events/${id}/`, formData);
+		} else {
+			response = yield axios.post("events/", formData);
+		}
 		yield put(eventsActions.saveEventSuccess(response.data));
 		yield put(globalActions.hideLoading());
+		yield put(eventActions.getEventsByIdSuccess(response.data));
 		yield put(globalActions.setRedirectPath(`/events/${response.data.id}`));
 	} catch (error) {
 		yield put(globalActions.showMessage(getHttpError(error)));

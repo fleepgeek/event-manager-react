@@ -5,6 +5,7 @@ import { createStructuredSelector } from "reselect";
 import { authSelectors } from "../../state/auth";
 import { eventsListSelectors, eventsListActions } from "../../state/eventsList";
 import { DashboardPageHeader } from "../../components";
+import { SaveEvent } from "../../pages";
 import Attending from "./Attending";
 import Created from "./Created";
 
@@ -19,9 +20,9 @@ const DashEvents = ({
 }) => {
 	useEffect(() => {
 		// if (location.state && location.state.fromDashboard) {
-		if (match.path === "/dashboard/events") {
-			history.replace(`${match.path}/attending`);
-		}
+		// if (match.path === "/dashboard/events") {
+		// 	history.replace(`${match.path}/attending`);
+		// }
 		onGetEvents(uid);
 		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, []);
@@ -41,8 +42,9 @@ const DashEvents = ({
 			/>
 			<Route
 				path={`${match.path}/myevents`}
-				render={() => <Created events={created} />}
+				render={props => <Created events={created} {...props} />}
 			/>
+			<Route path={`${match.path}/:id/edit`} component={SaveEvent} />
 		</>
 	);
 };

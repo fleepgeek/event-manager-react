@@ -25,9 +25,11 @@ const UsersList = ({
 }) => {
 	return (
 		<>
-			<Modal isModalOpen={isModalOpen} closeModal={closeModal}>
-				<ProfileCard profile={profile} events={events} />
-			</Modal>
+			{isModalOpen && (
+				<Modal isModalOpen={isModalOpen} closeModal={closeModal}>
+					<ProfileCard profile={profile} events={events} />
+				</Modal>
+			)}
 			<StyledContainer>
 				<Row className="text-center">
 					{users.map(person => (

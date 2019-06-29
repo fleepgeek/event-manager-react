@@ -8,13 +8,13 @@ const Wrapper = styled.div`
 	z-index: 20 !important;
 	position: absolute;
 	max-width: 992px;
-	top: 15%;
+	top: 10%;
 	left: 15%;
 	right: 15%;
-	margin: 0 auto !important;
+	margin: 0 auto 1rem auto !important;
 	display: ${({ isModalOpen }) => (isModalOpen ? "block" : "none")} !important;
 	background: #fff;
-	padding: 2rem 0.5rem;
+	padding: 1rem 0.5rem;
 	border-radius: 5px;
 	@media screen and (max-width: 992px) {
 		left: 5%;
@@ -25,11 +25,24 @@ const Wrapper = styled.div`
 
 const modalRoot = document.getElementById("modal-root");
 
-const Modal = ({ children, isModalOpen, closeModal }) => {
+const Modal = ({ children, isModalOpen, closeModal, clickableBackdrop }) => {
+	React.useEffect(() => {
+		const escapePressed = e => {
+			if (e.keyCode === 27) closeModal();
+		};
+		document.addEventListener("keydown", escapePressed);
+		return () => {
+			document.removeEventListener("keydown", escapePressed);
+		};
+	}, [closeModal]);
+
 	return ReactDOM.createPortal(
 		<>
-			<Backdrop show={isModalOpen} onClick={() => closeModal()} />
-			{/* <Backdrop show={isModalOpen} onClick={() => !isModalOpen} /> */}
+			{clickableBackdrop ? (
+				<Backdrop show={isModalOpen} onClick={() => closeModal()} />
+			) : (
+				<Backdrop show={isModalOpen} onClick={() => null} />
+			)}
 			<Wrapper isModalOpen={isModalOpen}>{children}</Wrapper>
 		</>,
 		modalRoot
@@ -37,7 +50,8 @@ const Modal = ({ children, isModalOpen, closeModal }) => {
 };
 
 Modal.defaultProps = {
-	closeModal: () => {}
+	closeModal: () => {},
+	clickableBackdrop: true
 };
 
 export default Modal;

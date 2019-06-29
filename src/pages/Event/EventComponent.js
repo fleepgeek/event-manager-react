@@ -75,70 +75,74 @@ const EventComponent = props => {
 		}
 	};
 	return (
-		<EventWrapper>
-			<Hero noGutters>
-				<Col lg="7">
-					<PosterImage src="https://img.evbuc.com/https%3A%2F%2Fcdn.evbuc.com%2Fimages%2F51853185%2F52642443556%2F1%2Foriginal.jpg?w=800&auto=compress&rect=1294%2C0%2C2842%2C1421&s=91a6faf8d21ccdf306d476339b2f4e3e" />
-				</Col>
-				<Content>
-					<div className="categories">
-						<Tag>Outdoor</Tag>
-					</div>
-					<h1>{event.title}</h1>
-					<HostTile event={event} />
-					<div className="actions">
-						{isAuth ? (
-							<Button
-								secondary
-								full
-								onClick={attendClicked}
-								disabled={isLoading}
-							>
-								{!event.attending ? "Attend" : "Cancel Attendance"}
-							</Button>
+		<>
+			{event && (
+				<EventWrapper>
+					<Hero noGutters>
+						<Col lg="7">
+							<PosterImage src="https://img.evbuc.com/https%3A%2F%2Fcdn.evbuc.com%2Fimages%2F51853185%2F52642443556%2F1%2Foriginal.jpg?w=800&auto=compress&rect=1294%2C0%2C2842%2C1421&s=91a6faf8d21ccdf306d476339b2f4e3e" />
+						</Col>
+						<Content>
+							<div className="categories">
+								<Tag>Outdoor</Tag>
+							</div>
+							<h1>{event.title}</h1>
+							<HostTile event={event} />
+							<div className="actions">
+								{isAuth ? (
+									<Button
+										secondary
+										full
+										onClick={attendClicked}
+										disabled={isLoading}
+									>
+										{!event.attending ? "Attend" : "Cancel Attendance"}
+									</Button>
+								) : (
+									<h4>Login to Attend</h4>
+								)}
+							</div>
+						</Content>
+					</Hero>
+					<Container>
+						<Info>
+							<Main lg="7">
+								<div className="description">
+									<p className="heading">Description</p>
+									<p>{event.description}</p>
+								</div>
+							</Main>
+							<Extras>
+								<div className="item">
+									<p className="heading">Date and Time</p>
+									<p>
+										<Moment format="MMMM Do YYYY, h:mm:ss a">
+											{event.event_date}
+										</Moment>
+									</p>
+								</div>
+								<div className="item">
+									<p className="heading">Location</p>
+									<p>{event.location}</p>
+								</div>
+							</Extras>
+						</Info>
+					</Container>
+					<Container>
+						<h3>Attendees</h3>
+						{(attendees || []).length > 0 ? (
+							<ul>
+								{attendees.map(attendee => (
+									<li key={attendee.id}>{attendee.user.username}</li>
+								))}
+							</ul>
 						) : (
-							<h4>Login to Attend</h4>
+							<p>None</p>
 						)}
-					</div>
-				</Content>
-			</Hero>
-			<Container>
-				<Info>
-					<Main lg="7">
-						<div className="description">
-							<p className="heading">Description</p>
-							<p>{event.description}</p>
-						</div>
-					</Main>
-					<Extras>
-						<div className="item">
-							<p className="heading">Date and Time</p>
-							<p>
-								<Moment format="MMMM Do YYYY, h:mm:ss a">
-									{event.event_date}
-								</Moment>
-							</p>
-						</div>
-						<div className="item">
-							<p className="heading">Location</p>
-							<p>{event.location}</p>
-						</div>
-					</Extras>
-				</Info>
-			</Container>
-			<Container>
-				<h3>Attendees</h3>
-				{(attendees || []).length > 0 ? (
-					<ul>
-						{attendees.map(attendee => (
-							<li key={attendee.id}>{attendee.user.username}</li>
-						))}
-					</ul>
-				) : (
-					<p>None</p>
-				)}
-			</Container>
-		</EventWrapper>
+					</Container>
+				</EventWrapper>
+			)}
+		</>
 	);
 };
 

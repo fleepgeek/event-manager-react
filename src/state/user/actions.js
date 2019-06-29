@@ -27,3 +27,12 @@ export const getUsersSuccess = users => ({
 	type: userActionTypes.GET_USERS_SUCCESS,
 	payload: { users }
 });
+
+export const updateUser = () => ({
+	type: userActionTypes.UPDATE_USER
+});
+
+export const updateUserSuccess = user => ({
+	type: userActionTypes.UPDATE_USER_SUCCESS,
+	payload: { user }
+});

@@ -1,8 +1,9 @@
-import { put, takeEvery, all } from "redux-saga/effects";
+import { put, takeEvery, all, select } from "redux-saga/effects";
 import userActionTypes from "./actionTypes";
 import * as userActions from "./actions";
 import * as globalActions from "../global/actions";
 import authActionTypes from "../auth/actionTypes";
+import { authSelectors } from "../auth";
 import axios from "../../utils/axios-base";
 import getHttpError from "../../utils/getHttpError";
 
@@ -40,10 +41,24 @@ function* getUsersSaga() {
 	}
 }
 
+function* updateUserSaga() {
+	try {
+		yield put(globalActions.showLoading());
+		const userId = yield select(authSelectors.getUid);
+		console.log(userId);
+		const response = yield axios.put(`users/${userId}/update/`);
+		yield put(userActions.getCurrentUserSuccess(response.data));
+		yield put(globalActions.hideLoading());
+	} catch (error) {
+		yield put(globalActions.showMessage(getHttpError(error)));
+	}
+}
+
 // Watcher
 export default function* watchUserActions() {
 	yield all([takeEvery(userActionTypes.GET_PROFILE, getProfileSaga)]);
 	yield all([takeEvery(userActionTypes.GET_CURRENT_USER, getCurrentUserSaga)]);
 	yield all([takeEvery(authActionTypes.LOGIN_SUCCESS, getCurrentUserSaga)]);
 	yield all([takeEvery(userActionTypes.GET_USERS, getUsersSaga)]);
+	yield all([takeEvery(userActionTypes.UPDATE_USER, updateUserSaga)]);
 }

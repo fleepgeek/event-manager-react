@@ -15,6 +15,7 @@ const userReducer = (state = INITIAL_STATE, { type, payload }) =>
 			case userActionTypes.GET_PROFILE_SUCCESS:
 				draft.profile = payload.profile;
 				break;
+			case userActionTypes.UPDATE_USER_SUCCESS:
 			case userActionTypes.GET_CURRENT_USER_SUCCESS:
 				draft.currentUser = payload.user;
 				break;

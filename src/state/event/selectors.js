@@ -5,7 +5,7 @@ export const selectEvent = state => state.event || INITIAL_STATE;
 
 export const getById = createSelector(
 	selectEvent,
-	eventState => eventState.event || {}
+	eventState => eventState.event
 );
 
 export const getAttendees = createSelector(

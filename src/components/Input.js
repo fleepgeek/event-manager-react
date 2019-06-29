@@ -114,4 +114,4 @@ Input.defaultProps = {
 	noLabel: false
 };
 
-export default Input;
+export default React.memo(Input);

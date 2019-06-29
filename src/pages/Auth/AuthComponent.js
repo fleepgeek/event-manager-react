@@ -8,7 +8,7 @@ const AuthComponent = props => {
 	return (
 		<>
 			{props.isAuthenticated && <Redirect to={from} />}
-			<Container style={{ marginTop: "40px" }}>
+			<Container>
 				<Row>
 					<Col
 						sm={{ size: 8, offset: 2 }}
