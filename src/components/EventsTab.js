@@ -9,6 +9,7 @@ import {
 	Row,
 	Col
 } from "reactstrap";
+import { EventsList } from ".";
 
 const StyledNavItem = styled(NavItem)`
 	flex: 1;
@@ -53,16 +54,12 @@ const EventsTab = ({ events }) => {
 					</StyledNavLink>
 				</StyledNavItem>
 			</Nav>
-			<TabContent activeTab={activeTab}>
+			<TabContent activeTab={activeTab} style={{ marginTop: "1rem" }}>
 				<TabPane tabId="1">
 					<Row>
 						<Col sm="12">
 							{((events || {}).attending || []).length > 0 ? (
-								<ul>
-									{events.attending.map(event => (
-										<li key={event.id}>{event.title}</li>
-									))}
-								</ul>
+								<EventsList events={events.attending} isMini={true} />
 							) : (
 								<p>No Event</p>
 							)}
@@ -71,13 +68,9 @@ const EventsTab = ({ events }) => {
 				</TabPane>
 				<TabPane tabId="2">
 					<Row>
-						<Col sm="6">
+						<Col sm="12">
 							{((events || {}).created || []).length > 0 ? (
-								<ul>
-									{events.created.map(event => (
-										<li key={event.id}>{event.title}</li>
-									))}
-								</ul>
+								<EventsList events={events.created} isMini={true} />
 							) : (
 								<p>No Event</p>
 							)}

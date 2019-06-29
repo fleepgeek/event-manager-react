@@ -4,34 +4,47 @@ import { connect } from "react-redux";
 import { createStructuredSelector } from "reselect";
 import { ProgressBar } from "./components";
 import { authActions } from "./state/auth";
-import { globalSelectors } from "./state/global";
+import { globalSelectors, globalActions } from "./state/global";
 import { AppRouter } from "./routes";
 
-const App = props => {
+const App = ({
+	history,
+	tryAutoLogin,
+	loading,
+	redirectPath,
+	onRedirectCompleted
+}) => {
 	useEffect(() => {
-		props.tryAutoLogin();
+		tryAutoLogin();
 		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, []);
 
+	useEffect(() => {
+		if (redirectPath) {
+			history.push(redirectPath);
+			onRedirectCompleted();
+		}
+	}, [redirectPath, history, onRedirectCompleted]);
+
 	return (
 		<>
-			{props.loading && <ProgressBar />}
+			{loading && <ProgressBar />}
 			<AppRouter />
 		</>
 	);
 };
 
 const mapStateToProps = createStructuredSelector({
-	loading: globalSelectors.getLoading
-});
-
-const mapDispatchToProps = dispatch => ({
-	tryAutoLogin: () => dispatch(authActions.autoLogin())
+	loading: globalSelectors.getLoading,
+	redirectPath: globalSelectors.getRedirectPath
 });
 
 export default withRouter(
 	connect(
 		mapStateToProps,
-		mapDispatchToProps
+		{
+			tryAutoLogin: authActions.autoLogin,
+			onRedirectCompleted: globalActions.redirectCompleted
+		}
 	)(App)
 );

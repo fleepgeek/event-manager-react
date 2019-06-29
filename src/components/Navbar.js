@@ -3,6 +3,7 @@ import { Link, NavLink } from "react-router-dom";
 import styled from "styled-components";
 import { lighten } from "polished";
 import { FaCalendarAlt } from "react-icons/fa";
+import { Button } from "./";
 
 const StyledNavbar = styled.nav`
 	display: flex;
@@ -38,32 +39,39 @@ const Menu = styled.div`
 
 const Navbar = props => {
 	return (
-		<StyledNavbar>
-			<Link to="/" className="logo">
-				<FaCalendarAlt size={20} />
-				<span>Eventio</span>
-			</Link>
-			<Menu>
-				<NavLink to="/events" exact>
-					Browse Events
-				</NavLink>
-				<NavLink to="/events/add" exact>
-					Create Event
-				</NavLink>
-				{props.isAuth ? (
-					<>
-						<NavLink to="/dashboard">Dashboard</NavLink>
-						<NavLink to="/logout" exact>
-							Logout
-						</NavLink>
-					</>
-				) : (
-					<NavLink to="/auth" exact>
-						Sign In
+		<>
+			<StyledNavbar>
+				<Link to="/" className="logo">
+					<FaCalendarAlt size={20} />
+					<span>Eventio</span>
+				</Link>
+				<Menu>
+					<NavLink
+						to={{
+							search: "?action=create_event",
+							state: { modal: true }
+						}}
+					>
+						<Button secondary>Create Event</Button>
 					</NavLink>
-				)}
-			</Menu>
-		</StyledNavbar>
+					<NavLink to="/events" exact>
+						Browse Events
+					</NavLink>
+					{props.isAuth ? (
+						<>
+							<NavLink to="/dashboard">Dashboard</NavLink>
+							<NavLink to="/logout" exact>
+								Logout
+							</NavLink>
+						</>
+					) : (
+						<NavLink to="/auth" exact>
+							Sign In
+						</NavLink>
+					)}
+				</Menu>
+			</StyledNavbar>
+		</>
 	);
 };
 

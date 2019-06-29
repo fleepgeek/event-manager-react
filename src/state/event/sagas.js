@@ -3,15 +3,16 @@ import axios from "../../utils/axios-base";
 import * as eventActions from "./actions";
 import * as globalActions from "../global/actions";
 import actionTypes from "./actionTypes";
+import getHttpError from "../../utils/getHttpError";
 
 function* getEventSaga({ payload }) {
 	try {
 		yield put(globalActions.showLoading());
 		const response = yield axios.get(`events/${payload.id}/`);
-		yield put(eventActions.fetchEventsByIdSuccess(response.data));
+		yield put(eventActions.getEventsByIdSuccess(response.data));
 		yield put(globalActions.hideLoading());
 	} catch (error) {
-		yield put(globalActions.showMessage(error.response.data.detail));
+		yield put(globalActions.showMessage(getHttpError(error)));
 	}
 }
 
@@ -22,7 +23,7 @@ function* getAttendeesSaga({ payload }) {
 		yield put(eventActions.getAttendeesSuccess(response.data));
 		yield put(globalActions.hideLoading());
 	} catch (error) {
-		yield put(globalActions.showMessage(error.response.data.detail));
+		yield put(globalActions.showMessage(getHttpError(error)));
 	}
 }
 
@@ -40,13 +41,13 @@ function* attendEventSaga({ type, payload }) {
 		}
 		yield put(globalActions.hideLoading());
 	} catch (error) {
-		yield put(globalActions.showMessage(error.response.data.detail));
+		yield put(globalActions.showMessage(getHttpError(error)));
 	}
 }
 
 // Watcher
 export default function* watchEventActions() {
-	yield all([takeEvery(actionTypes.FETCH_EVENT_BY_ID, getEventSaga)]);
+	yield all([takeEvery(actionTypes.GET_EVENT_BY_ID, getEventSaga)]);
 	yield all([takeEvery(actionTypes.GET_ATTENDEES, getAttendeesSaga)]);
 	yield all([takeEvery(actionTypes.ATTEND_EVENT, attendEventSaga)]);
 	yield all([takeEvery(actionTypes.CANCEL_ATTENDANCE, attendEventSaga)]);

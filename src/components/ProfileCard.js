@@ -1,13 +1,14 @@
 import React from "react";
 import styled from "styled-components";
-import { Row, Col } from "reactstrap";
+import { Container, Row, Col } from "reactstrap";
 import { FaMapMarker } from "react-icons/fa";
-import { Button, Tag, EventsTab } from "./";
+import { Button, Tag, EventsTab, Divider } from "./";
 
-const ProfileWrapper = styled(Row)`
+const ProfileRow = styled(Row)`
 	box-shadow: 0 0 2px 0 rgba(46, 62, 72, 0.12),
 		0 2px 4px 0 rgba(46, 62, 72, 0.12);
 	padding: 0 !important;
+	background: #fff;
 `;
 
 const PersonalInfo = styled(Col)`
@@ -16,9 +17,6 @@ const PersonalInfo = styled(Col)`
 
 const Header = styled.div`
 	display: flex;
-`;
-const Divider = styled.div`
-	border-bottom: 1px solid ${({ theme }) => theme.colors.lightGrey};
 `;
 
 const TempAvatar = styled.span`
@@ -56,45 +54,49 @@ const Section = styled.section`
 
 const ProfileCard = ({ profile, me, events }) => {
 	return (
-		<ProfileWrapper noGutters>
-			<PersonalInfo md={{ size: 8 }}>
-				<Section>
-					<Header>
-						{/* <Avatar src="" /> */}
-						<TempAvatar />
-						<Data>
-							<h2>
-								{profile.display_name}{" "}
-								<span style={{ fontSize: "13px", textTransform: "lowercase" }}>
-									@{profile.username}
-								</span>
-							</h2>
-							<p>
-								<FaMapMarker />
-								Lagos, Nigeria
-							</p>
-							{me && <Button primary>Edit</Button>}
-						</Data>
-					</Header>
-				</Section>
-				<Divider />
-				<Section>
-					<h2>About</h2>
-					<p>{profile.about}</p>
-				</Section>
-				<Divider />
-				<Section>
-					<h2>Interests</h2>
-					<div style={{ display: "flex" }}>
-						<Tag>Food</Tag>
-						<Tag>Coding</Tag>
-					</div>
-				</Section>
-			</PersonalInfo>
-			<Col>
-				<EventsTab events={events} />
-			</Col>
-		</ProfileWrapper>
+		<Container>
+			<ProfileRow noGutters>
+				<PersonalInfo md={{ size: 8 }}>
+					<Section>
+						<Header>
+							{/* <Avatar src="" /> */}
+							<TempAvatar />
+							<Data>
+								<h2>
+									{profile.display_name}{" "}
+									<span
+										style={{ fontSize: "13px", textTransform: "lowercase" }}
+									>
+										@{profile.username}
+									</span>
+								</h2>
+								<p>
+									<FaMapMarker />
+									Lagos, Nigeria
+								</p>
+								{me && <Button primary>Edit</Button>}
+							</Data>
+						</Header>
+					</Section>
+					<Divider />
+					<Section>
+						<h2>About</h2>
+						<p>{profile.about}</p>
+					</Section>
+					<Divider />
+					<Section>
+						<h2>Interests</h2>
+						<div style={{ display: "flex" }}>
+							<Tag>Food</Tag>
+							<Tag>Coding</Tag>
+						</div>
+					</Section>
+				</PersonalInfo>
+				<Col>
+					<EventsTab events={events} />
+				</Col>
+			</ProfileRow>
+		</Container>
 	);
 };
 

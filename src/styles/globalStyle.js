@@ -20,6 +20,7 @@ const GlobalStyle = createGlobalStyle`
     height: 100%;
     width: 100%;
     background-color: #fff;
+    /* position: relative !important; */
   }
   img {
     width: 100%;

@@ -17,3 +17,13 @@ export const getMessageOpen = createSelector(
 	selectGlobal,
 	globalState => globalState.messageOpen
 );
+
+export const getModalOpen = createSelector(
+	selectGlobal,
+	globalState => globalState.modalOpen
+);
+
+export const getRedirectPath = createSelector(
+	selectGlobal,
+	globalState => globalState.redirectPath
+);

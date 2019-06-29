@@ -20,10 +20,9 @@ const EventContainer = props => {
 		onUnload
 	} = props;
 	useEffect(() => {
-		if (+match.params.id !== event.id) {
-			onGetEvent(match.params.id);
-			onGetAttendees(match.params.id);
-		}
+		onGetEvent(match.params.id);
+		onGetAttendees(match.params.id);
+
 		return () => {
 			onUnload();
 		};
@@ -54,7 +53,7 @@ const mapStateToProps = createStructuredSelector({
 export default connect(
 	mapStateToProps,
 	{
-		onGetEvent: eventActions.fetchEventById,
+		onGetEvent: eventActions.getEventById,
 		onGetAttendees: eventActions.getAttendees,
 		onAttendEvent: eventActions.attendEvent,
 		onCancelAttendance: eventActions.cancelAttendance,

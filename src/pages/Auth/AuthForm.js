@@ -1,9 +1,9 @@
 import React, { useState } from "react";
 import styled from "styled-components";
-import { Formik, Form, Field, ErrorMessage } from "formik";
+import { Formik, Form } from "formik";
 import * as Yup from "yup";
 
-import { StyledForm, Button, InputWrapper } from "../../components";
+import { StyledForm, Button, Input } from "../../components";
 
 const LoginSchema = Yup.object().shape({
 	username: Yup.string()
@@ -40,72 +40,55 @@ const AuthToggle = styled.button`
 const AuthForm = props => {
 	const [isLogin, setIsLogin] = useState(true);
 	return (
-		<>
-			<StyledForm title={isLogin ? "Login" : "Sign Up"}>
-				<Formik
-					initialValues={{
-						username: "",
-						email: "",
-						password: "",
-						password2: ""
-					}}
-					validationSchema={isLogin ? LoginSchema : RegSchema}
-					onSubmit={values => {
-						// console.log(values);
-						let formData = values;
-						if (isLogin) {
-							formData = {
-								username: values.username,
-								password: values.password
-							};
-						}
-						props.onAuth(formData, isLogin);
-					}}
-				>
-					{({ isSubmitting }) => (
-						<Form>
-							<InputWrapper>
-								<Field name="username" type="text" placeholder="Username" />
-								<ErrorMessage name="username" component="div" />
-							</InputWrapper>
-
-							{!isLogin && (
-								<InputWrapper>
-									<Field name="email" type="email" placeholder="Email" />
-									<ErrorMessage name="email" component="div" />
-								</InputWrapper>
-							)}
-
-							<InputWrapper>
-								<Field name="password" type="password" placeholder="Password" />
-								<ErrorMessage name="password" component="div" />
-							</InputWrapper>
-
-							{!isLogin && (
-								<InputWrapper>
-									<Field
-										name="password2"
-										type="password"
-										placeholder="Confirm Password"
-									/>
-									<ErrorMessage name="password2" component="div" />
-								</InputWrapper>
-							)}
-
-							{/* <button type="submit" disabled={isSubmitting}> */}
-							<Button type="submit" secondary>
-								{isLogin ? "Login" : "Sign Up"}
-							</Button>
-						</Form>
-					)}
-				</Formik>
-				<AuthToggle onClick={() => setIsLogin(!isLogin)}>
-					{!isLogin && <span>Already have an account?</span>}{" "}
-					{isLogin ? "Or Sign Up" : "Login"}
-				</AuthToggle>
-				{props.message && <h3>{props.message}</h3>}
-			</StyledForm>
-		</>
+		<StyledForm title={isLogin ? "Login" : "Sign Up"}>
+			<Formik
+				initialValues={{
+					username: "",
+					email: "",
+					password: "",
+					password2: ""
+				}}
+				validationSchema={isLogin ? LoginSchema : RegSchema}
+				onSubmit={values => {
+					// console.log(values);
+					let formData = values;
+					if (isLogin) {
+						formData = {
+							username: values.username,
+							password: values.password
+						};
+					}
+					props.onAuth(formData, isLogin);
+				}}
+			>
+				{({ isSubmitting }) => (
+					<Form>
+						<Input name="username" type="text" placeholder="Username" />
+						{!isLogin && (
+							<Input name="email" type="email" placeholder="Email" />
+						)}
+						<Input name="password" type="password" placeholder="Password" />
+						{!isLogin && (
+							<Input
+								name="password2"
+								type="password"
+								placeholder="Confirm Password"
+								labelText="Re-Type Password"
+							/>
+						)}
+						{/* <button type="submit" disabled={isSubmitting}> */}
+						<Button type="submit" secondary>
+							{isLogin ? "Login" : "Sign Up"}
+						</Button>
+					</Form>
+				)}
+			</Formik>
+			<AuthToggle onClick={() => setIsLogin(!isLogin)}>
+				{!isLogin && <span>Already have an account?</span>}{" "}
+				{isLogin ? "Or Sign Up" : "Login"}
+			</AuthToggle>
+			{props.message && <h3>{props.message}</h3>}
+		</StyledForm>
 	);
 };
 

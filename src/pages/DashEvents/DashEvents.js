@@ -1,13 +1,32 @@
 import React, { useEffect } from "react";
-import { Switch, Route } from "react-router-dom";
+import { Route } from "react-router-dom";
+import { connect } from "react-redux";
+import { createStructuredSelector } from "reselect";
+import { authSelectors } from "../../state/auth";
+import { eventsListSelectors, eventsListActions } from "../../state/eventsList";
 import { DashboardPageHeader } from "../../components";
+import { SaveEvent } from "../../pages";
+import Attending from "./Attending";
+import Created from "./Created";
 
-const DashEvents = ({ match, history }) => {
+const DashEvents = ({
+	match,
+	history,
+	location,
+	uid,
+	onGetEvents,
+	attending,
+	created
+}) => {
 	useEffect(() => {
-		if (match.path === "/dashboard/events") {
-			history.replace(`${match.path}/attending`);
-		}
-	}, [match.path, history]);
+		// if (location.state && location.state.fromDashboard) {
+		// if (match.path === "/dashboard/events") {
+		// 	history.replace(`${match.path}/attending`);
+		// }
+		onGetEvents(uid);
+		// eslint-disable-next-line react-hooks/exhaustive-deps
+	}, []);
+	// }, [match.path, history]);
 	return (
 		<>
 			<DashboardPageHeader
@@ -17,20 +36,26 @@ const DashEvents = ({ match, history }) => {
 					{ text: "My Events", to: `${match.url}/myevents` }
 				]}
 			/>
-			<Switch>
-				<Route
-					path={`${match.path}/attending`}
-					render={() => <h2>Attending</h2>}
-					exact
-				/>
-				<Route
-					path={`${match.path}/myevents`}
-					render={() => <h2>Created</h2>}
-					exact
-				/>
-			</Switch>
+			<Route
+				path={`${match.path}/attending`}
+				render={() => <Attending events={attending} />}
+			/>
+			<Route
+				path={`${match.path}/myevents`}
+				render={props => <Created events={created} {...props} />}
+			/>
+			<Route path={`${match.path}/:id/edit`} component={SaveEvent} />
 		</>
 	);
 };
 
-export default DashEvents;
+const mapStateToProps = createStructuredSelector({
+	uid: authSelectors.getUid,
+	created: eventsListSelectors.getUserCreatedEvents,
+	attending: eventsListSelectors.getUserAttendingEvents
+});
+
+export default connect(
+	mapStateToProps,
+	{ onGetEvents: eventsListActions.getUserEvents }
+)(DashEvents);

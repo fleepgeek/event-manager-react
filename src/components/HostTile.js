@@ -8,13 +8,13 @@ const Tile = styled.div`
 	display: flex;
 	align-items: center;
 	color: ${props => props.theme.colors.grey};
-	margin-top: 10px;
+	margin-top: 0.6rem;
 `;
 
 const Detail = styled.div`
 	margin-left: 10px;
 	font-size: 14px;
-	line-height: 22px;
+	line-height: 1.3rem;
 `;
 
 const HostTile = props => {
@@ -26,7 +26,7 @@ const HostTile = props => {
 				<p>Hosted by {((props.event || {}).creator || {}).username}</p>
 				<p>
 					<Moment format="MMMM Do YYYY, h:mm:ss a">
-						{props.event.created_on}
+						{props.event.event_date}
 					</Moment>
 				</p>
 			</Detail>

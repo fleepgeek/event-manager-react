@@ -4,19 +4,14 @@ export const eventPageUnloaded = () => ({
 	type: eventActionTypes.EVENT_PAGE_UNLOADED
 });
 
-export const fetchEventById = id => ({
-	type: eventActionTypes.FETCH_EVENT_BY_ID,
+export const getEventById = id => ({
+	type: eventActionTypes.GET_EVENT_BY_ID,
 	payload: { id }
 });
 
-export const fetchEventsByIdSuccess = event => ({
-	type: eventActionTypes.FETCH_EVENT_BY_ID_SUCCESS,
+export const getEventsByIdSuccess = event => ({
+	type: eventActionTypes.GET_EVENT_BY_ID_SUCCESS,
 	payload: { event }
-});
-
-export const addEvent = formData => ({
-	type: eventActionTypes.ADD_EVENT,
-	payload: { formData }
 });
 
 export const getAttendees = eventId => ({

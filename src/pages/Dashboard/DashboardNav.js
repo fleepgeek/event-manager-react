@@ -64,7 +64,12 @@ const DashboardNav = ({ match }) => {
 						<MdDashboard size={20} />
 						<span>Dashboard</span>
 					</DashLink>
-					<DashLink to={match.url + "/events"}>
+					<DashLink
+						to={{
+							pathname: match.url + "/events",
+							state: { fromDashboard: true }
+						}}
+					>
 						<MdEvent size={20} />
 						<span>Events</span>
 					</DashLink>
