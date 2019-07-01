@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom";
 import styled, { css } from "styled-components";
 import Moment from "react-moment";
 import { FaMapMarker } from "react-icons/fa";
@@ -98,7 +99,9 @@ const EventCard = ({ event, isMini }) => {
 							</SmallDetail>
 						) : (
 							<>
-								<CardTitle>{event.title}</CardTitle>
+								<Link to={`/events/${event.id}`}>
+									<CardTitle>{event.title}</CardTitle>
+								</Link>
 								<HostTile event={event} />
 							</>
 						)}

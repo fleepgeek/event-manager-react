@@ -9,7 +9,8 @@ import {
 	BrowseEvents,
 	Event,
 	Dashboard,
-	SaveEvent
+	SaveEvent,
+	UserProfile
 } from "../pages";
 import PrivateRoute from "./PrivateRoute";
 
@@ -18,6 +19,7 @@ const EventRouter = ({ location }) => {
 	return (
 		<>
 			<Switch>
+				<Route path="/user/:id" component={UserProfile} />
 				<PrivateRoute path="/dashboard" component={Dashboard} />
 				<PrivateRoute path="/event/create" component={SaveEvent} />
 				<PrivateRoute path="/event/:id/edit" component={SaveEvent} />

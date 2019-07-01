@@ -1,4 +1,5 @@
 import React from "react";
+import { Link, withRouter } from "react-router-dom";
 import styled from "styled-components";
 import { Container, Row, Col } from "reactstrap";
 import { FaMapMarker } from "react-icons/fa";
@@ -52,7 +53,7 @@ const Section = styled.section`
 	}
 `;
 
-const ProfileCard = ({ profile, me, events }) => {
+const ProfileCard = ({ profile, me, events, match }) => {
 	return (
 		<Container>
 			<ProfileRow noGutters>
@@ -74,6 +75,11 @@ const ProfileCard = ({ profile, me, events }) => {
 									<FaMapMarker />
 									Lagos, Nigeria
 								</p>
+								{match.path !== "/user/:id" && (
+									<p>
+										<Link to={`/user/${profile.id}`}>View Public Profile</Link>
+									</p>
+								)}
 								{me && <Button primary>Edit</Button>}
 							</Data>
 						</Header>
@@ -100,4 +106,4 @@ const ProfileCard = ({ profile, me, events }) => {
 	);
 };
 
-export default ProfileCard;
+export default withRouter(ProfileCard);

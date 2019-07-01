@@ -19,9 +19,7 @@ const EventsList = ({ events, isMini, deleteHandler }) => {
 				<Col key={e.id} md="6" lg="4" style={{ marginBottom: "2rem" }}>
 					<Link to={`/dashboard/events/${e.id}/edit`}>Edit</Link>
 					<span onClick={() => deleteHandler(e.id)}>Delete</span>
-					<Link to={`/events/${e.id}`}>
-						<EventCard event={e} isMini={isMini} />
-					</Link>
+					<EventCard event={e} isMini={isMini} />
 				</Col>
 			);
 		}

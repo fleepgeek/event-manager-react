@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom";
 import styled from "styled-components";
 import Moment from "react-moment";
 
@@ -17,18 +18,19 @@ const Detail = styled.div`
 	line-height: 1.3rem;
 `;
 
-const HostTile = props => {
+const HostTile = ({ event }) => {
 	return (
 		<Tile>
 			<Avatar src="https://randomuser.me/api/portraits/men/43.jpg" />
 			<Detail>
 				{/* <p>Hosted by {props.event && props.event.creator ? props.event.creator.username : null}</p> */}
-				<p>Hosted by {props.event.creator.username}</p>
+				<p>
+					Hosted by{" "}
+					<Link to={`/user/${event.creator.id}`}>{event.creator.username}</Link>
+				</p>
 				{/* <p>Hosted by {((props.event || {}).creator || {}).username}</p> */}
 				<p>
-					<Moment format="MMMM Do YYYY, h:mm:ss a">
-						{props.event.event_date}
-					</Moment>
+					<Moment format="MMMM Do YYYY, h:mm:ss a">{event.event_date}</Moment>
 				</p>
 			</Detail>
 		</Tile>
