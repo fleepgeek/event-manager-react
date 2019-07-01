@@ -19,6 +19,16 @@ export const saveEventSuccess = event => ({
 	payload: { event }
 });
 
+export const deleteEvent = id => ({
+	type: eventsActionTypes.DELETE_EVENT,
+	payload: { id }
+});
+
+export const deleteEventSuccess = id => ({
+	type: eventsActionTypes.DELETE_EVENT_SUCCESS,
+	payload: { id }
+});
+
 export const getUserEvents = userId => ({
 	type: eventsActionTypes.GET_USER_EVENTS,
 	payload: { userId }

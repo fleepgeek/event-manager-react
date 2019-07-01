@@ -52,6 +52,22 @@ function* saveEventSaga({ payload }) {
 	}
 }
 
+function* deleteEventSaga({ payload }) {
+	yield put(globalActions.showLoading());
+	const { id } = payload;
+	try {
+		const response = yield axios.delete(`events/${id}/`);
+		if (response.request.status === 204) {
+			yield put(eventsActions.deleteEventSuccess(id));
+		} else {
+			yield put(globalActions.showMessage("Something went wrong!"));
+		}
+		yield put(globalActions.hideLoading());
+	} catch (error) {
+		yield put(globalActions.showMessage(getHttpError(error)));
+	}
+}
+
 function* getCategoriesSaga(action) {
 	try {
 		const response = yield axios("events/categories");
@@ -75,6 +91,7 @@ export default function* watchEventsListActions() {
 	yield all([takeEvery(actionTypes.GET_USER_EVENTS, getUserEventsSaga)]);
 	yield all([takeEvery(actionTypes.GET_ALL_EVENTS, getAllEventsSaga)]);
 	yield all([takeEvery(actionTypes.SAVE_EVENT, saveEventSaga)]);
+	yield all([takeEvery(actionTypes.DELETE_EVENT, deleteEventSaga)]);
 	yield all([takeEvery(actionTypes.GET_CATEGORIES, getCategoriesSaga)]);
 	yield all([takeEvery(actionTypes.GET_TAGS, getTagsSaga)]);
 }

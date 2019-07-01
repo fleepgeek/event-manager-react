@@ -16,7 +16,8 @@ const DashEvents = ({
 	uid,
 	onGetEvents,
 	attending,
-	created
+	created,
+	onDeleteEvent
 }) => {
 	useEffect(() => {
 		// if (location.state && location.state.fromDashboard) {
@@ -42,7 +43,9 @@ const DashEvents = ({
 			/>
 			<Route
 				path={`${match.path}/myevents`}
-				render={props => <Created events={created} {...props} />}
+				render={props => (
+					<Created events={created} deleteEvent={onDeleteEvent} {...props} />
+				)}
 			/>
 			<Route path={`${match.path}/:id/edit`} component={SaveEvent} />
 		</>
@@ -57,5 +60,8 @@ const mapStateToProps = createStructuredSelector({
 
 export default connect(
 	mapStateToProps,
-	{ onGetEvents: eventsListActions.getUserEvents }
+	{
+		onGetEvents: eventsListActions.getUserEvents,
+		onDeleteEvent: eventsListActions.deleteEvent
+	}
 )(DashEvents);

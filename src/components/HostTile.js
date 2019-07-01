@@ -23,7 +23,8 @@ const HostTile = props => {
 			<Avatar src="https://randomuser.me/api/portraits/men/43.jpg" />
 			<Detail>
 				{/* <p>Hosted by {props.event && props.event.creator ? props.event.creator.username : null}</p> */}
-				<p>Hosted by {((props.event || {}).creator || {}).username}</p>
+				<p>Hosted by {props.event.creator.username}</p>
+				{/* <p>Hosted by {((props.event || {}).creator || {}).username}</p> */}
 				<p>
 					<Moment format="MMMM Do YYYY, h:mm:ss a">
 						{props.event.event_date}
