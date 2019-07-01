@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import { EventCard } from "./";
 import { Container, Row, Col } from "reactstrap";
 
-const EventsList = ({ events, isMini }) => {
+const EventsList = ({ events, isMini, deleteHandler }) => {
 	if (isMini === undefined) {
 		isMini = false;
 	}
@@ -18,6 +18,7 @@ const EventsList = ({ events, isMini }) => {
 			return (
 				<Col key={e.id} md="6" lg="4" style={{ marginBottom: "2rem" }}>
 					<Link to={`/dashboard/events/${e.id}/edit`}>Edit</Link>
+					<span onClick={() => deleteHandler(e.id)}>Delete</span>
 					<Link to={`/events/${e.id}`}>
 						<EventCard event={e} isMini={isMini} />
 					</Link>

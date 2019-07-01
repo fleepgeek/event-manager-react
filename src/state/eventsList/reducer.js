@@ -22,6 +22,16 @@ const eventsReducer = (state = INITIAL_STATE, { type, payload }) =>
 			case eventsActionTypes.SAVE_EVENT_SUCCESS:
 				draft.all.push(payload.event);
 				break;
+			case eventsActionTypes.DELETE_EVENT_SUCCESS:
+				draft.userEvents.created.splice(
+					draft.userEvents.created.findIndex(event => event.id === payload.id),
+					1
+				);
+				draft.all.splice(
+					draft.all.findIndex(event => event.id === payload.id),
+					1
+				);
+				break;
 			case eventsActionTypes.GET_CATEGORIES_SUCCESS:
 				draft.categories = payload.categories;
 				break;

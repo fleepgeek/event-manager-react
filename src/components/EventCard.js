@@ -72,36 +72,40 @@ const SmallDetail = styled.div`
 
 const EventCard = ({ event, isMini }) => {
 	return (
-		<Card isMini={isMini}>
-			<CardMedia isMini={isMini}>
-				<EventImage
-					src="https://img.evbuc.com/https%3A%2F%2Fcdn.evbuc.com%2Fimages%2F51853185%2F52642443556%2F1%2Foriginal.jpg?h=512&w=512&auto=compress&rect=1294%2C0%2C2842%2C1421&s=92ccf976bc6bcef604d7e32b93451ec2"
-					alt="event poster"
-					isMini={isMini}
-				/>
-			</CardMedia>
-			<CardContent isMini={isMini}>
-				{isMini ? (
-					<SmallDetail>
-						<p className="title">{event.title}</p>
-						<p className="location">
-							<span>
-								<FaMapMarker size={10} />
-							</span>
-							{event.location}
-						</p>
-						<p className="date">
-							<Moment format="MMMM Do YYYY">{event.event_date}</Moment>
-						</p>
-					</SmallDetail>
-				) : (
-					<>
-						<CardTitle>{event.title}</CardTitle>
-						<HostTile event={event} />
-					</>
-				)}
-			</CardContent>
-		</Card>
+		<>
+			{event && (
+				<Card isMini={isMini}>
+					<CardMedia isMini={isMini}>
+						<EventImage
+							src="https://img.evbuc.com/https%3A%2F%2Fcdn.evbuc.com%2Fimages%2F51853185%2F52642443556%2F1%2Foriginal.jpg?h=512&w=512&auto=compress&rect=1294%2C0%2C2842%2C1421&s=92ccf976bc6bcef604d7e32b93451ec2"
+							alt="event poster"
+							isMini={isMini}
+						/>
+					</CardMedia>
+					<CardContent isMini={isMini}>
+						{isMini ? (
+							<SmallDetail>
+								<p className="title">{event.title}</p>
+								<p className="location">
+									<span>
+										<FaMapMarker size={10} />
+									</span>
+									{event.location}
+								</p>
+								<p className="date">
+									<Moment format="MMMM Do YYYY">{event.event_date}</Moment>
+								</p>
+							</SmallDetail>
+						) : (
+							<>
+								<CardTitle>{event.title}</CardTitle>
+								<HostTile event={event} />
+							</>
+						)}
+					</CardContent>
+				</Card>
+			)}
+		</>
 	);
 };
 
