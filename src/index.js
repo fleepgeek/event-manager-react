@@ -11,7 +11,7 @@ import theme from "./styles/theme";
 import "./index.scss";
 import GlobalStyle from "./styles/globalStyle";
 
-ReactDOM.render(
+export default ReactDOM.render(
 	<Provider store={store}>
 		<BrowserRouter>
 			<ThemeProvider theme={theme}>
@@ -26,7 +26,7 @@ ReactDOM.render(
 			</ThemeProvider>
 		</BrowserRouter>
 	</Provider>,
-	document.getElementById("root")
+	document.getElementById("root") || document.createElement("div")
 );
 
 // If you want your app to work offline and load faster, you can change
