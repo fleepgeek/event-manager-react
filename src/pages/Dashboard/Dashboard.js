@@ -1,13 +1,14 @@
 import React from "react";
 import { Switch, Route } from "react-router-dom";
 import DashboardNav from "./DashboardNav";
-import { DashSettings, DashEvents, DashPeople } from "../";
+import { DashSettings, DashEvents, DashPeople, DashCalendar } from "../";
 
 const DashboardComponent = ({ match }) => {
 	return (
 		<div>
 			<DashboardNav />
 			<Switch>
+				<Route path={`${match.path}/calendar`} component={DashCalendar} />
 				<Route path={`${match.path}/events`} component={DashEvents} />
 				<Route path={`${match.path}/people`} component={DashPeople} />
 				<Route

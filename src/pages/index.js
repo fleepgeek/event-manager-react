@@ -9,3 +9,4 @@ export { default as Dashboard } from "./Dashboard/Dashboard";
 export { default as DashSettings } from "./DashSettings/DashSettings";
 export { default as DashPeople } from "./DashPeople/DashPeople";
 export { default as DashEvents } from "./DashEvents/DashEvents";
+export { default as DashCalendar } from "./DashCalendar/DashCalendar";

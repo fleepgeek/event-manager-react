@@ -7,7 +7,7 @@ import { authActions } from "./state/auth";
 import { globalSelectors, globalActions } from "./state/global";
 import { AppRouter } from "./routes";
 
-const App = ({
+export const App = ({
 	history,
 	tryAutoLogin,
 	loading,

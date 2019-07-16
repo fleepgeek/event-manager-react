@@ -6,7 +6,7 @@ import { eventActions } from "../event";
 import actionTypes from "./actionTypes";
 import getHttpError from "../../utils/getHttpError";
 
-function* getAllEventsSaga(action) {
+export function* getAllEventsSaga(action) {
 	yield put(globalActions.showLoading());
 	try {
 		const response = yield axios.get("events/");
@@ -17,7 +17,7 @@ function* getAllEventsSaga(action) {
 	}
 }
 
-function* getUserEventsSaga({ payload }) {
+export function* getUserEventsSaga({ payload }) {
 	try {
 		yield put(globalActions.showLoading());
 		const { userId } = payload;
@@ -33,7 +33,7 @@ function* getUserEventsSaga({ payload }) {
 	}
 }
 
-function* saveEventSaga({ payload }) {
+export function* saveEventSaga({ payload }) {
 	yield put(globalActions.showLoading());
 	const { id, formData } = payload;
 	try {
@@ -52,7 +52,7 @@ function* saveEventSaga({ payload }) {
 	}
 }
 
-function* deleteEventSaga({ payload }) {
+export function* deleteEventSaga({ payload }) {
 	yield put(globalActions.showLoading());
 	const { id } = payload;
 	try {
@@ -68,7 +68,7 @@ function* deleteEventSaga({ payload }) {
 	}
 }
 
-function* getCategoriesSaga(action) {
+export function* getCategoriesSaga(action) {
 	try {
 		const response = yield axios("events/categories");
 		yield put(eventsActions.getCategoriesSuccess(response.data));
@@ -77,7 +77,7 @@ function* getCategoriesSaga(action) {
 	}
 }
 
-function* getTagsSaga(action) {
+export function* getTagsSaga(action) {
 	try {
 		const response = yield axios("events/tags");
 		yield put(eventsActions.getTagsSuccess(response.data));

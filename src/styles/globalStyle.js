@@ -7,7 +7,8 @@ const GlobalStyle = createGlobalStyle`
     border: 0;
     outline: 0;
     list-style: none;
-    font-family: "Source Sans Pro", sans-serif;
+    font-family: "Montserrat", sans-serif;
+    /* font-family: "Source Sans Pro", sans-serif; */
     font-size: 100%;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
