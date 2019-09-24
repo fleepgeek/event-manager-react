@@ -10,12 +10,17 @@ export const getToken = createSelector(
 
 export const getUid = createSelector(
 	selectAuth,
-	authState => authState.uid
+	authState => parseInt(authState.uid)
 );
 
 export const getIsAuthenticated = createSelector(
 	selectAuth,
 	authState => authState.token !== null
+);
+
+export const getIsRegistered = createSelector(
+	selectAuth,
+	authState => authState.isRegistered
 );
 
 export const getAuthRedirectPath = createSelector(

@@ -1,6 +1,6 @@
 import { put, takeEvery, all, delay } from "redux-saga/effects";
 import authActionTypes from "./actionTypes";
-import * as authActions from "./actions";
+import { authActions } from "./";
 import * as globalActions from "../global/actions";
 import axios from "../../utils/axios-base";
 import getHttpError from "../../utils/getHttpError";
@@ -16,8 +16,21 @@ function* authSaga(action) {
 			localStorage.setItem("token", token);
 			localStorage.setItem("uid", uid);
 			localStorage.setItem("expirationDate", expires);
+			const expirationDate = new Date(expires);
 			yield put(authActions.loginSuccess(token, uid));
 			yield put(globalActions.hideLoading());
+			yield put(
+				authActions.autoLogout(expirationDate.getTime() - new Date().getTime())
+			);
+			// yield all([
+			// 	put(authActions.loginSuccess(token, uid)),
+			// 	put(globalActions.hideLoading()),
+			// 	put(
+			// 		authActions.autoLogout(
+			// 			expirationDate.getTime() - new Date().getTime()
+			// 		)
+			// 	)
+			// ]);
 		} else {
 			yield put(globalActions.hideLoading());
 			yield put(authActions.regSuccess());
@@ -36,7 +49,8 @@ function* logoutSaga(action) {
 }
 
 function* authAutoLogoutSaga(action) {
-	yield delay(action.payload.expirationDate);
+	// yield delay(2000);
+	yield delay(action.payload.expirationTime);
 	try {
 		yield put(authActions.logout());
 	} catch (error) {

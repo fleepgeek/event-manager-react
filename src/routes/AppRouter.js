@@ -1,12 +1,21 @@
 import React from "react";
 import { Route, Switch } from "react-router-dom";
-import { EventApp } from "../layouts";
+
+// import { EventApp, AuthApp } from "../layouts";
+// import { EventApp } from "../layouts";
+const AuthApp = React.lazy(() => import("../layouts/AuthApp"));
+const EventApp = React.lazy(() => import("../layouts/EventApp"));
+
 const AppRouter = props => {
 	return (
-		<Switch>
-			<Route path="/terms" render={() => <h2>Terms & Conditions</h2>} />
-			<Route component={EventApp} />
-		</Switch>
+		<>
+			<React.Suspense fallback={<div>Please Wait...</div>}>
+				<Switch>
+					<Route path="/auth" component={AuthApp} />
+					<Route exact component={EventApp} />
+				</Switch>
+			</React.Suspense>
+		</>
 	);
 };
 

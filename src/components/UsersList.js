@@ -39,7 +39,11 @@ const UsersList = ({
 							md={{ size: 3 }}
 							className="mb-5"
 						>
-							<div onClick={() => clicked(person.id)}>
+							<div
+								style={{ cursor: "pointer" }}
+								onClick={() => clicked(person.id)}
+								data-testid="user"
+							>
 								<Avatar width={`100px`} height={`100px`} />
 								<Name>{person.username}</Name>
 							</div>

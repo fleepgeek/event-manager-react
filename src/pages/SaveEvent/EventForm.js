@@ -3,7 +3,7 @@ import { Formik, Form } from "formik";
 import * as Yup from "yup";
 import { Container, Row, Col } from "reactstrap";
 
-import { StyledForm, Button, Input } from "../../components";
+import { FormWrapper, Button, Input } from "../../components";
 
 const EventSchema = Yup.object().shape({
 	title: Yup.string()
@@ -23,8 +23,7 @@ const EventForm = ({
 	isEdit,
 	id,
 	event,
-	closeModal,
-	message,
+	// closeModal,
 	saveEvent,
 	categories,
 	tags
@@ -50,29 +49,31 @@ const EventForm = ({
 
 	return (
 		<Container>
-			<StyledForm title={!isEdit ? "Create Event" : "Edit Event"}>
-				<Formik
-					initialValues={defaultValues}
-					enableReinitialize={true}
-					validationSchema={EventSchema}
-					onSubmit={values => {
-						if (isEdit) {
-							saveEvent(values, id);
-						} else {
-							saveEvent(values);
-						}
-					}}
-				>
-					{({ isSubmitting }) => (
+			<Formik
+				initialValues={defaultValues}
+				enableReinitialize={true}
+				validationSchema={EventSchema}
+				onSubmit={values => {
+					if (isEdit) {
+						saveEvent(values, id);
+					} else {
+						saveEvent(values);
+					}
+				}}
+			>
+				{({ isSubmitting }) => (
+					<FormWrapper title={!isEdit ? "Create Event" : "Edit Event"}>
 						<Form>
 							<Row>
 								<Col md={{ size: 7 }}>
 									<Input name="title" placeholder="Title" />
-									<Input
-										name="category"
-										component="select"
-										items={categories}
-									/>
+									{categories && (
+										<Input
+											name="category"
+											component="select"
+											items={categories}
+										/>
+									)}
 									<Input
 										name="description"
 										component="textarea"
@@ -91,16 +92,15 @@ const EventForm = ({
 									<Button type="submit" className="mr-4" secondary>
 										Save Event
 									</Button>
-									{closeModal && (
+									{/* {closeModal && (
 										<Button onClick={() => closeModal()}>Cancel</Button>
-									)}
+									)} */}
 								</Col>
 							</Row>
 						</Form>
-					)}
-				</Formik>
-				{message && <h3>{message}</h3>}
-			</StyledForm>
+					</FormWrapper>
+				)}
+			</Formik>
 		</Container>
 	);
 };

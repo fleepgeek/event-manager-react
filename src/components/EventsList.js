@@ -18,7 +18,7 @@ const EventsList = ({ events, isMini, deleteHandler }) => {
 			return (
 				<Col key={e.id} md="6" lg="4" style={{ marginBottom: "2rem" }}>
 					<Link to={`/dashboard/events/${e.id}/edit`}>Edit</Link>
-					<span onClick={() => deleteHandler(e.id)}>Delete</span>
+					<button onClick={() => deleteHandler(e.id)}>Delete</button>
 					<EventCard event={e} isMini={isMini} />
 				</Col>
 			);
@@ -27,10 +27,10 @@ const EventsList = ({ events, isMini, deleteHandler }) => {
 	return (
 		<Container>
 			<Row>
-				{(events || []).length > 0 ? (
+				{events.length > 0 ? (
 					events.map(e => getContent(e))
 				) : (
-					<h3>No events</h3>
+					<h3>No events Yet</h3>
 				)}
 			</Row>
 		</Container>

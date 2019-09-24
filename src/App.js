@@ -19,12 +19,12 @@ export const App = ({
 		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, []);
 
-	useEffect(() => {
-		if (redirectPath) {
-			history.push(redirectPath);
-			onRedirectCompleted();
-		}
-	}, [redirectPath, history, onRedirectCompleted]);
+	// useEffect(() => {
+	// 	if (redirectPath) {
+	// 		history.push(redirectPath);
+	// 		onRedirectCompleted();
+	// 	}
+	// }, [redirectPath, history, onRedirectCompleted]);
 
 	return (
 		<>

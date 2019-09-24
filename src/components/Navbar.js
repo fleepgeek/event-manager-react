@@ -46,14 +46,17 @@ const Navbar = props => {
 					<span>Eventio</span>
 				</Link>
 				<Menu>
-					<NavLink
+					<NavLink to="/event/create">
+						<Button secondary>Create Event</Button>
+					</NavLink>
+					{/* <NavLink
 						to={{
 							search: "?action=create_event",
 							state: { modal: true }
 						}}
 					>
 						<Button secondary>Create Event</Button>
-					</NavLink>
+					</NavLink> */}
 					<NavLink to="/events" exact>
 						Browse Events
 					</NavLink>

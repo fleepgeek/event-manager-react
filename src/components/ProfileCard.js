@@ -56,52 +56,56 @@ const Section = styled.section`
 const ProfileCard = ({ profile, me, events, match }) => {
 	return (
 		<Container>
-			<ProfileRow noGutters>
-				<PersonalInfo md={{ size: 8 }}>
-					<Section>
-						<Header>
-							{/* <Avatar src="" /> */}
-							<TempAvatar />
-							<Data>
-								<h2>
-									{profile.display_name}{" "}
-									<span
-										style={{ fontSize: "13px", textTransform: "lowercase" }}
-									>
-										@{profile.username}
-									</span>
-								</h2>
-								<p>
-									<FaMapMarker />
-									Lagos, Nigeria
-								</p>
-								{match.path !== "/user/:id" && (
+			{profile && (
+				<ProfileRow noGutters>
+					<PersonalInfo md={{ size: 8 }}>
+						<Section>
+							<Header>
+								{/* <Avatar src="" /> */}
+								<TempAvatar />
+								<Data>
+									<h2>
+										{profile.display_name}{" "}
+										<span
+											style={{ fontSize: "13px", textTransform: "lowercase" }}
+										>
+											@{profile.username}
+										</span>
+									</h2>
 									<p>
-										<Link to={`/user/${profile.id}`}>View Public Profile</Link>
+										<FaMapMarker />
+										Lagos, Nigeria
 									</p>
-								)}
-								{me && <Button primary>Edit</Button>}
-							</Data>
-						</Header>
-					</Section>
-					<Divider />
-					<Section>
-						<h2>About</h2>
-						<p>{profile.about}</p>
-					</Section>
-					<Divider />
-					<Section>
-						<h2>Interests</h2>
-						<div style={{ display: "flex" }}>
-							<Tag>Food</Tag>
-							<Tag>Coding</Tag>
-						</div>
-					</Section>
-				</PersonalInfo>
-				<Col>
-					<EventsTab events={events} />
-				</Col>
-			</ProfileRow>
+									{match.path !== "/user/:id" && (
+										<p>
+											<Link to={`/user/${profile.id}`}>
+												View Public Profile
+											</Link>
+										</p>
+									)}
+									{me && <Button primary>Edit</Button>}
+								</Data>
+							</Header>
+						</Section>
+						<Divider />
+						<Section>
+							<h2>About</h2>
+							<p>{profile.about}</p>
+						</Section>
+						<Divider />
+						<Section>
+							<h2>Interests</h2>
+							<div style={{ display: "flex" }}>
+								<Tag>Food</Tag>
+								<Tag>Coding</Tag>
+							</div>
+						</Section>
+					</PersonalInfo>
+					<Col>
+						<EventsTab events={events} />
+					</Col>
+				</ProfileRow>
+			)}
 		</Container>
 	);
 };

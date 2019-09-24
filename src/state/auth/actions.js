@@ -26,7 +26,7 @@ export const autoLogin = () => ({
 	type: authActionTypes.AUTO_LOGIN
 });
 
-export const autoLogout = expirationDate => ({
+export const autoLogout = expirationTime => ({
 	type: authActionTypes.AUTO_LOGOUT,
-	payload: { expirationDate }
+	payload: { expirationTime }
 });

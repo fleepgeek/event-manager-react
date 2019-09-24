@@ -5,7 +5,8 @@ export const INITIAL_STATE = {
 	all: [],
 	userEvents: {},
 	categories: [],
-	tags: []
+	tags: [],
+	savedSuccess: false
 };
 
 const eventsReducer = (state = INITIAL_STATE, { type, payload }) =>
@@ -19,8 +20,16 @@ const eventsReducer = (state = INITIAL_STATE, { type, payload }) =>
 				draft.userEvents.created = payload.created;
 				draft.userEvents.attending = payload.attending;
 				break;
-			case eventsActionTypes.SAVE_EVENT_SUCCESS:
+			case eventsActionTypes.CREATE_EVENT_SUCCESS:
 				draft.all.push(payload.event);
+				draft.savedSuccess = true;
+				break;
+			case eventsActionTypes.UPDATE_EVENT_SUCCESS:
+				draft.userEvents.created[
+					draft.userEvents.created.findIndex(
+						event => event.id === payload.event.id
+					)
+				] = payload.event;
 				break;
 			case eventsActionTypes.DELETE_EVENT_SUCCESS:
 				draft.userEvents.created.splice(

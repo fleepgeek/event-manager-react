@@ -32,6 +32,7 @@ const MultiSelect = connect(({ formik, name, items }) => {
 	return (
 		<Field
 			name={name}
+			id={name}
 			component="select"
 			multiple
 			onChange={e =>
@@ -64,6 +65,7 @@ const Input = ({
 	let field = (
 		<Field
 			name={name}
+			id={name}
 			type={type || "text"}
 			component={component || "input"}
 			placeholder={placeholder || name}
@@ -75,9 +77,9 @@ const Input = ({
 			field = <MultiSelect name={name} items={items} />;
 		} else {
 			field = (
-				<Field name={name} component="select" {...props}>
+				<Field name={name} component="select" id={name} {...props}>
 					<option value="">-- Select {name} --</option>
-					{items.map(item => (
+					{(items || []).map(item => (
 						<option value={item.id} key={item.id}>
 							{item.name}
 						</option>

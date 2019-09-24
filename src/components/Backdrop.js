@@ -1,6 +1,6 @@
 import styled from "styled-components";
 
-const Backdrop = styled.div`
+const Backdrop = styled.div.attrs(props => ({ "data-testid": "backdrop" }))`
 	display: ${({ show }) => (show ? "block" : "none")} !important;
 	z-index: 10;
 	position: fixed;

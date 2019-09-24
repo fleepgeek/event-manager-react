@@ -56,9 +56,11 @@ function* updateUserSaga({ payload }) {
 
 // Watcher
 export default function* watchUserActions() {
-	yield all([takeEvery(userActionTypes.GET_PROFILE, getProfileSaga)]);
-	yield all([takeEvery(userActionTypes.GET_CURRENT_USER, getCurrentUserSaga)]);
-	yield all([takeEvery(authActionTypes.LOGIN_SUCCESS, getCurrentUserSaga)]);
-	yield all([takeEvery(userActionTypes.GET_USERS, getUsersSaga)]);
-	yield all([takeEvery(userActionTypes.UPDATE_USER, updateUserSaga)]);
+	yield all([
+		takeEvery(userActionTypes.GET_PROFILE, getProfileSaga),
+		takeEvery(userActionTypes.GET_CURRENT_USER, getCurrentUserSaga),
+		takeEvery(authActionTypes.LOGIN_SUCCESS, getCurrentUserSaga),
+		takeEvery(userActionTypes.GET_USERS, getUsersSaga),
+		takeEvery(userActionTypes.UPDATE_USER, updateUserSaga)
+	]);
 }
