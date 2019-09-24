@@ -1,14 +1,14 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import { connect } from "react-redux";
 import { createStructuredSelector } from "reselect";
 // import queryString from "query-string";
-import { Modal } from "../../components";
+// import { Modal } from "../../components";
 import EventForm from "./EventForm";
 import { eventsListActions, eventsListSelectors } from "../../state/eventsList";
 import { globalActions, globalSelectors } from "../../state/global";
 import { eventSelectors, eventActions } from "../../state/event";
 
-const CreateEvent = ({
+const SaveEvent = ({
 	history,
 	location,
 	match,
@@ -21,35 +21,44 @@ const CreateEvent = ({
 	tags,
 	event,
 	message,
-	onUnloadEvent
+	onUnloadEvent,
+	savedSuccess,
+	redirectPath,
+	onRedirectCompleted
 }) => {
-	const [showModal, setShowModal] = useState(false);
+	// const [showModal, setShowModal] = useState(false);
 	const isEditRef = React.useRef(false);
 	// console.log(location, match);
+	const { id } = match.params;
+
 	useEffect(() => {
-		// if(location.pathname)
-		if (match.path === "/dashboard/events/:id/edit") {
-			onGetEvent(match.params.id);
-			isEditRef.current = true;
-		} else {
-			history.replace("/event/create");
+		if (redirectPath) {
+			history.push(redirectPath);
+			onRedirectCompleted();
 		}
+	}, [redirectPath, history, onRedirectCompleted]);
+
+	useEffect(() => {
 		onGetCategories();
 		onGetTags();
+		if (location.pathname === `/dashboard/events/${id}/edit`) {
+			onGetEvent(id);
+			isEditRef.current = true;
+		}
 		return () => {
 			onUnloadEvent();
 		};
 		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, []);
 
-	const closeModal = () => {
-		onCloseModal();
-		history.replace(location.pathname, { modal: false });
-	};
+	// const closeModal = () => {
+	// 	onCloseModal();
+	// 	history.replace(location.pathname, { modal: false });
+	// };
 
 	return (
 		<>
-			{showModal ? (
+			{/* {showModal ? (
 				<Modal
 					isModalOpen={showModal}
 					closeModal={closeModal}
@@ -64,22 +73,23 @@ const CreateEvent = ({
 						message={message}
 					/>
 				</Modal>
-			) : (
-				<>
-					{((isEditRef.current && event) ||
-						location.pathname === "/event/create") && (
-						<EventForm
-							isEdit={isEditRef.current}
-							saveEvent={onSaveEvent}
-							categories={categories}
-							tags={tags}
-							event={event}
-							id={match.params.id}
-							message={message}
-						/>
-					)}
-				</>
-			)}
+			) : ( */}
+			<>
+				{((isEditRef.current && event) ||
+					location.pathname === "/event/create") && (
+					<EventForm
+						isEdit={isEditRef.current}
+						saveEvent={onSaveEvent}
+						categories={categories}
+						tags={tags}
+						event={event}
+						id={match.params.id}
+						message={message}
+					/>
+				)}
+				{message && <h3>{message}</h3>}
+			</>
+			{/* )} */}
 		</>
 	);
 };
@@ -87,8 +97,10 @@ const CreateEvent = ({
 const mapStateToProps = createStructuredSelector({
 	categories: eventsListSelectors.getCategories,
 	tags: eventsListSelectors.getTags,
+	savedSuccess: eventsListSelectors.getSavedSuccess,
 	event: eventSelectors.getById,
-	message: globalSelectors.getMessage
+	message: globalSelectors.getMessage,
+	redirectPath: globalSelectors.getRedirectPath
 });
 
 export default connect(
@@ -99,6 +111,7 @@ export default connect(
 		onGetTags: eventsListActions.getTags,
 		onCloseModal: globalActions.hideModal,
 		onGetEvent: eventActions.getEventById,
-		onUnloadEvent: eventActions.eventPageUnloaded
+		onUnloadEvent: eventActions.eventPageUnloaded,
+		onRedirectCompleted: globalActions.redirectCompleted
 	}
-)(CreateEvent);
+)(SaveEvent);

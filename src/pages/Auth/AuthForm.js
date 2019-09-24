@@ -1,9 +1,9 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import styled from "styled-components";
 import { Formik, Form } from "formik";
 import * as Yup from "yup";
 
-import { StyledForm, Button, Input } from "../../components";
+import { FormWrapper, Button, Input } from "../../components";
 
 const LoginSchema = Yup.object().shape({
 	username: Yup.string()
@@ -21,10 +21,12 @@ const RegSchema = Yup.object().shape({
 	email: Yup.string()
 		.email("E-mail is not valid!")
 		.required("E-mail is required!"),
-	password2: Yup.string().oneOf([Yup.ref("password")], "Passwords must match"),
 	password: Yup.string()
 		.min(8, "Password must not be less than 8 characters")
-		.required("Password Required")
+		.required("Password Required"),
+	password2: Yup.string()
+		.oneOf([Yup.ref("password")], "Passwords must match")
+		.required("Please confirm your password")
 });
 
 const AuthToggle = styled.button`
@@ -37,10 +39,60 @@ const AuthToggle = styled.button`
 	}
 `;
 
-const AuthForm = props => {
+const Content = ({
+	isValid,
+	resetForm,
+	isLoading,
+	isRegistered,
+	isLogin,
+	setIsLogin,
+	message
+}) => {
+	useEffect(() => {
+		if (isRegistered) {
+			setIsLogin(true);
+			resetForm();
+		}
+	}, [isRegistered, resetForm, setIsLogin]);
+	return (
+		<FormWrapper title={isLogin ? "Login" : "Sign Up"}>
+			<Form role="form">
+				<Input name="username" type="text" placeholder="Username" />
+				{!isLogin && <Input name="email" type="email" placeholder="Email" />}
+				<Input name="password" type="password" placeholder="Password" />
+				{!isLogin && (
+					<Input
+						name="password2"
+						type="password"
+						placeholder="Confirm Password"
+						labelText="Re-Type Password"
+					/>
+				)}
+				<Button
+					type="submit"
+					secondary
+					disabled={isLoading || !isValid}
+					data-testid="submit-button"
+				>
+					{isLogin ? "Login" : "Sign Up"}
+				</Button>{" "}
+			</Form>
+			<AuthToggle
+				onClick={() => setIsLogin(!isLogin)}
+				data-testid="auth-toggle"
+			>
+				{!isLogin && <span>Already have an account?</span>}{" "}
+				{isLogin ? "Or Sign Up" : "Login"}
+			</AuthToggle>
+			{message && <h5>Error Occured: {message}</h5>}
+		</FormWrapper>
+	);
+};
+
+const AuthForm = ({ onAuth, message, isLoading, isRegistered }) => {
 	const [isLogin, setIsLogin] = useState(true);
 	return (
-		<StyledForm title={isLogin ? "Login" : "Sign Up"}>
+		<>
 			<Formik
 				initialValues={{
 					username: "",
@@ -49,8 +101,7 @@ const AuthForm = props => {
 					password2: ""
 				}}
 				validationSchema={isLogin ? LoginSchema : RegSchema}
-				onSubmit={values => {
-					// console.log(values);
+				onSubmit={(values, { resetForm, submitForm }) => {
 					let formData = values;
 					if (isLogin) {
 						formData = {
@@ -58,37 +109,21 @@ const AuthForm = props => {
 							password: values.password
 						};
 					}
-					props.onAuth(formData, isLogin);
+					onAuth(formData, isLogin);
 				}}
 			>
-				{({ isSubmitting }) => (
-					<Form>
-						<Input name="username" type="text" placeholder="Username" />
-						{!isLogin && (
-							<Input name="email" type="email" placeholder="Email" />
-						)}
-						<Input name="password" type="password" placeholder="Password" />
-						{!isLogin && (
-							<Input
-								name="password2"
-								type="password"
-								placeholder="Confirm Password"
-								labelText="Re-Type Password"
-							/>
-						)}
-						{/* <button type="submit" disabled={isSubmitting}> */}
-						<Button type="submit" secondary>
-							{isLogin ? "Login" : "Sign Up"}
-						</Button>
-					</Form>
+				{props => (
+					<Content
+						{...props}
+						isLogin={isLogin}
+						setIsLogin={setIsLogin}
+						isLoading={isLoading}
+						isRegistered={isRegistered}
+						message={message}
+					/>
 				)}
 			</Formik>
-			<AuthToggle onClick={() => setIsLogin(!isLogin)}>
-				{!isLogin && <span>Already have an account?</span>}{" "}
-				{isLogin ? "Or Sign Up" : "Login"}
-			</AuthToggle>
-			{props.message && <h3>{props.message}</h3>}
-		</StyledForm>
+		</>
 	);
 };
 

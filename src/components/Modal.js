@@ -23,9 +23,8 @@ const Wrapper = styled.div`
 	}
 `;
 
-const modalRoot = document.getElementById("modal-root");
-
 const Modal = ({ children, isModalOpen, closeModal, clickableBackdrop }) => {
+	const modalRoot = document.getElementById("modal-root");
 	React.useEffect(() => {
 		const escapePressed = e => {
 			if (e.keyCode === 27) closeModal();
@@ -37,14 +36,14 @@ const Modal = ({ children, isModalOpen, closeModal, clickableBackdrop }) => {
 	}, [closeModal]);
 
 	return ReactDOM.createPortal(
-		<>
+		<div data-testid="modal">
 			{clickableBackdrop ? (
 				<Backdrop show={isModalOpen} onClick={() => closeModal()} />
 			) : (
 				<Backdrop show={isModalOpen} onClick={() => null} />
 			)}
 			<Wrapper isModalOpen={isModalOpen}>{children}</Wrapper>
-		</>,
+		</div>,
 		modalRoot
 	);
 };

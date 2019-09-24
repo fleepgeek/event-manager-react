@@ -2,7 +2,12 @@ import mockAxios from "axios";
 import { recordSaga } from "../../utils/testUtils";
 import eventsReducer, { eventsListActions } from "./";
 import { globalActions } from "../global";
-import { getAllEventsSaga, getUserEventsSaga, saveEventSaga } from "./sagas";
+import {
+	getAllEventsSaga,
+	getUserEventsSaga,
+	saveEventSaga,
+	deleteEventSaga
+} from "./sagas";
 
 describe("getAllEventsSaga", () => {
 	const event = {
@@ -101,7 +106,7 @@ describe("getAllEventsSaga", () => {
 		);
 		expect(mockAxios.post).toBeCalled();
 		expect(mockAxios.put).not.toBeCalled();
-		expect(actions).toContainEqual(eventsListActions.saveEventSuccess(event));
+		expect(actions).toContainEqual(eventsListActions.createEventSuccess(event));
 		expect(actions).not.toContainEqual(globalActions.showMessage());
 	});
 
@@ -122,7 +127,22 @@ describe("getAllEventsSaga", () => {
 		);
 		expect(mockAxios.put).toBeCalled();
 		expect(mockAxios.post).not.toBeCalled();
-		expect(actions).toContainEqual(eventsListActions.saveEventSuccess(event));
+		expect(actions).toContainEqual(eventsListActions.updateEventSuccess(event));
+		expect(actions).not.toContainEqual(globalActions.showMessage());
+	});
+
+	it("should delete Event successfully", async () => {
+		mockAxios.delete.mockImplementation(() =>
+			Promise.resolve({
+				status: 204
+			})
+		);
+		const actions = await recordSaga(
+			deleteEventSaga,
+			eventsListActions.deleteEvent(1)
+		);
+		expect(mockAxios.delete).toBeCalled();
+		expect(actions).toContainEqual(eventsListActions.deleteEventSuccess(1));
 		expect(actions).not.toContainEqual(globalActions.showMessage());
 	});
 
@@ -137,7 +157,7 @@ describe("getAllEventsSaga", () => {
 			eventsListActions.saveEvent(event)
 		);
 		expect(actions).not.toContainEqual(
-			eventsListActions.saveEventSuccess(event)
+			eventsListActions.createEventSuccess(event)
 		);
 		expect(actions).toContainEqual(globalActions.showMessage());
 	});
@@ -149,7 +169,8 @@ describe("eventsReducer", () => {
 		all: [],
 		userEvents: {},
 		categories: [],
-		tags: []
+		tags: [],
+		savedSuccess: false
 	};
 	const events = [
 		{
@@ -173,7 +194,8 @@ describe("eventsReducer", () => {
 			all: events,
 			userEvents: {},
 			categories: [],
-			tags: []
+			tags: [],
+			savedSuccess: false
 		});
 	});
 
@@ -186,7 +208,29 @@ describe("eventsReducer", () => {
 			all: [],
 			userEvents: { created: events, attending: events },
 			categories: [],
-			tags: []
+			tags: [],
+			savedSuccess: false
+		});
+	});
+
+	it("handles DELETE_EVENT_SUCCESS as expected", () => {
+		const stateWithUserEvents = {
+			all: [],
+			userEvents: { created: events, attending: events },
+			categories: [],
+			tags: [],
+			savedSuccess: false
+		};
+		const reducer = eventsReducer(
+			stateWithUserEvents,
+			eventsListActions.deleteEventSuccess(1)
+		);
+		expect(reducer).toEqual({
+			all: [],
+			userEvents: { created: [], attending: events },
+			categories: [],
+			tags: [],
+			savedSuccess: false
 		});
 	});
 });

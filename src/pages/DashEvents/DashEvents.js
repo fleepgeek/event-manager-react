@@ -3,11 +3,13 @@ import { Route } from "react-router-dom";
 import { connect } from "react-redux";
 import { createStructuredSelector } from "reselect";
 import { authSelectors } from "../../state/auth";
+import { globalSelectors } from "../../state/global";
 import { eventsListSelectors, eventsListActions } from "../../state/eventsList";
-import { DashboardPageHeader } from "../../components";
-import { SaveEvent } from "../../pages";
-import Attending from "./Attending";
-import Created from "./Created";
+import { DashPageHeader } from "../../components";
+
+const Created = React.lazy(() => import("./Created"));
+const Attending = React.lazy(() => import("./Attending"));
+const SaveEvent = React.lazy(() => import("../../pages/SaveEvent/SaveEvent"));
 
 const DashEvents = ({
 	match,
@@ -17,37 +19,49 @@ const DashEvents = ({
 	onGetEvents,
 	attending,
 	created,
-	onDeleteEvent
+	onDeleteEvent,
+	isLoading
 }) => {
 	useEffect(() => {
-		// if (location.state && location.state.fromDashboard) {
-		// if (match.path === "/dashboard/events") {
-		// 	history.replace(`${match.path}/attending`);
-		// }
 		onGetEvents(uid);
 		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, []);
-	// }, [match.path, history]);
+
+	useEffect(() => {
+		if (location.pathname === "/dashboard/events") {
+			history.replace(`${match.path}/myevents`);
+		}
+	}, [location.pathname, history, match.path, onGetEvents, uid]);
+
 	return (
 		<>
-			<DashboardPageHeader
+			<DashPageHeader
 				pageTitle="Events"
 				links={[
-					{ text: "Attending", to: `${match.url}/attending` },
-					{ text: "My Events", to: `${match.url}/myevents` }
+					{ text: "My Events", to: `${match.url}/myevents` },
+					{ text: "Attending", to: `${match.url}/attending` }
 				]}
 			/>
-			<Route
-				path={`${match.path}/attending`}
-				render={() => <Attending events={attending} />}
-			/>
-			<Route
-				path={`${match.path}/myevents`}
-				render={props => (
-					<Created events={created} deleteEvent={onDeleteEvent} {...props} />
-				)}
-			/>
-			<Route path={`${match.path}/:id/edit`} component={SaveEvent} />
+			<React.Suspense
+				fallback={<h3 style={{ textAlign: "center" }}>Loading...</h3>}
+			>
+				<Route
+					path={`${match.path}/myevents`}
+					render={props => (
+						<Created
+							events={created}
+							deleteEvent={onDeleteEvent}
+							isLoading={isLoading}
+							{...props}
+						/>
+					)}
+				/>
+				<Route
+					path={`${match.path}/attending`}
+					render={props => <Attending events={attending} {...props} />}
+				/>
+				<Route path={`${match.path}/:id/edit`} component={SaveEvent} />
+			</React.Suspense>
 		</>
 	);
 };
@@ -55,7 +69,8 @@ const DashEvents = ({
 const mapStateToProps = createStructuredSelector({
 	uid: authSelectors.getUid,
 	created: eventsListSelectors.getUserCreatedEvents,
-	attending: eventsListSelectors.getUserAttendingEvents
+	attending: eventsListSelectors.getUserAttendingEvents,
+	isLoading: globalSelectors.getLoading
 });
 
 export default connect(

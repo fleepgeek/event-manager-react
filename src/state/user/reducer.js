@@ -3,9 +3,9 @@ import userActionTypes from "./actionTypes";
 
 // Reducer
 export const INITIAL_STATE = {
-	profile: {},
+	profile: null,
 	currentUser: null,
-	usersList: []
+	usersList: null
 };
 
 const userReducer = (state = INITIAL_STATE, { type, payload }) =>

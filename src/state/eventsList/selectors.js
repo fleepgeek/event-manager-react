@@ -15,12 +15,12 @@ export const getUserEvent = createSelector(
 
 export const getUserCreatedEvents = createSelector(
 	getUserEvent,
-	eventsListState => eventsListState.created
+	eventsListState => eventsListState.created || []
 );
 
 export const getUserAttendingEvents = createSelector(
 	getUserEvent,
-	eventsListState => eventsListState.attending
+	eventsListState => eventsListState.attending || []
 );
 
 export const getCategories = createSelector(
@@ -31,4 +31,9 @@ export const getCategories = createSelector(
 export const getTags = createSelector(
 	selectEventsList,
 	eventsListState => eventsListState.tags
+);
+
+export const getSavedSuccess = createSelector(
+	selectEventsList,
+	eventsListState => eventsListState.savedSuccess
 );

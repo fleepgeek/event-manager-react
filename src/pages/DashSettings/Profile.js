@@ -4,7 +4,7 @@ import { connect } from "react-redux";
 import { Container, Row, Col } from "reactstrap";
 import { Formik, Form } from "formik";
 import * as Yup from "yup";
-import { StyledForm, Input, Button } from "../../components";
+import { FormWrapper, Input, Button } from "../../components";
 import { userActions } from "../../state/user";
 
 const UserSchema = Yup.object().shape({});
@@ -12,17 +12,17 @@ const UserSchema = Yup.object().shape({});
 const Profile = ({ profile, onUpdateUser }) => {
 	return (
 		<Container>
-			<StyledForm title="Public Profile">
-				{profile && (
-					<Formik
-						initialValues={profile}
-						// enableReinitialize={true}
-						validationSchema={UserSchema}
-						onSubmit={values => {
-							onUpdateUser(values);
-						}}
-					>
-						{() => (
+			{profile && (
+				<Formik
+					initialValues={profile}
+					// enableReinitialize={true}
+					validationSchema={UserSchema}
+					onSubmit={values => {
+						onUpdateUser(values);
+					}}
+				>
+					{() => (
+						<FormWrapper title="Public Profile">
 							<Form>
 								<Row>
 									<Col>
@@ -59,14 +59,14 @@ const Profile = ({ profile, onUpdateUser }) => {
 									<Input name="location" placeholder="Location" />
 								</Col> */}
 								</Row>
-								<Button type="submit" secondary>
+								<Button type="submit" secondary data-testid="update-btn">
 									Update Profile
 								</Button>
 							</Form>
-						)}
-					</Formik>
-				)}
-			</StyledForm>
+						</FormWrapper>
+					)}
+				</Formik>
+			)}
 		</Container>
 	);
 };

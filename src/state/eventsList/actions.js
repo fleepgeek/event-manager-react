@@ -14,8 +14,13 @@ export const saveEvent = (formData, id = null) => ({
 	payload: { formData, id }
 });
 
-export const saveEventSuccess = event => ({
-	type: eventsActionTypes.SAVE_EVENT_SUCCESS,
+export const createEventSuccess = event => ({
+	type: eventsActionTypes.CREATE_EVENT_SUCCESS,
+	payload: { event }
+});
+
+export const updateEventSuccess = event => ({
+	type: eventsActionTypes.UPDATE_EVENT_SUCCESS,
 	payload: { event }
 });
 

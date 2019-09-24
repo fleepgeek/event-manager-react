@@ -5,12 +5,14 @@ import { createStructuredSelector } from "reselect";
 import { eventsListActions, eventsListSelectors } from "../../state/eventsList";
 import { userActions, userSelectors } from "../../state/user";
 import { globalActions, globalSelectors } from "../../state/global";
-import { DashboardPageHeader } from "../../components";
-import People from "./People";
+import { DashPageHeader } from "../../components";
+
+const People = React.lazy(() => import("./People"));
 
 const DashPeople = ({
 	match,
 	history,
+	location,
 	onGetUsers,
 	users,
 	profile,
@@ -22,8 +24,7 @@ const DashPeople = ({
 	useEffect(() => {
 		history.replace(`${match.path}/list`);
 		onGetUsers();
-		// eslint-disable-next-line react-hooks/exhaustive-deps
-	}, []);
+	}, [history, match.path, onGetUsers, location.pathname]);
 
 	const getUserDetails = id => {
 		props.onOpenModal();
@@ -32,21 +33,25 @@ const DashPeople = ({
 	};
 	return (
 		<>
-			<DashboardPageHeader
+			<DashPageHeader
 				pageTitle="People"
 				links={[{ text: "People", to: `${match.url}/list` }]}
 			/>
 			<Route
 				path={`${match.path}/list`}
 				render={() => (
-					<People
-						users={users}
-						profile={profile}
-						getUser={getUserDetails}
-						events={{ created, attending }}
-						isModalOpen={isModalOpen}
-						closeModal={props.onCloseModal}
-					/>
+					<React.Suspense
+						fallback={<h3 style={{ textAlign: "center" }}>Loading...</h3>}
+					>
+						<People
+							users={users}
+							profile={profile}
+							getUser={getUserDetails}
+							events={{ created, attending }}
+							isModalOpen={isModalOpen}
+							closeModal={props.onCloseModal}
+						/>
+					</React.Suspense>
 				)}
 				exact
 			/>

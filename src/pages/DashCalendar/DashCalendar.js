@@ -6,7 +6,8 @@ import FullCalendar from "@fullcalendar/react";
 import dayGridPlugin from "@fullcalendar/daygrid";
 import { eventsListActions, eventsListSelectors } from "../../state/eventsList";
 import { authSelectors } from "../../state/auth";
-import { DashboardPageHeader } from "../../components";
+import { globalSelectors } from "../../state/global";
+import { DashPageHeader } from "../../components";
 
 const DashCalendar = ({
 	match,
@@ -16,63 +17,63 @@ const DashCalendar = ({
 	created,
 	attending,
 	onGetUserEvents,
+	isLoading,
 	...props
 }) => {
-	const [calendarEvents, setCalendarEvents] = useState();
+	const [calendarEvents, setCalendarEvents] = useState([]);
 	useEffect(() => {
 		onGetUserEvents(uid);
 		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, []);
 
 	useEffect(() => {
+		const allUserEvents = [...attending, ...created];
 		const ev = [];
-		if (
-			(attending && attending.length > 0) ||
-			(created && created.length > 0)
-		) {
-			const allUserEvents = [...attending, ...created];
-			allUserEvents.forEach(e => {
-				let bg = "#19212c";
-				if (e.creator.id === parseInt(uid)) {
-					bg = "#e53633"; // Your Events (Red)
-				}
-				ev.push({
-					id: e.id,
-					title: e.title,
-					date: e.event_date,
-					url: `/events/${e.id}`,
-					backgroundColor: bg
-				});
+		allUserEvents.forEach(e => {
+			let bg = "#19212c";
+			if (e.creator.id === uid) {
+				bg = "#e53633"; // Your Events (Red)
+			}
+			ev.push({
+				id: e.id,
+				title: e.title,
+				date: e.event_date,
+				url: `/events/${e.id}`,
+				backgroundColor: bg
 			});
-
-			setCalendarEvents(ev);
-		}
+		});
+		setCalendarEvents(ev);
 	}, [attending, created, uid]);
 
 	return (
 		<>
-			<DashboardPageHeader
+			<DashPageHeader
 				pageTitle="Calendar"
 				links={[{ text: "Calendar", to: `${match.url}` }]}
 			/>
 			<Container>
-				{calendarEvents ? (
-					<FullCalendar
-						defaultView="dayGridMonth"
-						plugins={[dayGridPlugin]}
-						header={{
-							left: "prev,next today",
-							center: "title",
-							right: ""
-						}}
-						events={calendarEvents}
-						eventClick={info => {
-							info.jsEvent.preventDefault(); // don't let the browser navigate
-							history.push(info.event.url);
-						}}
-					/>
+				{isLoading ? (
+					<h5>Loading...</h5>
 				) : (
-					<h3>Loading...</h3>
+					<>
+						{(attending.length > 0 || created.length > 0) && (
+							<FullCalendar
+								defaultView="dayGridMonth"
+								plugins={[dayGridPlugin]}
+								header={{
+									left: "prev,next today",
+									center: "title",
+									right: ""
+								}}
+								events={calendarEvents}
+								eventClick={info => {
+									info.jsEvent.preventDefault(); // don't let the browser navigate
+									history.push(info.event.url);
+								}}
+							/>
+						)}
+						{calendarEvents.length === 0 && <h5>No events yet.</h5>}
+					</>
 				)}
 			</Container>
 		</>
@@ -82,7 +83,8 @@ const DashCalendar = ({
 const mapStateToProps = createStructuredSelector({
 	created: eventsListSelectors.getUserCreatedEvents,
 	attending: eventsListSelectors.getUserAttendingEvents,
-	uid: authSelectors.getUid
+	uid: authSelectors.getUid,
+	isLoading: globalSelectors.getLoading
 });
 
 export default connect(

@@ -1,8 +1,10 @@
 import React, { useEffect } from "react";
 import { connect } from "react-redux";
 import { createStructuredSelector } from "reselect";
+import { Container } from "reactstrap";
 import { ProfileCard } from "../../components";
 import { userActions, userSelectors } from "../../state/user";
+import { globalSelectors } from "../../state/global";
 import { eventsListActions, eventsListSelectors } from "../../state/eventsList";
 
 const UserProfile = ({
@@ -11,7 +13,8 @@ const UserProfile = ({
 	created,
 	attending,
 	onGetProfile,
-	onGetUserEvents
+	onGetUserEvents,
+	message
 }) => {
 	useEffect(() => {
 		onGetProfile(match.params.id);
@@ -20,7 +23,15 @@ const UserProfile = ({
 	}, []);
 	return (
 		<div style={{ marginTop: "2rem" }}>
-			<ProfileCard profile={profile} events={{ created, attending }} />
+			<Container>
+				<h3>User Profile</h3>
+				{profile ? (
+					<ProfileCard profile={profile} events={{ created, attending }} />
+				) : (
+					<>{!message && <h3>Loading...</h3>}</>
+				)}
+				{message && <h4>Error: {message}</h4>}
+			</Container>
 		</div>
 	);
 };
@@ -28,7 +39,8 @@ const UserProfile = ({
 const mapStateToProps = createStructuredSelector({
 	profile: userSelectors.getProfile,
 	created: eventsListSelectors.getUserCreatedEvents,
-	attending: eventsListSelectors.getUserAttendingEvents
+	attending: eventsListSelectors.getUserAttendingEvents,
+	message: globalSelectors.getMessage
 });
 
 export default connect(

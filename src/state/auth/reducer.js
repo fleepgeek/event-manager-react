@@ -3,9 +3,11 @@ import authActionTypes from "./actionTypes";
 
 // Reducer
 export const INITIAL_STATE = {
-	token: localStorage.getItem("token"),
-	uid: localStorage.getItem("uid"),
-	loading: false,
+	token: null,
+	uid: null,
+	// token: localStorage.getItem("token"),
+	// uid: localStorage.getItem("uid"),
+	isRegistered: false,
 	error: null
 };
 
@@ -16,13 +18,15 @@ const authReducer = (state = INITIAL_STATE, { type, payload }) =>
 			case authActionTypes.LOGIN_SUCCESS:
 				draft.token = payload.token;
 				draft.uid = payload.uid;
+				draft.isRegistered = false;
 				break;
 			case authActionTypes.LOGOUT_SUCCESS:
 				draft.token = null;
 				draft.uid = null;
+				draft.isRegistered = false;
 				break;
 			case authActionTypes.REG_SUCCESS:
-				draft.loading = false;
+				draft.isRegistered = true;
 				break;
 		}
 	});

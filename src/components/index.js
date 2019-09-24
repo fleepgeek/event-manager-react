@@ -1,14 +1,14 @@
 export { default as Navbar } from "./Navbar";
-export { default as Layout } from "./Layout";
 export { default as EventCard } from "./EventCard";
 export { default as Button } from "./Button";
 export { default as HostTile } from "./HostTile";
 export { default as Avatar } from "./Avatar";
 export { default as Tag } from "./Tag";
-export { default as StyledForm } from "./StyledForm";
+export { default as FormWrapper } from "./FormWrapper";
 export { default as Input } from "./Input";
 export { default as ProgressBar } from "./ProgressBar";
-export { default as DashboardPageHeader } from "./DashboardPageHeader";
+export { default as DashPageHeader } from "./DashPageHeader";
+export { default as DashNav } from "./DashNav";
 export { default as ProfileCard } from "./ProfileCard";
 export { default as EventsTab } from "./EventsTab";
 export { default as EventsList } from "./EventsList";

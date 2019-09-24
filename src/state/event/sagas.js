@@ -1,4 +1,4 @@
-import { put, takeEvery, all, select } from "redux-saga/effects";
+import { put, takeEvery, takeLeading, all, select } from "redux-saga/effects";
 import axios from "../../utils/axios-base";
 import * as eventActions from "./actions";
 import * as globalActions from "../global/actions";
@@ -47,8 +47,10 @@ function* attendEventSaga({ type, payload }) {
 
 // Watcher
 export default function* watchEventActions() {
-	yield all([takeEvery(actionTypes.GET_EVENT_BY_ID, getEventSaga)]);
-	yield all([takeEvery(actionTypes.GET_ATTENDEES, getAttendeesSaga)]);
-	yield all([takeEvery(actionTypes.ATTEND_EVENT, attendEventSaga)]);
-	yield all([takeEvery(actionTypes.CANCEL_ATTENDANCE, attendEventSaga)]);
+	yield all([
+		takeEvery(actionTypes.GET_EVENT_BY_ID, getEventSaga),
+		takeEvery(actionTypes.GET_ATTENDEES, getAttendeesSaga),
+		takeLeading(actionTypes.ATTEND_EVENT, attendEventSaga),
+		takeLeading(actionTypes.CANCEL_ATTENDANCE, attendEventSaga)
+	]);
 }

@@ -1,4 +1,5 @@
 import React from "react";
+import { Container } from "reactstrap";
 import { UsersList } from "../../components";
 
 const People = ({
@@ -10,14 +11,26 @@ const People = ({
 	closeModal
 }) => {
 	return (
-		<UsersList
-			users={users}
-			clicked={getUser}
-			events={events}
-			profile={profile}
-			isModalOpen={isModalOpen}
-			closeModal={closeModal}
-		/>
+		<Container>
+			{users ? (
+				<>
+					{users.length > 0 ? (
+						<UsersList
+							users={users}
+							clicked={getUser}
+							events={events}
+							profile={profile}
+							isModalOpen={isModalOpen}
+							closeModal={closeModal}
+						/>
+					) : (
+						<h4>No Users</h4>
+					)}
+				</>
+			) : (
+				<h4>Loading...</h4>
+			)}
+		</Container>
 	);
 };
 
